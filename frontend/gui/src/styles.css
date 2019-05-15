@@ -1,0 +1,561 @@
+/* UNIVERSAL STYLES */
+
+html {
+  height: 100%;
+  min-height:100%;
+}
+
+body {
+  padding-top: 40px;
+  height: 100%;
+  min-height:100%;
+}
+
+h1 {
+  font-family: "Avenir";
+  font-size: 28px;
+  text-align: center;
+}
+
+
+h3 {
+  font-family: Avenir-Heavy;
+  font-size: 16px;
+  color: #000000;
+  letter-spacing: 0;
+  text-align: center;
+}
+
+h4 {
+  font-family: Avenir-Heavy;
+  font-size: 10px;
+  color: #000000;
+  letter-spacing: 2px;
+  text-align: center;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.paragraph {
+  height: 42px;
+  overflow: hidden;
+  color: #898989;
+}
+
+/* NAVBAR COMPONENT */
+
+.navbar {
+  font-family: Avenir-Heavy;
+}
+
+/* COLLECTION COMPONENT */
+
+.app {
+  text-align: center;
+}
+
+.collection {
+  width: 85%;
+  max-width: 1100px;
+  display: inline-block;
+}
+
+.tutor-results {
+  color: #898989;
+  font-family: Avenir;
+  font-size: 14px;
+  text-align: center;
+  padding: 20px;
+}
+
+
+/* TUTOR CARD COMPONENT */
+.tutor-card {
+  display: inline-block;
+  vertical-align: top;
+  overflow: hidden;
+  width: 300px;
+  /* height: 400px; */
+  border-radius: 8px;
+  box-shadow: 1px 4px 12px rgba(0,0,0,0.05);
+  margin: 20px;
+  transition: all .1s ease-in-out;
+  font-family: Avenir-Book;
+  font-size: 14px;
+  text-align: center;
+  padding: 24px;
+  background-color: white;
+}
+
+.tutor-profpic {
+  height: 80px;
+  width: 80px;
+  border: 3px solid #ECECEC;
+  border-radius: 40px;
+  text-align: center;
+  object-fit: cover;
+}
+
+.tutor-name {
+  height: 24px;
+  margin-top: 10px;
+  font-family: Avenir-Heavy;
+  font-size: 20px;
+  color: #000000;
+  letter-spacing: 0;
+  text-align: center;
+}
+
+.tutor-availabilities {
+  height: 12px;
+  font-family: Avenir-Heavy;
+  font-size: 10px;
+  color: #000000;
+  letter-spacing: 2px;
+  text-align: center;
+}
+
+.tutor-rating {
+  font-family: Avenir-Heavy;
+  font-size: 12px;
+  color: #000000;
+  letter-spacing: 2px;
+  text-align: left;
+}
+
+.tutor-classes {
+  font-family: Avenir-Heavy;
+  font-size: 12px;
+  color: #000000;
+  letter-spacing: 2px;
+  text-align: left;
+
+}
+
+.tutor-availability {
+  font-family: Avenir-Heavy;
+  font-size: 12px;
+  color: #000000;
+  letter-spacing: 2px;
+  text-align: left;
+
+}
+
+.tutor-reportCard {
+  font-family: Avenir-Heavy;
+  font-size: 12px;
+  color: #000000;
+  letter-spacing: 2px;
+  text-align: left;
+
+}
+
+.tutor-schoolYearAndRate {
+  font-family: Avenir-Heavy;
+  font-size: 14px;
+  color: #0d47a1;
+  letter-spacing: 2px;
+  text-align: left;
+}
+
+.tutor-appointment {
+  display: inline-block;
+  overflow: hidden;
+  /* height: 480px; */
+  width: 300px;
+  border-radius: 8px;
+  box-shadow: 1px 1px 4px rgba(0,0,0,0.10);
+  margin: 20px;
+  transition: all .1s ease-in-out;
+  font-family: Avenir-Book;
+  font-size: 14px;
+  text-align: left;
+  padding: 24px;
+  background-color: white;
+}
+
+.tutor-appointment-main {
+  font-family: Avenir-Heavy;
+  font-size: 20px;
+  color: #000000;
+  letter-spacing: 2px;
+  text-align: left;
+}
+
+.tutor-description {
+  font-family: Avenir;
+  font-size: 14px;
+  color: #757575;
+  letter-spacing: 2px;
+  text-align: left;
+
+}
+
+/* APPOINTMENT CARD COMPONENT */
+
+.appointment-card-container {
+  text-align: center;
+}
+
+.appointment-card-card {
+  display: inline-block;
+  overflow: hidden;
+  width: 100%;
+  border-radius: 8px;
+  box-shadow: 1px 1px 4px rgba(0,0,0,0.10);
+  margin-top: 12px;
+  margin-bottom: 12px;
+  font-family: Avenir-Book;
+  font-size: 14px;
+  padding: 24px;
+  background-color: white;
+}
+
+.appointment-card-profpic {
+  height: 80px;
+  width: 80px;
+  border: 3px solid #ECECEC;
+  border-radius: 40px;
+  vertical-align: top;
+  margin-left: 24px;
+  margin-right: 36px;
+  object-fit: cover;
+  float: left;
+  display: inline-block;
+}
+
+.appointment-card-text {
+  display: inline-block;
+}
+
+.appointment-card-name {
+  margin-top: -10px;
+  font-family: Avenir-Heavy;
+  font-size: 20px;
+  text-align: left;
+}
+
+.appointment-card-details {
+  margin-top: 10px;
+  font-family: Avenir-Medium;
+  font-size: 14px;
+  text-align: left;
+  color: #9B9B9B;
+}
+
+.appointment-card-left {
+  display: inline-block;
+  float: left;
+}
+
+.appointment-card-right {
+  float: right;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.appointment-card-info {
+  text-align: left;
+  margin-top: 24px;
+  display: inline-block;
+  margin-left: 28px;
+}
+
+.appointment-card-info-left {
+  display: inline-block;
+  vertical-align: top;
+  margin-right: 16px;
+}
+
+.appointment-card-info-right {
+  display: inline-block;
+}
+
+.appointment-status {
+  font-family: "Avenir-Heavy";
+  font-size: 12px;
+  text-align: left;
+}
+
+.appointments-container {
+  text-align: center;
+  align-items: center;
+}
+
+.upcoming-appointments {
+  display: inline-block;
+  width: 60%;
+  max-width: 1000px;
+  text-align: left;
+}
+
+.upcoming-appointments-text {
+  font-family: "Avenir-Heavy";
+  font-size: 24px;
+  padding-top: 24px;
+}
+
+.past-appointments {
+  display: inline-block;
+  width: 60%;
+  max-width: 1000px;
+  text-align: left;
+  font-family: "Avenir-Heavy";
+  font-size: 24px;
+  padding-bottom: 20px;
+}
+
+.past-appointments-text {
+  font-family: "Avenir-Heavy";
+  font-size: 24px;
+  padding-top: 24px;
+}
+
+.tutor-schoolYearAndRate {
+  font-size: 13px;
+}
+
+.availability-input {
+  width: 250px;
+}
+
+.description-input {
+  width: 250px;
+}
+
+.tutor-profpicture {
+  display: block;
+  border: 3px solid #ECECEC;
+  border-radius: 100px;
+  width: 110px;
+  height: 110px;
+  object-fit: cover;
+  margin-top: 32px;
+}
+
+.tutor-named {
+  font-family: "Avenir-Black";
+  font-size: 24px;
+  text-align: left;
+}
+
+
+
+.tutor {
+  text-align: center;
+}
+
+.tutor-TutorProfile {
+  display: inline-block;
+  vertical-align: top;
+}
+.tutor-appointment {
+  margin-left: 40px;
+  display: inline-block;
+}
+
+.tutor-info {
+  max-width: 26em;
+  /* margin-left: 280px; */
+  margin-top: -120px;
+  margin-right: 40px;
+  margin-left: 132px;
+  display: flex;
+  text-wrap: wrap;
+  text-align: center;
+  flex-direction: column;
+}
+
+.tutor-description {
+  letter-spacing: 0px;
+  font-size: 14px;
+}
+
+.tutor-stats {
+  margin-top: 40px;
+  margin-right: 24px;
+}
+
+.rating-details {
+  color: #757575;
+  font-family: Avenir;
+  letter-spacing: 0px;
+  font-size: 14px;
+}
+
+.class-details {
+  color: #757575;
+  font-family: Avenir;
+  letter-spacing: 0px;
+  font-size: 14px;
+}
+
+.availability-details {
+  color: #757575;
+  font-family: Avenir;
+  letter-spacing: 0px;
+  font-size: 14px;
+}
+
+.RCdetails {
+  color: #757575;
+  font-family: Avenir;
+  letter-spacing: 0px;
+  font-size: 14px;
+  max-width: 32em;
+  padding-bottom: 60px;
+}
+
+.tutor-appointment-main {
+  font-family: Avenir-Black;
+  letter-spacing: 0px;
+  font-size: 24px;
+  padding-top: 12px;
+}
+
+.schedule-input {
+  font-family: Avenir-Heavy;
+  letter-spacing: 0px;
+  font-size: 12px;
+  margin-bottom: 8px;
+  text-align: left;
+}
+
+.text-input-box {
+  height: 36px;
+  width: 250px;
+  border: 1px solid #ECECEC;
+  border-radius: 4px;
+  font-family: Avenir-Medium;
+  font-size: 12px;
+  letter-spacing: 0;
+  padding-left: 12px;
+}
+
+.textarea-input-box {
+  height: 80px;
+  width: 250px;
+  border: 1px solid #ECECEC;
+  border-radius: 4px;
+  font-family: Avenir-Medium;
+  font-size: 12px;
+  padding: 12px;
+  resize: none;
+}
+
+::placeholder {
+  color: #C9C9C9;
+  font-family: Avenir-Book;
+  font-size: 14px;
+}
+
+.navbar-appointments {
+  padding-right: 16px;
+}
+
+/* Sign In/ Sign Up Flows */
+
+.signin {
+  height: 100vh;
+  position: relative;
+}
+
+.signin-left {
+  width: 45%;
+  height: 100%;
+  float: left;
+  overflow: hidden;
+  display: inline-block;
+}
+
+.signin-background {
+  /* margin-left: -750px; */
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
+}
+
+.signin-right {
+  display: inline-block;
+  margin-left: 60px;
+  position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+.signin-input {
+  font-family: Avenir-Heavy;
+  letter-spacing: 0px;
+  font-size: 12px;
+  margin-bottom: 8px;
+  margin-top: 20px;
+}
+
+.signin-input-box {
+  height: 40px;
+  width: 440px;
+  border: 1px solid #ECECEC;
+  border-radius: 4px;
+  background-color: #F8F8F8;
+  font-family: Avenir-Medium;
+  font-size: 14px;
+  letter-spacing: 0;
+  padding-left: 12px;
+}
+
+.signin-title {
+  font-family: Avenir-Black;
+  font-size: 28px;
+  padding-bottom: 20px;
+}
+
+.signup-tutor-label {
+  font-family: Avenir-Medium;
+  font-size: 14px;
+  margin-bottom: 8px;
+  margin-top: 20px;
+}
+
+.signup-checkbox {
+  margin-right: 8px;
+  border: 1px solid #ECECEC;
+}
+
+.bio-input-box {
+  height: 100px;
+  width: 440px;
+  border: 1px solid #ECECEC;
+  border-radius: 4px;
+  background-color: #F8F8F8;
+  font-family: Avenir-Medium;
+  font-size: 14px;
+  letter-spacing: 0;
+  padding: 12px;
+
+}
+
+.hourlyRate-input-box {
+  height: 40px;
+  width: 120px;
+  border: 1px solid #ECECEC;
+  border-radius: 4px;
+  background-color: #F8F8F8;
+  font-family: Avenir-Medium;
+  font-size: 14px;
+  letter-spacing: 0;
+  padding-left: 12px;
+}
+
+.navbar-profpic {
+  height: 40px;
+  width: 40px;
+  border: 3px solid #ECECEC;
+  border-radius: 40px;
+  vertical-align: middle;
+  margin-left: 12px;
+  margin-right: 12px;
+  object-fit: cover;
+}
