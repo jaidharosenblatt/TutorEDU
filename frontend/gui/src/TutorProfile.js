@@ -64,9 +64,9 @@ class TutorProfile extends Component {
         year: 2020,
         hourly_rate: 40
       },
-      subjects: [],
+      courses: [],
       isLoggedIn: localStorage.getItem('token') ? true : false,
-      selectedSubject: -1,
+      selectedCourse: -1,
     };
     this.scheduleAppointment.bind(this);
   }
@@ -100,25 +100,25 @@ class TutorProfile extends Component {
 
   getTutor(userID) {
     axios
-      .get("/users/" + userID)
+      .get(" http://127.0.0.1:8000/api/users/" + userID)
       .then(res => {
         this.setState({ tutor: res.data })
-        this.getCourses(this.state.tutor.subjects)
+        this.getCourses(this.state.tutor.courses)
       })
       .catch(err => console.log(err));
   }
 
-  getCourses(subjects) {
+  getCourses(courses) {
 
-    for(let subject of subjects) {
+    for(let course of courses) {
       axios
-        .get("/subjects/" + subject.id)
+        .get("http://127.0.0.1:8000/api/courses/" + course.id)
         .then(res => {
           this.setState(state => {
             console.log(res.data)
-            const subjects = state.subjects.concat(res.data);
+            const courses = state.courses.concat(res.data);
             return {
-              subjects,
+              courses,
             };
           });
         })
@@ -132,7 +132,7 @@ class TutorProfile extends Component {
       id: Math.floor(Math.random() * 100000),
       tutor: this.state.tutor.id,
       student: this.state.user.id,
-      subject: parseInt(this.state.selectedSubject, 10) !== -1 ? parseInt(this.state.selectedSubject, 10) : this.state.subjects[0].id,
+      course: parseInt(this.state.selectedCourse, 10) !== -1 ? parseInt(this.state.selectedCourse, 10) : this.state.courses[0].id,
       additional_comments: document.getElementById('description').value,
       availabilities: document.getElementById('availabilities').value,
       is_active: true,
@@ -143,7 +143,7 @@ class TutorProfile extends Component {
 
     console.log(appointment);
 
-    axios.post('/appointments/', appointment)
+    axios.post('http://127.0.0.1:8000/api/appointments/', appointment)
       .then(function (response) {
         console.log(response);
       })
@@ -153,21 +153,21 @@ class TutorProfile extends Component {
   }
 
   handleChange = (e) => {
-    this.setState({ selectedSubject: e.target.value });
+    this.setState({ selectedCourse: e.target.value });
   }
 
   render() {
 
-    const subjects = this.state.subjects
-    var tutorSubjects = ""
+    const courses = this.state.courses
+    var tutorCourses = ""
 
-    for(let i = 0; i < subjects.length; i++) {
+    for(let i = 0; i < courses.length; i++) {
       if (i === 0) {
-        tutorSubjects = subjects[i].course_name
-      } else if (i === subjects.length - 1) {
-        tutorSubjects = tutorSubjects + ", and " + subjects[i].course_name
+        tutorCourses = courses[i].course_name
+      } else if (i === courses.length - 1) {
+        tutorCourses = tutorCourses + ", and " + courses[i].course_name
       } else {
-        tutorSubjects = tutorSubjects + ", " + subjects[i].course_name
+        tutorCourses = tutorCourses + ", " + courses[i].course_name
       }
 
     }
@@ -196,7 +196,7 @@ class TutorProfile extends Component {
             </div>
             <div className="tutor-classes">
               <h4 className="tutor-classes">CLASSES</h4>
-              <p className="class-details">{ tutorSubjects }</p>
+              <p className="class-details">{ tutorCourses }</p>
             </div>
             <div className="tutor-availability">
               <h4 className="tutor-availability">AVAILABILITIES</h4>
@@ -212,10 +212,10 @@ class TutorProfile extends Component {
         <div className="tutor-appointment">
           <p className="tutor-appointment-main">Schedule an appointment</p>
           <p className="schedule-input">Select a course</p>
-          {this.state.subjects.length > 0 &&
+          {this.state.courses.length > 0 &&
             <StyledDropdown onChange={this.handleChange}>
-              {this.state.subjects.map((subject,k) => (
-                <option className="course-select" key={k} value={subject.id}>{subject.course_name}</option>
+              {this.state.courses.map((course,k) => (
+                <option className="course-select" key={k} value={course.id}>{course.course_name}</option>
               ))}
             </StyledDropdown>
           }

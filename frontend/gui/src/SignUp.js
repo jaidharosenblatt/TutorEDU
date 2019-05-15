@@ -81,7 +81,7 @@ class SignUp extends Component {
 
     console.log(newUser);
 
-    axios.post('/users/', newUser)
+    axios.post('http://127.0.0.1:8000/api/users/', newUser)
       .then((response) => {
         console.log(response);
         localStorage.removeItem('token');

@@ -64,20 +64,20 @@ class AppointmentCard extends Component {
     this.state = {
       tutor: null,
       appointment: this.props.appointment,
-      subjectName: "",
+      courseName: "",
     };
 
   }
 
   componentDidMount() {
-    this.getSubjectNameFromId(this.props.appointment.subject)
+    this.getCourseNameFromId(this.props.appointment.course)
     this.getTutorFromId(this.state.appointment.tutor)
   }
 
-  getSubjectNameFromId(subjectID) {
+  getCourseNameFromId(courseID) {
     axios
-      .get("/subjects/" + subjectID)
-      .then(res => this.setState({ subjectName: res.data.course_name }))
+      .get("http://127.0.0.1:8000/api/courses/" + courseID)
+      .then(res => this.setState({ courseName: res.data.course_name }))
       .catch(err => console.log(err));
   }
 
@@ -149,14 +149,14 @@ class AppointmentCard extends Component {
     var secondaryButtonText = "Cancel Request"
     var primaryAction = "save"
     var secondaryAction = "cancel"
-    var detailString = "TUTOR • " + this.state.subjectName + " • $" + (this.state.tutor != null ? this.state.tutor.hourly_rate : "") + "/HOUR"
+    var detailString = "TUTOR • " + this.state.courseName + " • $" + (this.state.tutor != null ? this.state.tutor.hourly_rate : "") + "/HOUR"
 
     if (tutorID === currentUserID) {
       primaryButtonText = "Approve Request"
       secondaryButtonText = "Reject Request"
       primaryAction = "confirm"
       secondaryAction = "decline"
-      detailString = "CLIENT • " + this.state.subjectName
+      detailString = "CLIENT • " + this.state.courseName
     }
 
     return (

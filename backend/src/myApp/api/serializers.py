@@ -11,7 +11,7 @@ class CourseSerializer(serializers.ModelSerializer):
     user_courses= serializers.StringRelatedField(many=True,required=False)
     class Meta:
         model = Course
-        fields = ('id', 'course_name', 'description','course_appointments','user_courses')
+        fields = ('id', 'name', 'description','course_appointments','user_courses')
 
 class UserSerializer(serializers.ModelSerializer):
     tutor_appointments = AppointmentSerializer(many=True,required=False)
@@ -20,7 +20,7 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = CustomUser
-        fields = ('id','email', 'username','name',
+        fields = ('id','email', 'username','name', 'courses',
         'password', 'university','bio', 'client_rating',
         'is_tutor','is_active', 'tutor_rating','hourly_rate','availabilities','tutor_appointments','student_appointments','courses','report_card')
         write_only_fields = ('password',)

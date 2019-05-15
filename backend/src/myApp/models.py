@@ -2,7 +2,6 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 
 class Course(models.Model):
-    id = models.IntegerField(default='1', blank=True, primary_key=True)
     name = models.CharField(default='blank', blank=True, max_length=40)
     description = models.CharField(default='blank', blank=True, max_length=2000)
     def __str__(self):
@@ -26,7 +25,6 @@ class CustomUser(AbstractUser):
         return self.email
 
 class Appointment(models.Model):
-    id = models.IntegerField(default='5', blank=True, primary_key=True)
     additional_comments = models.CharField(default='blank', blank=True, max_length=200)
     availabilities = models.CharField(default='blank', blank=True, max_length=2000)
     date = models.DateField(("Date"), auto_now_add=True)

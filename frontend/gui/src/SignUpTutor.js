@@ -73,28 +73,6 @@ class SignUpTutor extends Component {
     })
   }
 
-  // handleSubjects() {
-  //
-  //   // Retrieve all existing subjects
-  //   var subjects = []
-  //   axios
-  //     .get("/subjects")
-  //     .then(res => {
-  //       subjects = res.data
-  //     })
-  //     .catch(err => console.log(err));
-  //
-  //     console.log(subjects)
-  //
-  //   // See if inputted subject names match any existing ones
-  //   const inputtedSubjects = document.getElementById('subjects').value
-  //   var subjectIDs
-  //
-  //     // If yes, append course_id to this.state.subjects
-  //
-  //     // If no, create new course with inputted course_name
-  // }
-
   handleSignup() {
 
     const newUser = {
@@ -104,14 +82,13 @@ class SignUpTutor extends Component {
       password: this.state.password,
       is_tutor: true,
       bio: document.getElementById('bio').value,
-      // subjects: {id: 5, course_name: "PUBPOL 310"},
       hourly_rate: document.getElementById('hourlyRate').value,
       availabilities: document.getElementById('availabilities').value
     }
 
     console.log(newUser);
 
-    axios.post('/users/', newUser)
+    axios.post('http://127.0.0.1:8000/api/users/', newUser)
       .then((response) => {
         console.log(response);
         localStorage.removeItem('token');
@@ -137,8 +114,8 @@ class SignUpTutor extends Component {
           <h2 className="signin-title">Complete your tutor profile</h2>
           <p className="signin-input">Bio</p>
           <textarea className="bio-input-box" id="bio" type="text" placeholder="Tell us about yourself…"></textarea>
-          <p className="signin-input">Subjects</p>
-          <input className="signin-input-box" id="subjects" type="text" placeholder="CS290, I&E342, etc. (Comma separated)"></input>
+          <p className="signin-input">Courses</p>
+          <input className="signin-input-box" id="courses" type="text" placeholder="CS290, I&E342, etc. (Comma separated)"></input>
           <p className="signin-input">Hourly rate</p>
           <input className="hourlyRate-input-box" id="hourlyRate" type="text" placeholder="$"></input>
           <p className="signin-input">Availabilities</p>
