@@ -1,7 +1,13 @@
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateAPIView
 from myApp.models import CustomUser,Course, Appointment
-from .serializers import UserSerializer,CourseSerializer,AppointmentSerializer
+from .serializers import UserSerializerWithToken, UserSerializer,CourseSerializer,AppointmentSerializer
+from rest_framework.response import Response
+from rest_framework.decorators import api_view
 
+@api_view(['GET', 'POST', ])
+def CurrentUser(request):
+    serializer = UserSerializer(request.user)
+    return Response(serializer.data)
 
 class UserListView(ListCreateAPIView):
     queryset = CustomUser.objects.all()

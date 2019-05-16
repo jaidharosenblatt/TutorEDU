@@ -1,5 +1,6 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+from rest_framework.authtoken.models import Token
 
 class Course(models.Model):
     name = models.CharField(default='blank', blank=True, max_length=40)
@@ -8,6 +9,7 @@ class Course(models.Model):
         return self.name
 
 class CustomUser(AbstractUser):
+    image = models.ImageField(upload_to='profile_image', blank=True, default='default.jpg')
     name = models.CharField(default='blank', blank=True, max_length=40)
     email = models.EmailField(default='blank', unique=True)
     university = models.CharField(default='blank', blank=True, max_length=40)
@@ -21,6 +23,9 @@ class CustomUser(AbstractUser):
     availabilities = models.CharField(default='blank', blank=True, max_length=2000)
     courses = models.ManyToManyField(Course, related_name='user_courses',blank=True)
 
+    def create_auth_token(CustomUser, instance=None, created=False, **kwargs):
+        if created:
+            Token.objects.create(user=instance)
     def __str__(self):
         return self.email
 
