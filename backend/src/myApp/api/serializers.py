@@ -22,7 +22,7 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = CustomUser
-        fields = ('id','email', 'username','name', 'courses',
+        fields = ('id','email', 'username','name', 'courses','profile_image',
         'password', 'university','bio', 'client_rating',
         'is_tutor','is_active', 'tutor_rating','hourly_rate','availabilities','tutor_appointments','student_appointments','courses','report_card')
         write_only_fields = ('password',)
@@ -53,7 +53,7 @@ class UserSerializerWithToken(serializers.ModelSerializer):
 
     class Meta:
         model = CustomUser
-        fields = ('id','email', 'username','name', 'courses',
+        fields = ('id','email', 'username','name', 'courses','profile_image',
         'password', 'university','bio', 'client_rating',
         'is_tutor','is_active', 'tutor_rating','hourly_rate','availabilities','tutor_appointments','student_appointments','courses','report_card')
         write_only_fields = ('password',)

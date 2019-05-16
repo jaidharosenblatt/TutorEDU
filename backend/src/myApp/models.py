@@ -9,7 +9,7 @@ class Course(models.Model):
         return self.name
 
 class CustomUser(AbstractUser):
-    image = models.ImageField(upload_to='profile_image', blank=True, default='default.jpg')
+    profile_image = models.ImageField(upload_to='profile_image', blank=True, default='default-profile.png')
     name = models.CharField(default='blank', blank=True, max_length=40)
     email = models.EmailField(default='blank', unique=True)
     university = models.CharField(default='blank', blank=True, max_length=40)
