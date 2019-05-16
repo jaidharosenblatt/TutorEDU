@@ -41,7 +41,7 @@ class TutorCard extends Component {
 
     return (
         <div className="tutor-card">
-          <img  src={ this.props.user.image !== null ? this.props.user.image : "https://randomuser.me/api/portraits/men/" + this.props.user.id + ".jpg" }
+          <img  src={ this.props.user.profile_image}
                 alt={ "TUTOR NAME" }
                 className="tutor-profpic" />
           <h3 className="tutor-name">{this.props.user.name}</h3>

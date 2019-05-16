@@ -23,7 +23,7 @@ class NavBar extends Component {
     };
 
     axios
-      .get('/current_user', config)
+      .get('http://127.0.0.1:8000/api/current-user/', config)
       .then(res => {
         this.setState({
           user: res.data,

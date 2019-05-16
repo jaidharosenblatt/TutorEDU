@@ -73,7 +73,7 @@ class SignIn extends Component {
     };
 
     axios
-      .get('/current_user', config)
+      .get('http://127.0.0.1:8000/api/current-user/', config)
       .then(res => {
         console.log(res);
         this.setState({

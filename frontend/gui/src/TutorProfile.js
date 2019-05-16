@@ -90,7 +90,7 @@ class TutorProfile extends Component {
     };
 
     axios
-      .get('/current_user', config)
+      .get('http://127.0.0.1:8000/api/current-user/', config)
       .then(res => {
         this.setState({
           user: res.data,
@@ -176,7 +176,7 @@ class TutorProfile extends Component {
         <div className="tutor-TutorProfile">
           <div className="tutor-topHeader">
             <div className="tutor-picture">
-            <img  src={ this.state.tutor.image !== null ? this.state.tutor.image : "https://randomuser.me/api/portraits/men/" + this.state.tutor.id + ".jpg" }
+            <img  src={ this.state.tutor.profile_image}
                   alt={ this.state.tutor.name }
                   className="tutor-profpicture"/>
             </div>
