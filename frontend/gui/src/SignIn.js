@@ -89,7 +89,7 @@ class SignIn extends Component {
       password: document.getElementById('password').value
     }
 
-    axios.post('http://127.0.0.1:8000/api/token-auth/', credentials)
+    axios.post('http://127.0.0.1:8000/api/get-token/', credentials)
       .then((response) => {
         console.log(response);
         if (response.data.token !== undefined) {
@@ -106,7 +106,7 @@ class SignIn extends Component {
   }
 
   refreshToken() {
-    axios.post('http://127.0.0.1:8000/api/token-auth-refresh/', { token: localStorage.getItem('token') })
+    axios.post('http://127.0.0.1:8000/api/refresh-token/', { token: localStorage.getItem('token') })
       .then((response) => {
         console.log(response);
         if (response.data.token !== undefined) {

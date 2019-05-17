@@ -20,6 +20,7 @@ class NavBar extends Component {
   getCurrentUser() {
     var config = {
       headers: {'Authorization': `JWT ${localStorage.getItem('token')}`}
+
     };
 
     axios
