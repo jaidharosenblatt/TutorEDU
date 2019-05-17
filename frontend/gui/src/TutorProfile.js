@@ -109,7 +109,6 @@ class TutorProfile extends Component {
   }
 
   getCourses(courses) {
-
     for(let course of courses) {
       axios
         .get("http://127.0.0.1:8000/api/courses/" + course.id)
@@ -159,15 +158,15 @@ class TutorProfile extends Component {
   render() {
 
     const courses = this.state.courses
-    var tutorCourses = ""
+    var tutorCourses = "None"
 
     for(let i = 0; i < courses.length; i++) {
       if (i === 0) {
-        tutorCourses = courses[i].course_name
-      } else if (i === courses.length - 1) {
-        tutorCourses = tutorCourses + ", and " + courses[i].course_name
+        tutorCourses = courses[i].name
+      } else if (i === courses.length - 1 && courses.length!==2) {
+        tutorCourses = tutorCourses + ", and " + courses[i].name
       } else {
-        tutorCourses = tutorCourses + ", " + courses[i].course_name
+        tutorCourses = tutorCourses + ", " + courses[i].name
       }
 
     }
@@ -182,7 +181,7 @@ class TutorProfile extends Component {
             </div>
             <p></p>
             <div className="tutor-info">
-            <h3 className="tutor-schoolYearAndRate">{this.state.tutor.university.toUpperCase()} • SENIOR • ${this.state.tutor.hourly_rate}/HOUR</h3>
+            <h3 className="tutor-schoolYearAndRate">{this.state.tutor.university.toUpperCase()} • {this.state.tutor.year.toString().toUpperCase()} • ${this.state.tutor.hourly_rate}/HOUR</h3>
             <h1 className="tutor-named">{this.state.tutor.name}</h1>
             <p className="tutor-description">{this.state.tutor.bio}</p>
             </div>
@@ -215,7 +214,7 @@ class TutorProfile extends Component {
           {this.state.courses.length > 0 &&
             <StyledDropdown onChange={this.handleChange}>
               {this.state.courses.map((course,k) => (
-                <option className="course-select" key={k} value={course.id}>{course.course_name}</option>
+                <option className="course-select" key={k} value={course.id}>{course.name}</option>
               ))}
             </StyledDropdown>
           }

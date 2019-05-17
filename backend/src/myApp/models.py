@@ -12,6 +12,7 @@ class CustomUser(AbstractUser):
     profile_image = models.ImageField(upload_to='profile_image', blank=True, default='default-profile.png')
     name = models.CharField(default='blank', blank=True, max_length=40)
     email = models.EmailField(default='blank', unique=True)
+    year = models.CharField(default='blank', blank=True, max_length=40)
     university = models.CharField(default='blank', blank=True, max_length=40)
     bio = models.CharField(default='blank', blank=True, max_length=2000)
     report_card = models.CharField(default='blank', blank=True, max_length=2000)

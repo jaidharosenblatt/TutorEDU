@@ -26,17 +26,16 @@ class TutorCard extends Component {
   render() {
 
     const courses = this.props.user.courses
-    var studentCourses = ""
+    var studentCourses = "None"
 
     for(let i = 0; i < courses.length; i++) {
       if (i === 0) {
-        studentCourses = courses[i].course_name
-      } else if (i === courses.length - 1) {
-        studentCourses = studentCourses + ", and " + courses[i].course_name
+        studentCourses = courses[i].name
+      } else if (i === courses.length - 1 & courses.length!==2) {
+        studentCourses = studentCourses + ", and " + courses[i].name
       } else {
-        studentCourses = studentCourses + ", " + courses[i].course_name
+        studentCourses = studentCourses + ", " + courses[i].name
       }
-
     }
 
     return (
