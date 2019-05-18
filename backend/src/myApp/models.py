@@ -1,6 +1,14 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from rest_framework.authtoken.models import Token
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+from django.conf import settings
+
+# @receiver(post_save, sender=settings.AUTH_USER_MODEL)
+# def create_auth_token(sender, instance=None, created=False, **kwargs):
+#     if created:
+#         Token.objects.create(user=instance)
 
 class Course(models.Model):
     name = models.CharField(default='blank', blank=True, max_length=40)
@@ -23,12 +31,6 @@ class CustomUser(AbstractUser):
     hourly_rate = models.FloatField(null=True, blank=True, default=None)
     availabilities = models.CharField(default='blank', blank=True, max_length=2000)
     courses = models.ManyToManyField(Course, related_name='user_courses',blank=True)
-
-    def create_auth_token(CustomUser, instance=None, created=False, **kwargs):
-        if created:
-            Token.objects.create(user=instance)
-    def __str__(self):
-        return self.email
 
 class Appointment(models.Model):
     additional_comments = models.CharField(default='blank', blank=True, max_length=200)
