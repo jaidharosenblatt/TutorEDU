@@ -5,11 +5,6 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.conf import settings
 
-# @receiver(post_save, sender=settings.AUTH_USER_MODEL)
-# def create_auth_token(sender, instance=None, created=False, **kwargs):
-#     if created:
-#         Token.objects.create(user=instance)
-
 class Course(models.Model):
     name = models.CharField(default='blank', blank=True, max_length=40)
     description = models.CharField(default='blank', blank=True, max_length=2000)
@@ -26,7 +21,6 @@ class CustomUser(AbstractUser):
     report_card = models.CharField(default='blank', blank=True, max_length=2000)
     client_rating = models.IntegerField(default='5', blank=True)
     is_tutor = models.BooleanField(default=False)
-    is_active = models.BooleanField(default=True)
     tutor_rating = models.IntegerField(default='5', blank=True)
     hourly_rate = models.FloatField(null=True, blank=True, default=None)
     availabilities = models.CharField(default='blank', blank=True, max_length=2000)

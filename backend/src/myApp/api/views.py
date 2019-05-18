@@ -3,7 +3,7 @@ from myApp.models import CustomUser,Course, Appointment
 from .serializers import UserSerializer,CourseSerializer,AppointmentSerializer, RegisterSerializer, LoginSerializer
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
-from rest_framework import status, permissions, generics
+from rest_framework import generics
 from knox.models import AuthToken
 
 
