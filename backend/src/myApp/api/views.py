@@ -3,14 +3,20 @@ from myApp.models import CustomUser,Course, Appointment
 from .serializers import UserSerializer,CourseSerializer,AppointmentSerializer, RegisterSerializer, LoginSerializer
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
-from rest_framework import generics
+from rest_framework import generics,permissions
 from knox.models import AuthToken
 
 
-@api_view(['GET'])
-def CurrentUser(request):
-    serializer = UserSerializer(request.user)
-    return Response(serializer.data)
+# @api_view(['GET'])
+# def CurrentUser(request):
+#     serializer = UserSerializer(request.user)
+#     return Response(serializer.data)
+
+class CurrentUserView(generics.RetrieveAPIView):
+  serializer_class = UserSerializer
+  permission_classes = permissions.IsAuthenticated,
+  def get_object(self):
+    return self.request.user
 
 class RegisterUserView(generics.GenericAPIView):
   serializer_class = RegisterSerializer
