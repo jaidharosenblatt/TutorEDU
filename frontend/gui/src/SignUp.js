@@ -81,7 +81,7 @@ class SignUp extends Component {
 
     console.log(newUser);
 
-    axios.post('http://127.0.0.1:8000/api/users/', newUser)
+    axios.post('http://127.0.0.1:8000/api/register/', newUser)
       .then((response) => {
         console.log(response);
         localStorage.removeItem('token');
@@ -115,13 +115,7 @@ class SignUp extends Component {
           <input className="signin-input-box" id="password" type="password" placeholder="(8 characters minimum)"></input>
           <div>
             <label className="signup-tutor-label">
-              <input
-                className="signup-checkbox"
-                name="isTutor"
-                type="checkbox"
-                value={this.state.isTutor}
-                onChange={this.handleCheckboxChange} />
-              I want to be a tutor
+
             </label>
           </div>
           <div>

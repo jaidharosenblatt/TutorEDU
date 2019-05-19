@@ -69,7 +69,7 @@ class SignIn extends Component {
 
   getCurrentUser() {
     var config = {
-      headers: {'Authorization': `JWT ${localStorage.getItem('token')}`}
+      headers: {"Authorization": `Token ${localStorage.getItem('token')}`}
     };
 
     axios
@@ -89,36 +89,13 @@ class SignIn extends Component {
       password: document.getElementById('password').value
     }
 
-    axios.post('http://127.0.0.1:8000/api/get-token/', credentials)
+    axios.post('http://127.0.0.1:8000/api/login/', credentials)
       .then((response) => {
         console.log(response);
         if (response.data.token !== undefined) {
           localStorage.setItem('token', response.data.token);
           this.setState({
               isLoggedIn: true,
-            });
-            this.refreshToken()
-        }
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  }
-
-  refreshToken() {
-    axios.post('http://127.0.0.1:8000/api/refresh-token/', { token: localStorage.getItem('token') })
-      .then((response) => {
-        console.log(response);
-        if (response.data.token !== undefined) {
-          localStorage.setItem('token', response.data.token);
-          this.setState({
-              isLoggedIn: true,
-            });
-
-            window.location.reload()
-            let { history } = this.props;
-            history.push({
-             pathname: '/',
             });
         }
       })

@@ -82,13 +82,13 @@ class SignUpTutor extends Component {
       password: this.state.password,
       is_tutor: true,
       bio: document.getElementById('bio').value,
-      hourly_rate: document.getElementById('hourlyRate').value,
+      hourly_rate: parseInt(document.getElementById('hourlyRate').value, 10),
       availabilities: document.getElementById('availabilities').value
     }
 
     console.log(newUser);
 
-    axios.post('http://127.0.0.1:8000/api/users/', newUser)
+    axios.post('http://127.0.0.1:8000/api/register/', newUser)
       .then((response) => {
         console.log(response);
         localStorage.removeItem('token');
@@ -114,8 +114,6 @@ class SignUpTutor extends Component {
           <h2 className="signin-title">Complete your tutor profile</h2>
           <p className="signin-input">Bio</p>
           <textarea className="bio-input-box" id="bio" type="text" placeholder="Tell us about yourself…"></textarea>
-          <p className="signin-input">Courses</p>
-          <input className="signin-input-box" id="courses" type="text" placeholder="CS290, I&E342, etc. (Comma separated)"></input>
           <p className="signin-input">Hourly rate</p>
           <input className="hourlyRate-input-box" id="hourlyRate" type="text" placeholder="$"></input>
           <p className="signin-input">Availabilities</p>

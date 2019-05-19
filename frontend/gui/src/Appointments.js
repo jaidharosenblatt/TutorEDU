@@ -20,7 +20,7 @@ class Appointments extends Component {
 
   getCurrentUser() {
     var config = {
-      headers: {'Authorization': `JWT ${localStorage.getItem('token')}`}
+      headers: {"Authorization": `Token ${localStorage.getItem('token')}`}
     };
 
     axios

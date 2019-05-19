@@ -17,6 +17,10 @@ class Collection extends Component {
       .catch(err => console.log(err));
   }
 
+  handleRemove() {
+    this.setState({users: this.state.users.filter(user => user.id === 1)})
+  }
+
   render() {
     return  (
       <div className="app">
