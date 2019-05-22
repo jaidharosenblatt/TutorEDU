@@ -22,6 +22,7 @@ class Appointments extends Component {
     var config = {
       headers: {"Authorization": `Token ${localStorage.getItem('token')}`}
     };
+    
 
     axios
       .get('http://127.0.0.1:8000/api/current-user/', config)

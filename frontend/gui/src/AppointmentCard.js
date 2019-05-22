@@ -165,7 +165,7 @@ class AppointmentCard extends Component {
           <div className="appointment-card-left">
             <div className="appointment-card-text">
               <div className="appointment-card-left">
-                <img className="appointment-card-profpic" src={ this.state.tutor != null ? this.state.tutor.image : null } alt="Tutor Profile Pic"/>
+                <img className="appointment-card-profpic" src={ this.state.tutor != null ? this.state.tutor.profile_image : null } alt="Tutor Profile Pic"/>
               </div>
               <div className="appointment-card-left">
                 { statusComponent }

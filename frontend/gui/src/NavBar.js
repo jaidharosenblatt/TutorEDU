@@ -45,7 +45,7 @@ class NavBar extends Component {
                   <Navbar.Text className="navbar-appointments">
                     <a href="/appointments">Appointments</a>
                   </Navbar.Text>
-                  <a href="/signin"><img className="navbar-profpic" src={ this.state.user != null ? this.state.user.image : null } alt=""/>
+                  <a href="/signin"><img className="navbar-profpic" src={ this.state.user != null ? this.state.user.profile_image : null } alt=""/>
                   </a>
                 </div>
               ) : (
