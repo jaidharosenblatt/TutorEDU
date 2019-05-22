@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router';
 import './styles.css';
 import styled from 'styled-components';
 import axios from "axios";
@@ -50,15 +51,18 @@ const SecondaryButton = styled.button`
 
 class SignIn extends Component {
 
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
       isLoggedIn: localStorage.getItem('token') ? true : false,
       username: '',
       user: null,
+      hasError: false,
+      redirect: false
     };
 
     this.handleLogin = this.handleLogin.bind(this);
+
   }
 
   componentDidMount() {
@@ -96,11 +100,14 @@ class SignIn extends Component {
           localStorage.setItem('token', response.data.token);
           this.setState({
               isLoggedIn: true,
+              redirect: true
             });
         }
       })
-      .catch(function (error) {
+      .catch((error) => {
+        this.setState({hasError:true})
         console.log(error);
+
       });
   }
 
@@ -112,6 +119,9 @@ class SignIn extends Component {
 
   render() {
 
+    if (this.state.redirect){
+      return <Redirect push to="/" />;
+    }
     const signInView =
       <div className="signin-right">
         <h2 className="signin-title">Sign in</h2>
@@ -121,6 +131,7 @@ class SignIn extends Component {
         <p className="signin-input">Password</p>
         <input className="signin-input-box" id="password" type="password" placeholder="">
         </input>
+        {this.state.hasError ? <p style={{color:"#d13e50"}}>You have entered an invalid username or password</p> : null}
         <div>
           <PrimaryButton onClick={() => {this.handleLogin()}}>Sign In</PrimaryButton>
           <Link to={{ pathname: "/signup/" }}>
