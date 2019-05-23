@@ -496,20 +496,7 @@ h4 {
   padding-left: 12px;
 }
 
-@media screen and (max-width: 900px) {
-  .signin-left {
-    width: 0%;
-    height: 0%;
-    visibility: hidden;
-    display: inline-block;
-  }
-  .signin-right{
-    margin-left: 3%;
-  }
-  .signin-input-box{
-    width: 400px;
-  }
-}
+
 
 .signin-background {
   /* margin-left: -750px; */
@@ -555,7 +542,8 @@ h4 {
   font-family: Avenir-Medium;
   font-size: 14px;
   letter-spacing: 0;
-  padding: 12px;
+  padding-bottom: 4.7em;
+  padding-left: 12px;
 
 }
 
@@ -580,4 +568,22 @@ h4 {
   margin-left: 12px;
   margin-right: 12px;
   object-fit: cover;
+}
+
+@media screen and (max-width: 900px) {
+  .signin-left {
+    width: 0%;
+    height: 0%;
+    visibility: hidden;
+    display: inline-block;
+  }
+  .signin-right{
+    margin-left: 3%;
+  }
+  .signin-input-box{
+    width: 390px;
+  }
+  .bio-input-box {
+    width: 390px;
+  }
 }

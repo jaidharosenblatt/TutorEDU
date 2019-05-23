@@ -71,8 +71,13 @@ class EditProfile extends Component {
   }
 
   handleChange(event){
-    const {name, value} = event.target
-    this.setState({ [name]: value})
+    const target = event.target;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+    const name = target.name;
+
+    this.setState({
+      [name]: value
+    });
     console.log(this.state)
   }
 
@@ -83,7 +88,10 @@ class EditProfile extends Component {
 
     const updatedUser = {
         name : this.state.name,
-        year : this.state.year
+        year : this.state.year,
+        university : this.state.university,
+        bio : this.state.bio,
+        availabilities: this.state.availabilities,
     }
     console.log(updatedUser)
     axios
@@ -117,7 +125,6 @@ class EditProfile extends Component {
             onChange = {this.handleChange}
             placeholder="e.g. Johnny Appleseed...">
           </input>
-
           <p className="signin-input">Year</p>
           <select
             className="signin-input-box"
@@ -154,6 +161,15 @@ class EditProfile extends Component {
             name = "availabilities"
             onChange = {this.handleChange}
             placeholder="e.g. Friday 10am-2pm…">
+          </input>
+          <p className="signin-input">Tutor?</p>
+          <input
+            className = "signin-input-box"
+            name = "is_tutor"
+            type = ""
+            checked = {this.state.user.is_tutor}
+            onChange = {this.handleChange}
+          >
           </input>
           <div>
             <label className="signup-tutor-label">
