@@ -52,11 +52,7 @@ class EditProfile extends Component {
     super(props);
     this.state = {
       user: {},
-      id : 0,
-      name : "",
-      university : "",
-      bio : "",
-      availabilities : "",
+      redirect: false
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleUpdate = this.handleUpdate.bind(this);
@@ -75,21 +71,23 @@ class EditProfile extends Component {
   }
 
   handleChange(event){
-    const {name, value, type, checked} = event.target
-    type === "checkbox" ? this.setState({[name]: checked}) : this.setState({ [name]: value})
-    // console.log(this.state)
-    // let user = Object.assign({}, this.state.user)
-    // user.name = this.state.name
-    // this.setState({user})
+    const {name, value} = event.target
+    this.setState({ [name]: value})
+    console.log(this.state)
   }
 
   handleUpdate(){
-    const UserID = this.state.user.id
+    this.setState({redirect:true})
+
+    const myID =  this.state.user.id
+
+    const updatedUser = {
+        name : this.state.name,
+        year : this.state.year
+    }
+    console.log(updatedUser)
     axios
-        .put("http://127.0.0.1:8000/api/users/" + UserID,
-        {
-          username: this.state.user.username
-        })
+        .patch("http://127.0.0.1:8000/api/users/" + myID,updatedUser)
         .then(res=>{console.log(res);})
   }
 
@@ -98,6 +96,9 @@ class EditProfile extends Component {
     this.setState({ isLoggedIn: false });
   }
   render() {
+    if (this.state.redirect){
+      window.location.assign("/");
+    }
     return (
 
       <div className="signin">
@@ -110,8 +111,9 @@ class EditProfile extends Component {
           <p className="signin-input">Full name</p>
           <input className="signin-input-box"
             type="text"
-            value =  {this.state.name}
+            // value =  {this.state.name}
             name = "name"
+            defaultValue={this.state.user.name}
             onChange = {this.handleChange}
             placeholder="e.g. Johnny Appleseed...">
           </input>
@@ -121,7 +123,8 @@ class EditProfile extends Component {
             className="signin-input-box"
             name = "year"
             onChange = {this.handleChange}
-            value = {this.state.year}>
+            defaultValue={this.state.user.year}
+            >
               <option value = "freshman">Freshman</option>
               <option value = "sophomore">Sophomore</option>
               <option value = "junior">Junior</option>
@@ -131,15 +134,15 @@ class EditProfile extends Component {
           <p className="signin-input">University</p>
           <input className="signin-input-box"
             type="text"
-            value = {this.state.university}
+            defaultValue = {this.state.user.university}
             name = "university"
             onChange = {this.handleChange}
             placeholder="e.g. Duke University...">
           </input>
           <p className="signin-input">Bio</p>
-          <input className="signin-input-box"
+          <input className="bio-input-box"
             type="text"
-            value = {this.state.bio}
+            defaultValue = {this.state.user.bio}
             name = "bio"
             onChange = {this.handleChange}
             placeholder="Tell us about yourself">
@@ -147,7 +150,7 @@ class EditProfile extends Component {
           <p className="signin-input">Availabilities</p>
           <input className="signin-input-box"
             type="text"
-            value = {this.state.availabilities}
+            defaultValue = {this.state.user.availabilities}
             name = "availabilities"
             onChange = {this.handleChange}
             placeholder="e.g. Friday 10am-2pm…">
@@ -158,9 +161,9 @@ class EditProfile extends Component {
             </label>
           </div>
           <div>
-            <Link to={{ pathname: "/" }}>
+
               <SecondaryButton onClick={() => {this.handleUpdate()}}>Update Profile</SecondaryButton>
-            </Link >
+
             <Link to={{ pathname: "/signin/" }}>
               <PrimaryButton onClick={() => {this.handleLogout()}}>Log Out</PrimaryButton>
             </Link >

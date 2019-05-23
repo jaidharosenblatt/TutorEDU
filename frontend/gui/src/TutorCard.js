@@ -24,7 +24,7 @@ const Button = styled.button`
 class TutorCard extends Component {
 
   render() {
-
+    
     const courses = this.props.user.courses
     var studentCourses = "None"
 

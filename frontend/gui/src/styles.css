@@ -475,36 +475,13 @@ h4 {
   display: inline-block;
 }
 
-@media screen and (max-width: 900px) {
-  .signin-left {
-    width: 0%;
-    height: 0%;
-    visibility: hidden;
-    display: inline-block;
-  }
-}
-
-.signin-background {
-  /* margin-left: -750px; */
-  object-fit: cover;
-  height: 100%;
-  width: 100%;
-}
 .signin-right {
   display: inline-block;
   margin-left: 60px;
   position: absolute;
   top: 50%;
-  -ms-transform: translateY(-50%);
-  transform: translateY(-50%);
-}
-
-.signin-input {
-  font-family: Avenir-Heavy;
-  letter-spacing: 0px;
-  font-size: 12px;
-  margin-bottom: 8px;
-  margin-top: 20px;
+  -ms-transform: translateY(-45%);
+  transform: translateY(-45%);
 }
 
 .signin-input-box {
@@ -518,6 +495,38 @@ h4 {
   letter-spacing: 0;
   padding-left: 12px;
 }
+
+@media screen and (max-width: 900px) {
+  .signin-left {
+    width: 0%;
+    height: 0%;
+    visibility: hidden;
+    display: inline-block;
+  }
+  .signin-right{
+    margin-left: 3%;
+  }
+  .signin-input-box{
+    width: 400px;
+  }
+}
+
+.signin-background {
+  /* margin-left: -750px; */
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
+}
+
+
+.signin-input {
+  font-family: Avenir-Heavy;
+  letter-spacing: 0px;
+  font-size: 12px;
+  margin-bottom: 8px;
+  margin-top: 20px;
+}
+
 
 .signin-title {
   font-family: Avenir-Black;
