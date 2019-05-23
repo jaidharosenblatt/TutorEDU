@@ -57,7 +57,6 @@ class EditProfile extends Component {
       university : "",
       bio : "",
       availabilities : "",
-      isNewData : false,
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleUpdate = this.handleUpdate.bind(this);
@@ -77,8 +76,8 @@ class EditProfile extends Component {
 
   handleChange(event){
     const {name, value, type, checked} = event.target
-    type === "checkbox" ? this.setState({[name]: checked, isNewData:true  }) : this.setState({ [name]: value, isNewData:true })
-    console.log(this.state)
+    type === "checkbox" ? this.setState({[name]: checked}) : this.setState({ [name]: value})
+    // console.log(this.state)
     // let user = Object.assign({}, this.state.user)
     // user.name = this.state.name
     // this.setState({user})

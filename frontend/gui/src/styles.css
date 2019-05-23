@@ -475,13 +475,21 @@ h4 {
   display: inline-block;
 }
 
+@media screen and (max-width: 900px) {
+  .signin-left {
+    width: 0%;
+    height: 0%;
+    visibility: hidden;
+    display: inline-block;
+  }
+}
+
 .signin-background {
   /* margin-left: -750px; */
   object-fit: cover;
   height: 100%;
   width: 100%;
 }
-
 .signin-right {
   display: inline-block;
   margin-left: 60px;
