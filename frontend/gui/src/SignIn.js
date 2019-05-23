@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Redirect } from 'react-router';
 import './styles.css';
 import styled from 'styled-components';
 import axios from "axios";
@@ -109,6 +108,7 @@ class SignIn extends Component {
         console.log(error);
 
       });
+
   }
 
   handleLogout() {
@@ -120,7 +120,11 @@ class SignIn extends Component {
   render() {
 
     if (this.state.redirect){
-      return <Redirect push to="/" />;
+      window.location.assign("/");
+      // return (
+      //   <Redirect push to="/" />
+      // )
+
     }
     const signInView =
       <div className="signin-right">

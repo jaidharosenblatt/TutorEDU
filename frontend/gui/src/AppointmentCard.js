@@ -77,13 +77,13 @@ class AppointmentCard extends Component {
   getCourseNameFromId(courseID) {
     axios
       .get("http://127.0.0.1:8000/api/courses/" + courseID)
-      .then(res => this.setState({ courseName: res.data.course_name }))
+      .then(res => this.setState({ courseName: res.data.name }))
       .catch(err => console.log(err));
   }
 
   getTutorFromId(tutorId) {
     axios
-      .get("/users/" + tutorId)
+      .get("http://127.0.0.1:8000/api/users/" + tutorId)
       .then(res => {
         this.setState({ tutor: res.data })
       })
@@ -113,11 +113,11 @@ class AppointmentCard extends Component {
         status: "Declined"
       }
     }
-
+    window.location.reload();
     console.log(updatedFields)
 
     axios
-      .patch("/appointments/" + this.state.appointment.id + "/", updatedFields)
+      .patch("http://127.0.0.1:8000/api/appointments/" + this.state.appointment.id + "/", updatedFields)
       .then(res => {
         console.log(res)
         this.setState({ appointment: res.data })
