@@ -8,11 +8,9 @@ class AppointmentSerializer(serializers.ModelSerializer):
         fields = ('id', 'tutor', 'student', 'course', 'additional_comments', 'availabilities', 'is_active','date', 'location', 'status', 'rating')
 
 class CourseSerializer(serializers.ModelSerializer):
-    course_appointments = AppointmentSerializer(many=True,required=False)
-    user_courses= serializers.StringRelatedField(many=True,required=False)
     class Meta:
         model = Course
-        fields = ('id', 'name', 'description','course_appointments','user_courses')
+        fields = ('id', 'name', 'description')
 
 class UserSerializer(serializers.ModelSerializer):
     tutor_appointments = AppointmentSerializer(many=True,required=False)

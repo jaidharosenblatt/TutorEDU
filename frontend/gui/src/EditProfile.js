@@ -4,6 +4,8 @@ import styled from 'styled-components';
 import axios from "axios";
 import { Link, withRouter } from "react-router-dom";
 import background from './images/duke.png'
+import Multiselect from 'react-widgets/lib/Multiselect'
+
 
 const PrimaryButton = styled.button`
   height: 44px;
@@ -52,7 +54,10 @@ class EditProfile extends Component {
     super(props);
     this.state = {
       user: {},
-      redirect: false
+      redirect: false,
+      is_tutor: false,
+      courses: [],
+      userCourses: [],
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleUpdate = this.handleUpdate.bind(this);
@@ -68,7 +73,16 @@ class EditProfile extends Component {
           user: res.data,
         })
       })
+    axios
+      .get(" http://127.0.0.1:8000/api/courses/")
+
+      .then(res => {
+        const courseData = res.data
+        this.setState({courses:courseData})
+      })
+      .catch(err => console.log(err));
   }
+
 
   handleChange(event){
     const target = event.target;
@@ -83,15 +97,17 @@ class EditProfile extends Component {
 
   handleUpdate(){
     this.setState({redirect:true})
-
+    console.log(this.state.userCourses)
     const myID =  this.state.user.id
-
     const updatedUser = {
         name : this.state.name,
         year : this.state.year,
         university : this.state.university,
         bio : this.state.bio,
         availabilities: this.state.availabilities,
+        is_tutor: this.state.is_tutor,
+        hourly_rate: this.state.hourly_rate,
+        courses: this.state.userCourses
     }
     console.log(updatedUser)
     axios
@@ -103,10 +119,16 @@ class EditProfile extends Component {
     localStorage.removeItem('token');
     this.setState({ isLoggedIn: false });
   }
+  result(params) {
+   console.log(params);
+   this.setState({
+     userCourses: {params}
+   })
+ }
   render() {
-    if (this.state.redirect){
-      window.location.assign("/");
-    }
+    // if (this.state.redirect){
+    //   window.location.assign("/");
+    // }
     return (
 
       <div className="signin">
@@ -162,24 +184,34 @@ class EditProfile extends Component {
             onChange = {this.handleChange}
             placeholder="e.g. Friday 10am-2pm…">
           </input>
-          <p className="signin-input">Tutor?</p>
+          <p className="signin-input"> Rate ($/Hour)</p>
           <input
-            className = "signin-input-box"
-            name = "is_tutor"
-            type = ""
-            checked = {this.state.user.is_tutor}
+            className="hourlyRate-input-box"
+            defaultValue = {this.state.user.hourly_rate}
+            name = "hourly_rate"
             onChange = {this.handleChange}
-          >
+            placeholder="$">
           </input>
-          <div>
-            <label className="signup-tutor-label">
+          <p className="signin-input">Courses taken</p>
 
-            </label>
-          </div>
+          <Multiselect
+            className="signin-input"
+            data = {this.state.courses}
+            textField = "name"
+            userCourses = {this.state.userCourses}
+            onChange = {userCourses => this.setState({userCourses})}
+          />
+          <p className="signin-input-checkbox">Tutor?
+          <input
+            className= "checkbox"
+            type = "checkbox"
+            pattern="[0-9]*"
+            name = "is_tutor"
+            onChange = {this.handleChange}
+            defaultChecked = {this.state.user.is_tutor}
+          /></p>
           <div>
-
               <SecondaryButton onClick={() => {this.handleUpdate()}}>Update Profile</SecondaryButton>
-
             <Link to={{ pathname: "/signin/" }}>
               <PrimaryButton onClick={() => {this.handleLogout()}}>Log Out</PrimaryButton>
             </Link >

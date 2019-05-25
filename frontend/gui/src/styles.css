@@ -528,11 +528,6 @@ h4 {
   margin-top: 20px;
 }
 
-.signup-checkbox {
-  margin-right: 8px;
-  border: 1px solid #ECECEC;
-}
-
 .bio-input-box {
   height: 100px;
   width: 440px;
@@ -570,6 +565,18 @@ h4 {
   object-fit: cover;
 }
 
+.signin-input-checkbox{
+  font-family: Avenir-Heavy;
+  letter-spacing: 0px;
+  font-size: 12px;
+  margin-bottom: 0px;
+  margin-top: 20px;
+}
+
+.checkbox {
+  margin-left: 10px;
+  border: 20px solid #ECECEC;
+}
 @media screen and (max-width: 900px) {
   .signin-left {
     width: 0%;
