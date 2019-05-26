@@ -15,8 +15,8 @@ class CourseSerializer(serializers.ModelSerializer):
 class UserSerializer(serializers.ModelSerializer):
     tutor_appointments = AppointmentSerializer(many=True,required=False)
     student_appointments = AppointmentSerializer(many=True,required=False)
-    courses = CourseSerializer(many=True,required=False)
-
+    courses = serializers.PrimaryKeyRelatedField(
+        queryset= Course.objects.all(), many=True,required=False)
     class Meta:
         model = CustomUser
         fields = ('id','email', 'username','name', 'courses','profile_image','year', 'university','bio', 'client_rating',
@@ -26,8 +26,8 @@ class UserSerializer(serializers.ModelSerializer):
 class RegisterSerializer(serializers.ModelSerializer):
     tutor_appointments = AppointmentSerializer(many=True,required=False)
     student_appointments = AppointmentSerializer(many=True,required=False)
-    courses = CourseSerializer(many=True,required=False)
-
+    courses = serializers.PrimaryKeyRelatedField(
+        queryset= Course.objects.all(), many=True,required=False)
     class Meta:
         model = CustomUser
         fields = ('id','email', 'username','name', 'courses','profile_image','year',

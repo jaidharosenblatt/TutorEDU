@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './styles.css';
 import styled from 'styled-components';
+import axios from "axios";
 import { Link } from "react-router-dom";
 
 const Button = styled.button`
@@ -22,21 +23,47 @@ const Button = styled.button`
 `;
 
 class TutorCard extends Component {
+  constructor(){
+    super()
+    this.state = {
+      courses: []
+    }
+  }
 
+  componentDidMount() {
+    axios
+      .get(" http://127.0.0.1:8000/api/courses/")
+      .then(res => {
+        this.setState({courses:res.data})
+      })
+      .catch(err => console.log(err));
+  }
   render() {
-    
-    const courses = this.props.user.courses
-    var studentCourses = "None"
+    const courses = this.state.courses
+    const coursesIDs = this.props.user.courses
+    const tutorCourses = coursesIDs.map(id=>{
+        const courseName = courses.find(course =>
+          course.id === id
+          )
+        return(courseName)
+    }
+    )
+    // console.log(this.props.user.name)
+    // console.log(tutorCourses)
+    var studentCourses = ""
 
-    for(let i = 0; i < courses.length; i++) {
+    if (tutorCourses.length>0 && tutorCourses[0]!== undefined){
+      for(let i = 0; i < tutorCourses.length; i++) {
       if (i === 0) {
-        studentCourses = courses[i].name
-      } else if (i === courses.length - 1 & courses.length!==2) {
-        studentCourses = studentCourses + ", and " + courses[i].name
+        studentCourses = tutorCourses[i].name
+      } else if (i === courses.length - 1 & tutorCourses.length!==2) {
+        studentCourses = studentCourses + ", and " + tutorCourses[i].name
       } else {
-        studentCourses = studentCourses + ", " + courses[i].name
+        studentCourses = studentCourses + ", " + tutorCourses[i].name
       }
     }
+    }
+
 
     return (
         <div className="tutor-card">

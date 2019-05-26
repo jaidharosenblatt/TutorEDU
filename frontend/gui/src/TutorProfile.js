@@ -67,6 +67,7 @@ class TutorProfile extends Component {
       courses: [],
       isLoggedIn: localStorage.getItem('token') ? true : false,
       selectedCourse: -1,
+      hasError: false,
     };
     this.scheduleAppointment.bind(this);
   }
@@ -111,7 +112,7 @@ class TutorProfile extends Component {
   getCourses(courses) {
     for(let course of courses) {
       axios
-        .get("http://127.0.0.1:8000/api/courses/" + course.id)
+        .get("http://127.0.0.1:8000/api/courses/" + course)
         .then(res => {
           this.setState(state => {
             console.log(res.data)
@@ -126,7 +127,10 @@ class TutorProfile extends Component {
   }
 
   scheduleAppointment() {
-
+    if (this.state.hasError || this.state.tutor.id === this.state.user.id){
+      this.setState({hasError:true})
+      return(undefined)
+    }
     var appointment = {
       id: Math.floor(Math.random() * 100000),
       tutor: this.state.tutor.id,
@@ -148,6 +152,7 @@ class TutorProfile extends Component {
       })
       .catch(function (error) {
         console.log(error);
+        this.setState({hasError:true})
       });
   }
 
@@ -233,10 +238,16 @@ class TutorProfile extends Component {
               </Link>
               <p></p>
               <p className="availability-details">We will get back to you within 24 hours.</p>
+              {this.state.hasError ?
+                <p style={{fontFamily: "Avenir-Heavy", color: "#d13e50", textAlign: "center" }} className="availability-details">Error scheduling appointment</p>
+                :
+                null
+              }
             </div>
           ) : (
             <p style={{ textAlign: "center" }} className="availability-details"><br/>Please sign in to schedule an appointment.</p>
           )}
+
         </div>
       </div>
     )

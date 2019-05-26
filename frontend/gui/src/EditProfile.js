@@ -97,17 +97,20 @@ class EditProfile extends Component {
 
   handleUpdate(){
     this.setState({redirect:true})
-    console.log(this.state.userCourses)
+    const coursesIDs = this.state.userCourses.map(course => {
+      return(course.id)
+    })
     const myID =  this.state.user.id
     const updatedUser = {
         name : this.state.name,
         year : this.state.year,
         university : this.state.university,
         bio : this.state.bio,
+        report_card : this.state.report_card,
         availabilities: this.state.availabilities,
         is_tutor: this.state.is_tutor,
         hourly_rate: this.state.hourly_rate,
-        courses: this.state.userCourses
+        courses: coursesIDs
     }
     console.log(updatedUser)
     axios
@@ -176,6 +179,14 @@ class EditProfile extends Component {
             onChange = {this.handleChange}
             placeholder="Tell us about yourself">
           </input>
+          <p className="signin-input">Report Card</p>
+          <input className="bio-input-box"
+            type="text"
+            defaultValue = {this.state.user.report_card}
+            name = "report_card"
+            onChange = {this.handleChange}
+            placeholder="e.g. Econ 174: A-, Econ 256: A, CS 201: A, CS 230: A-, CS 290: A">
+          </input>
           <p className="signin-input">Availabilities</p>
           <input className="signin-input-box"
             type="text"
@@ -195,9 +206,9 @@ class EditProfile extends Component {
           <p className="signin-input">Courses taken</p>
 
           <Multiselect
-            className="signin-input"
             data = {this.state.courses}
             textField = "name"
+            valueField = "id"
             userCourses = {this.state.userCourses}
             onChange = {userCourses => this.setState({userCourses})}
           />
