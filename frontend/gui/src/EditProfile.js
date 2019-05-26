@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import axios from "axios";
 import { Link, withRouter } from "react-router-dom";
 import background from './images/duke.png'
-import Multiselect from 'react-widgets/lib/Multiselect'
+import Select from 'react-select';
 
 
 const PrimaryButton = styled.button`
@@ -55,7 +55,7 @@ class EditProfile extends Component {
     this.state = {
       user: {},
       redirect: false,
-      is_tutor: false,
+      is_tutor: true,
       courses: [],
       userCourses: [],
     }
@@ -73,6 +73,7 @@ class EditProfile extends Component {
           user: res.data,
         })
       })
+
     axios
       .get(" http://127.0.0.1:8000/api/courses/")
 
@@ -97,9 +98,12 @@ class EditProfile extends Component {
 
   handleUpdate(){
     this.setState({redirect:true})
+    console.log(this.state.userCourses)
     const coursesIDs = this.state.userCourses.map(course => {
-      return(course.id)
+      return(course.value)
     })
+    console.log(coursesIDs)
+
     const myID =  this.state.user.id
     const updatedUser = {
         name : this.state.name,
@@ -132,6 +136,10 @@ class EditProfile extends Component {
     // if (this.state.redirect){
     //   window.location.assign("/");
     // }
+    const options = this.state.courses.map(course => {
+      const newCourse = {value: course.id,label:course.name}
+      return(newCourse)
+    })
     return (
 
       <div className="signin">
@@ -198,28 +206,29 @@ class EditProfile extends Component {
           <p className="signin-input"> Rate ($/Hour)</p>
           <input
             className="hourlyRate-input-box"
+            pattern="[0-9]*"
             defaultValue = {this.state.user.hourly_rate}
             name = "hourly_rate"
             onChange = {this.handleChange}
             placeholder="$">
           </input>
           <p className="signin-input">Courses taken</p>
-
-          <Multiselect
-            data = {this.state.courses}
-            textField = "name"
-            valueField = "id"
-            userCourses = {this.state.userCourses}
+          <div>
+          <Select
+            options = {options}
             onChange = {userCourses => this.setState({userCourses})}
+            isMulti="true"
           />
+          </div>
+          
           <p className="signin-input-checkbox">Tutor?
+
           <input
             className= "checkbox"
             type = "checkbox"
-            pattern="[0-9]*"
             name = "is_tutor"
             onChange = {this.handleChange}
-            defaultChecked = {this.state.user.is_tutor}
+            defaultChecked = {this.state.is_tutor}
           /></p>
           <div>
               <SecondaryButton onClick={() => {this.handleUpdate()}}>Update Profile</SecondaryButton>

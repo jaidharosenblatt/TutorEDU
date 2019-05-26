@@ -480,8 +480,8 @@ h4 {
   margin-left: 60px;
   position: absolute;
   top: 50%;
-  -ms-transform: translateY(-45%);
-  transform: translateY(-45%);
+  -ms-transform: translateY(-30%);
+  transform: translateY(-30%);
 }
 
 .signin-input-box {
@@ -573,6 +573,10 @@ h4 {
   margin-top: 20px;
 }
 
+.course-dropdown{
+  background-color: red;
+  font-size: 100px;
+  }
 .checkbox {
   margin-left: 10px;
   border: 20px solid #ECECEC;
@@ -593,4 +597,13 @@ h4 {
   .bio-input-box {
     width: 390px;
   }
+  .appointment-card-card {
+    width: 130%;
+    -ms-transform: translateX(-10%);
+    transform: translateX(-10%);
+  }
+  .appointment-card-profpic{
+    transform: translateX(-30%);
+  }
+
 }

@@ -50,7 +50,7 @@ class TutorCard extends Component {
     )
     // console.log(this.props.user.name)
     // console.log(tutorCourses)
-    var studentCourses = ""
+    var studentCourses = "None"
 
     if (tutorCourses.length>0 && tutorCourses[0]!== undefined){
       for(let i = 0; i < tutorCourses.length; i++) {
