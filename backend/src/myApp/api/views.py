@@ -5,12 +5,31 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework import generics,permissions
 from knox.models import AuthToken
+from rest_framework.views import APIView
+from rest_framework.parsers import MultiPartParser, FormParser
 
 
 # @api_view(['GET'])
 # def CurrentUser(request):
 #     serializer = UserSerializer(request.user)
 #     return Response(serializer.data)
+
+class ImagePostView(APIView):
+    parser_classes = (MultiPartParser, FormParser)
+
+    def get(self, request, *args, **kwargs):
+        users = CustomUser.objects.all()
+        serializer = UserSerializer(users, many=True)
+        return Response(serializer.data)
+
+    def post(self, request, *args, **kwargs):
+        user_serializer = UserSerializer(data=request.data)
+        if user_serializer.is_valid():
+            puser_serializer.save()
+            return Response(user_serializer.data, status=status.HTTP_201_CREATED)
+        else:
+            print('error', user_serializer.errors)
+            return Response(user_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class CurrentUserView(generics.RetrieveAPIView):
   serializer_class = UserSerializer

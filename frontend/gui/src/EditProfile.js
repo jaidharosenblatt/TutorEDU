@@ -58,6 +58,7 @@ class EditProfile extends Component {
       is_tutor: true,
       courses: [],
       userCourses: [],
+      image: null,
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleUpdate = this.handleUpdate.bind(this);
@@ -114,7 +115,8 @@ class EditProfile extends Component {
         availabilities: this.state.availabilities,
         is_tutor: this.state.is_tutor,
         hourly_rate: this.state.hourly_rate,
-        courses: coursesIDs
+        courses: coursesIDs,
+        profile_image: this.state.image
     }
     console.log(updatedUser)
     axios
@@ -126,16 +128,16 @@ class EditProfile extends Component {
     localStorage.removeItem('token');
     this.setState({ isLoggedIn: false });
   }
-  result(params) {
-   console.log(params);
-   this.setState({
-     userCourses: {params}
-   })
- }
+
+   handleImageChange = (e) => {
+      this.setState({
+        image: e.target.files[0]
+      })
+    }
   render() {
-    // if (this.state.redirect){
-    //   window.location.assign("/");
-    // }
+    if (this.state.redirect){
+      window.location.assign("/");
+    }
     const options = this.state.courses.map(course => {
       const newCourse = {value: course.id,label:course.name}
       return(newCourse)
@@ -195,6 +197,7 @@ class EditProfile extends Component {
             onChange = {this.handleChange}
             placeholder="e.g. Econ 174: A-, Econ 256: A, CS 201: A, CS 230: A-, CS 290: A">
           </input>
+
           <p className="signin-input">Availabilities</p>
           <input className="signin-input-box"
             type="text"
@@ -220,7 +223,10 @@ class EditProfile extends Component {
             isMulti="true"
           />
           </div>
-          
+          <input type="file"
+                            id="image"
+                            accept="image/png, image/jpeg"  onChange={this.handleImageChange} required/>
+
           <p className="signin-input-checkbox">Tutor?
 
           <input
