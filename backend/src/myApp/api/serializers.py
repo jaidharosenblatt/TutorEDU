@@ -5,7 +5,7 @@ from django.contrib.auth import authenticate
 class ProfilePictureSerializer(serializers.ModelSerializer):
     class Meta:
         model = Photo
-        fields = ['image','user']
+        fields = ['image','user','id']
         read_only_fields = ('user',)
 
 class AppointmentSerializer(serializers.ModelSerializer):

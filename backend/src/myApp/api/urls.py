@@ -7,19 +7,14 @@ CurrentUserView, LoginUserView, RegisterUserView, UserListView,
 
 urlpatterns = [
     path('users/', UserListView.as_view()),
-
     path('users/<pk>', UserDetailView.as_view()),
     path('appointments/', AppointmentListView.as_view()),
     path('appointments/<pk>', AppointmentDetailView.as_view()),
     path('courses/', CourseListView.as_view()),
     path('courses/<pk>', CourseDetailView.as_view()),
-    # path('get-token/', obtain_auth_token),
-    # path('current-user/',CurrentUser),
     path('current-user/',CurrentUserView.as_view()),
     path('register/',RegisterUserView.as_view()),
     path('login/',LoginUserView.as_view()),
     path('images/', ProfilePictureView.as_view()),
     path('images/<pk>', ProfilePictureDetailView.as_view()),
-
-
 ]

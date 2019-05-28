@@ -7,7 +7,8 @@ class NavBar extends Component {
     super(props);
     this.state = {
       isLoggedIn: localStorage.getItem('token') ? true : false,
-      user: null
+      user: null,
+      photo: {},
     };
   }
 
@@ -24,11 +25,23 @@ class NavBar extends Component {
 
     axios
       .get('http://127.0.0.1:8000/api/current-user/', config)
-      .then(res => {
-        this.setState({
-          user: res.data,
-        })
-        console.log(res);
+      .then(resA =>
+        Promise.all([
+          resA,
+          axios.get('http://127.0.0.1:8000/api/images/'+resA.data.profile_image[0])
+        ])
+      )
+      .then(
+        ([resA,resB])=>{
+          console.log(resA,resB)
+          this.setState({
+            user: resA.data,
+            photo: resB.data
+          })
+        }
+      )
+      .catch((err)=>{
+        console.log(err.message)
       })
   }
 
@@ -45,7 +58,7 @@ class NavBar extends Component {
                   <Navbar.Text className="navbar-appointments">
                     <a href="/appointments">Appointments</a>
                   </Navbar.Text>
-                  <a href="/edit-profile"><img className="navbar-profpic" src={ this.state.user != null ? this.state.user.profile_image : null } alt=""/>
+                  <a href="/edit-profile"><img className="navbar-profpic" src={ this.state.user != null ? this.state.photo.image : null } alt=""/>
                   </a>
                 </div>
               ) : (

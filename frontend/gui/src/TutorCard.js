@@ -26,7 +26,8 @@ class TutorCard extends Component {
   constructor(){
     super()
     this.state = {
-      courses: []
+      courses: [],
+      photo: {},
     }
   }
 
@@ -37,6 +38,14 @@ class TutorCard extends Component {
         this.setState({courses:res.data})
       })
       .catch(err => console.log(err));
+
+    const imageID= this.props.user.profile_image[0];
+    axios
+        .get('http://127.0.0.1:8000/api/images/'+imageID)
+        .then(res => {
+          this.setState({photo:res.data})
+        })
+        .catch(err => console.log(err));
   }
   render() {
     const courses = this.state.courses
@@ -67,7 +76,7 @@ class TutorCard extends Component {
 
     return (
         <div className="tutor-card">
-          <img  src={ this.props.user.profile_image}
+          <img  src={ this.state.photo.image}
                 alt={ "TUTOR NAME" }
                 className="tutor-profpic" />
           <h3 className="tutor-name">{this.props.user.name}</h3>
