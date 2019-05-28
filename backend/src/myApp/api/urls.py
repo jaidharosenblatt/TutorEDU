@@ -1,6 +1,8 @@
 from django.contrib import admin
 from django.urls import path, include
-from .views import ImagePostView, CurrentUserView, LoginUserView, RegisterUserView, UserListView, UserDetailView, AppointmentListView, AppointmentDetailView, CourseListView, CourseDetailView
+from .views import (ProfilePictureDetailView, ProfilePictureView,
+CurrentUserView, LoginUserView, RegisterUserView, UserListView,
+ UserDetailView, AppointmentListView, AppointmentDetailView, CourseListView, CourseDetailView)
 # from rest_framework.authtoken.views import obtain_auth_token
 
 urlpatterns = [
@@ -16,7 +18,8 @@ urlpatterns = [
     path('current-user/',CurrentUserView.as_view()),
     path('register/',RegisterUserView.as_view()),
     path('login/',LoginUserView.as_view()),
-    path('image-upload/', ImagePostView.as_view()),
+    path('images/', ProfilePictureView.as_view()),
+    path('images/<pk>', ProfilePictureDetailView.as_view()),
 
 
 ]

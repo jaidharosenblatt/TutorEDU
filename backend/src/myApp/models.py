@@ -12,7 +12,6 @@ class Course(models.Model):
         return self.name
 
 class CustomUser(AbstractUser):
-    profile_image = models.ImageField(upload_to='profile_image', blank=True, default='default-profile.png')
     name = models.CharField(default='blank', blank=True, max_length=40)
     email = models.EmailField(default='blank', unique=True)
     year = models.CharField(default='blank', blank=True, max_length=40)
@@ -25,6 +24,12 @@ class CustomUser(AbstractUser):
     hourly_rate = models.FloatField(null=True, blank=True, default=None)
     availabilities = models.CharField(default='blank', blank=True, max_length=2000)
     courses = models.ManyToManyField(Course, related_name='user_courses',blank=True)
+
+class Photo(models.Model):
+    user = models.ForeignKey(CustomUser,related_name= 'profile_image', on_delete=models.CASCADE, null=True, blank=True)
+    image = models.ImageField(upload_to='profile_image', null=True, default='default-profile.png')
+    def __str__(self):
+        return str(self.user.email)
 
 class Appointment(models.Model):
     additional_comments = models.CharField(default='blank', blank=True, max_length=200)

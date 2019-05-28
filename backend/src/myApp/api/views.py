@@ -1,35 +1,31 @@
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateAPIView
-from myApp.models import CustomUser,Course, Appointment
-from .serializers import UserSerializer,CourseSerializer,AppointmentSerializer, RegisterSerializer, LoginSerializer
+from myApp.models import Photo, CustomUser,Course, Appointment
+from .serializers import ProfilePictureSerializer, UserSerializer,CourseSerializer,AppointmentSerializer, RegisterSerializer, LoginSerializer
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework import generics,permissions
 from knox.models import AuthToken
 from rest_framework.views import APIView
-from rest_framework.parsers import MultiPartParser, FormParser
+from rest_framework.parsers import MultiPartParser, FormParser,FileUploadParser
 
 
 # @api_view(['GET'])
 # def CurrentUser(request):
 #     serializer = UserSerializer(request.user)
 #     return Response(serializer.data)
+class ProfilePictureView(generics.CreateAPIView):
+    permission_classes = (permissions.AllowAny,)
+    serializer_class = ProfilePictureSerializer
+    parser_classes = (FormParser,MultiPartParser, FileUploadParser)
+    def perform_create(self, serializer):
+        print(self.request.FILES['image'])
+        serializer.save(user=CustomUser.objects.get(pk=1))
 
-class ImagePostView(APIView):
-    parser_classes = (MultiPartParser, FormParser)
-
-    def get(self, request, *args, **kwargs):
-        users = CustomUser.objects.all()
-        serializer = UserSerializer(users, many=True)
-        return Response(serializer.data)
-
-    def post(self, request, *args, **kwargs):
-        user_serializer = UserSerializer(data=request.data)
-        if user_serializer.is_valid():
-            puser_serializer.save()
-            return Response(user_serializer.data, status=status.HTTP_201_CREATED)
-        else:
-            print('error', user_serializer.errors)
-            return Response(user_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+class ProfilePictureDetailView(generics.RetrieveUpdateAPIView):
+    permission_classes = (permissions.AllowAny,)
+    serializer_class = ProfilePictureSerializer
+    parser_classes = (FormParser,MultiPartParser, FileUploadParser)
+    queryset = Photo.objects.all()
 
 class CurrentUserView(generics.RetrieveAPIView):
   serializer_class = UserSerializer

@@ -1,6 +1,12 @@
 from rest_framework import serializers
-from myApp.models import Appointment, Course, CustomUser
+from myApp.models import Appointment, Course, CustomUser, Photo
 from django.contrib.auth import authenticate
+
+class ProfilePictureSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Photo
+        fields = ['image','user']
+        read_only_fields = ('user',)
 
 class AppointmentSerializer(serializers.ModelSerializer):
     class Meta:
@@ -13,8 +19,6 @@ class CourseSerializer(serializers.ModelSerializer):
         fields = ('id', 'name', 'description')
 
 class UserSerializer(serializers.ModelSerializer):
-    tutor_appointments = AppointmentSerializer(many=True,required=False)
-    student_appointments = AppointmentSerializer(many=True,required=False)
     courses = serializers.PrimaryKeyRelatedField(
         queryset= Course.objects.all(), many=True,required=False)
     class Meta:
@@ -24,8 +28,6 @@ class UserSerializer(serializers.ModelSerializer):
         read_only_fields = ('id',)
 
 class RegisterSerializer(serializers.ModelSerializer):
-    tutor_appointments = AppointmentSerializer(many=True,required=False)
-    student_appointments = AppointmentSerializer(many=True,required=False)
     courses = serializers.PrimaryKeyRelatedField(
         queryset= Course.objects.all(), many=True,required=False)
     class Meta:
