@@ -7,6 +7,7 @@ from rest_framework import generics,permissions
 from knox.models import AuthToken
 from rest_framework.views import APIView
 from rest_framework.parsers import MultiPartParser, FormParser,FileUploadParser
+from django.http import HttpResponse
 
 
 # @api_view(['GET'])
@@ -20,6 +21,8 @@ class ProfilePictureView(generics.CreateAPIView):
     def perform_create(self, serializer):
         print(self.request.FILES['image'])
         serializer.save(user=CustomUser.objects.get(pk=1))
+        return HttpResponse('')
+
 
 class ProfilePictureDetailView(generics.RetrieveUpdateAPIView):
     permission_classes = (permissions.AllowAny,)

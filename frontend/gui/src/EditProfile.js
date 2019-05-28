@@ -58,7 +58,7 @@ class EditProfile extends Component {
       is_tutor: true,
       courses: [],
       userCourses: [],
-      image: null,
+      profilePic: null,
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleUpdate = this.handleUpdate.bind(this);
@@ -97,6 +97,33 @@ class EditProfile extends Component {
     console.log(this.state)
   }
 
+  handleImageChange = (e) => {
+     this.setState({
+       profilePic: e.target.files[0]
+     })
+   }
+
+  handleImage(){
+    let formData = new FormData();
+    const imageID = this.state.user.profile_image[0]
+    formData.append("image",this.state.profilePic);
+    formData.append("user",this.state.user.id);
+    formData.append("id",imageID);
+    var config = {
+      headers: { 'Accept': 'application/json',
+     'Content-Type': 'multipart/form-data',}
+    };
+    // const image = this.state.profilePic
+
+    console.log(formData)
+    axios
+      .put('http://127.0.0.1:8000/api/images/'+imageID, formData,config)
+      .then(res => {
+        console.log(res)
+        this.setState({ appointment: res.data })
+      })
+      .catch(err => console.log(err));
+  }
   handleUpdate(){
     this.setState({redirect:true})
     console.log(this.state.userCourses)
@@ -129,11 +156,7 @@ class EditProfile extends Component {
     this.setState({ isLoggedIn: false });
   }
 
-   handleImageChange = (e) => {
-      this.setState({
-        image: e.target.files[0]
-      })
-    }
+
   render() {
     if (this.state.redirect){
       window.location.assign("/");
@@ -224,8 +247,10 @@ class EditProfile extends Component {
           />
           </div>
           <input type="file"
-                            id="image"
-                            accept="image/png, image/jpeg"  onChange={this.handleImageChange} required/>
+          id="image"
+          accept="image/png, image/jpeg"
+          onChange={this.handleImageChange}
+          />
 
           <p className="signin-input-checkbox">Tutor?
 
@@ -237,6 +262,8 @@ class EditProfile extends Component {
             defaultChecked = {this.state.is_tutor}
           /></p>
           <div>
+          <SecondaryButton onClick={() => {this.handleImage()}}>Upload Photo</SecondaryButton>
+
               <SecondaryButton onClick={() => {this.handleUpdate()}}>Update Profile</SecondaryButton>
             <Link to={{ pathname: "/signin/" }}>
               <PrimaryButton onClick={() => {this.handleLogout()}}>Log Out</PrimaryButton>

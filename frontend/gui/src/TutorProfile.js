@@ -68,6 +68,7 @@ class TutorProfile extends Component {
       isLoggedIn: localStorage.getItem('token') ? true : false,
       selectedCourse: -1,
       hasError: false,
+      photo: {},
     };
     this.scheduleAppointment.bind(this);
   }
@@ -107,6 +108,27 @@ class TutorProfile extends Component {
         this.getCourses(this.state.tutor.courses)
       })
       .catch(err => console.log(err));
+    axios
+      .get(" http://127.0.0.1:8000/api/users/" + userID)
+      .then(resA =>
+        Promise.all([
+          resA,
+          axios.get('http://127.0.0.1:8000/api/images/'+resA.data.profile_image[0])
+        ])
+      )
+      .then(
+        ([resA,resB])=>{
+          console.log(resA)
+          this.setState({
+            tutor: resA.data,
+            photo: resB.data
+          })
+          this.getCourses(this.state.tutor.courses)
+        }
+      )
+      .catch((err)=>{
+        console.log(err.message)
+      })
   }
 
   getCourses(courses) {
@@ -180,7 +202,7 @@ class TutorProfile extends Component {
         <div className="tutor-TutorProfile">
           <div className="tutor-topHeader">
             <div className="tutor-picture">
-            <img  src={ this.state.tutor.profile_image}
+            <img  src={ this.state.photo.image}
                   alt={ this.state.tutor.name }
                   className="tutor-profpicture"/>
             </div>
