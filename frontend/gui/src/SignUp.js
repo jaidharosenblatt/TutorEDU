@@ -78,23 +78,30 @@ class SignUp extends Component {
       password: document.getElementById('password').value,
       is_tutor: false,
     }
-
     console.log(newUser);
+    axios
+      .post(" http://127.0.0.1:8000/api/register/",newUser)
+      .then(resA =>
+        Promise.all([
+          resA,
+          axios.post('http://127.0.0.1:8000/api/images/')
+        ])
+      )
+      .then(
+        ([resA,resB])=>{
+          console.log(resA)
+          localStorage.removeItem('token');
+          localStorage.setItem('token', resA.data.token);
 
-    axios.post('http://127.0.0.1:8000/api/register/', newUser)
-      .then((response) => {
-        console.log(response);
-        localStorage.removeItem('token');
-        localStorage.setItem('token', response.data.token);
-
-        let { history } = this.props;
-        history.push({
-         pathname: '/',
-        });
+          let { history } = this.props;
+          history.push({
+           pathname: '/',
+          });
+        }
+      )
+      .catch((err)=>{
+        console.log(err.message)
       })
-      .catch(function (error) {
-        console.log(error);
-      });
   }
 
   render() {

@@ -103,13 +103,6 @@ class TutorProfile extends Component {
   getTutor(userID) {
     axios
       .get(" http://127.0.0.1:8000/api/users/" + userID)
-      .then(res => {
-        this.setState({ tutor: res.data })
-        this.getCourses(this.state.tutor.courses)
-      })
-      .catch(err => console.log(err));
-    axios
-      .get(" http://127.0.0.1:8000/api/users/" + userID)
       .then(resA =>
         Promise.all([
           resA,
@@ -228,10 +221,6 @@ class TutorProfile extends Component {
               <h4 className="tutor-availability">AVAILABILITIES</h4>
               <p className="availability-details">
               {this.state.tutor.availabilities}</p>
-            </div>
-            <div className="tutor-reportCard">
-              <h4 className="tutor-reportCard">REPORT CARD</h4>
-              <p className="RCdetails">{ this.state.tutor.report_card }</p>
             </div>
             </div>
         </div>

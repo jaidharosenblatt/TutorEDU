@@ -7,6 +7,9 @@ class ProfilePictureSerializer(serializers.ModelSerializer):
         model = Photo
         fields = ['image','user','id']
         read_only_fields = ('user',)
+    def __init__(self, *args, **kwargs):
+        super(ProfilePictureSerializer, self).__init__(*args, **kwargs)
+        self.fields['image'].required = False
 
 class AppointmentSerializer(serializers.ModelSerializer):
     class Meta:
@@ -32,9 +35,9 @@ class RegisterSerializer(serializers.ModelSerializer):
         queryset= Course.objects.all(), many=True,required=False)
     class Meta:
         model = CustomUser
-        fields = ('id','email', 'username','name', 'courses','profile_image','year',
+        fields = ('id','email', 'username','name', 'courses','year',
         'password', 'university','bio', 'client_rating',
-        'is_tutor','is_active', 'tutor_rating','hourly_rate','availabilities','tutor_appointments','student_appointments','courses','report_card')
+        'is_tutor','is_active', 'tutor_rating','hourly_rate','availabilities','courses','report_card')
         write_only_fields = ('password',)
         read_only_fields = ('id',)
 

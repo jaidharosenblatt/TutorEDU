@@ -19,10 +19,9 @@ class ProfilePictureView(generics.CreateAPIView):
     serializer_class = ProfilePictureSerializer
     parser_classes = (FormParser,MultiPartParser, FileUploadParser)
     def perform_create(self, serializer):
-        print(self.request.FILES['image'])
-        serializer.save(user=CustomUser.objects.get(pk=1))
+        maxID = CustomUser.objects.all().order_by("-id")[0].id
+        serializer.save(user=CustomUser.objects.get(pk=maxID))
         return HttpResponse('')
-
 
 class ProfilePictureDetailView(generics.RetrieveUpdateAPIView):
     permission_classes = (permissions.AllowAny,)

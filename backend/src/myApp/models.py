@@ -26,8 +26,8 @@ class CustomUser(AbstractUser):
     courses = models.ManyToManyField(Course, related_name='user_courses',blank=True)
 
 class Photo(models.Model):
-    user = models.ForeignKey(CustomUser,related_name= 'profile_image', on_delete=models.CASCADE, null=True, blank=True)
-    image = models.ImageField(upload_to='profile_image', null=True, default='default-profile.png')
+    user = models.ForeignKey(CustomUser,related_name= 'profile_image', on_delete=models.CASCADE)
+    image = models.ImageField(null=True, blank=True, upload_to='profile_image', default='default-profile.png')
 
 class Appointment(models.Model):
     additional_comments = models.CharField(default='blank', blank=True, max_length=200)
