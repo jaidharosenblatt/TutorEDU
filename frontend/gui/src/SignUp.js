@@ -55,6 +55,7 @@ class SignUp extends Component {
     this.state = {
       isTutor: false,
       isLoggedIn: false,
+      hasError: false,
     };
 
     this.handleCheckboxChange = this.handleCheckboxChange.bind(this);
@@ -101,6 +102,7 @@ class SignUp extends Component {
       )
       .catch((err)=>{
         console.log(err.message)
+        this.setState({hasError:true})
       })
   }
 
@@ -122,9 +124,10 @@ class SignUp extends Component {
           <input className="signin-input-box" id="password" type="password" placeholder="(8 characters minimum)"></input>
           <div>
             <label className="signup-tutor-label">
-
             </label>
+
           </div>
+          {this.state.hasError ? <p  style={{color:"#d13e50"}}>Error creating profile</p> : null}
           <div>
             <Link to={{ pathname: "/signin/" }}>
               <SecondaryButton>Sign In</SecondaryButton>
