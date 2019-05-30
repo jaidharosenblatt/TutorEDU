@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import axios from "axios";
 import { Link, withRouter } from "react-router-dom";
 import background from './images/duke.png'
-import Select from 'react-select';
+import Select from "react-select";
 
 
 const PrimaryButton = styled.button`
@@ -19,7 +19,8 @@ const PrimaryButton = styled.button`
   text-align: center;
   justifyContent: center;
   alignItems: center;
-  margin-top: 36px;
+  margin-right: 12px;
+  margin-top: 10px;
 
   :hover {
     color: white;
@@ -39,8 +40,8 @@ const SecondaryButton = styled.button`
   text-align: center;
   justifyContent: center;
   alignItems: center;
-  margin-top: 12px;
-  margin-right: 12px;
+  margin-top: 10px;
+
 
   :hover {
     color: white;
@@ -48,14 +49,24 @@ const SecondaryButton = styled.button`
     background-color: #1C3A9F;
   }
 `;
-
+const colourStyles = {
+  control: styles => ({ ...styles,
+    backgroundColor: '#F8F8F8',
+    border: '1px solid #ECECEC'
+  }),
+  placeholder: styles => ({...styles,
+    color:'black',
+  }),
+};
 class EditProfile extends Component {
   constructor(props) {
     super(props);
     this.state = {
       user: {},
+      year: {},
       redirect: false,
       is_tutor: true,
+      hasError: false,
       courses: [],
       userCourses: [],
       profilePic: null,
@@ -84,25 +95,20 @@ class EditProfile extends Component {
       })
       .catch(err => console.log(err));
   }
-
-
-  handleChange(event){
+  handleChange(event) {
     const target = event.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.name;
-
     this.setState({
       [name]: value
     });
     console.log(this.state)
-  }
-
+    }
   handleImageChange = (e) => {
      this.setState({
        profilePic: e.target.files[0]
      })
    }
-
   handleImage(){
     let formData = new FormData();
     const imageID = this.state.user.profile_image[0]
@@ -125,20 +131,23 @@ class EditProfile extends Component {
       .catch(err => console.log(err));
   }
   handleUpdate(){
-    this.setState({redirect:true})
+    if (this.state.profilePic !== null){
+      this.handleImage()
+    }
+
+
     console.log(this.state.userCourses)
     const coursesIDs = this.state.userCourses.map(course => {
       return(course.value)
     })
-    console.log(coursesIDs)
+    console.log(this.state.year.value)
 
     const myID =  this.state.user.id
     const updatedUser = {
         name : this.state.name,
-        year : this.state.year,
+        year : this.state.year.value,
         university : this.state.university,
         bio : this.state.bio,
-        report_card : this.state.report_card,
         availabilities: this.state.availabilities,
         is_tutor: this.state.is_tutor,
         hourly_rate: this.state.hourly_rate,
@@ -148,14 +157,22 @@ class EditProfile extends Component {
     console.log(updatedUser)
     axios
         .patch("http://127.0.0.1:8000/api/users/" + myID,updatedUser)
-        .then(res=>{console.log(res);})
+        .then(
+          res=>{console.log(res)
+            if (res.status === 200){
+              this.setState({redirect:true})
+            }
+          }
+        )
+        .catch(
+          err => {console.log(err)
+          this.setState({hasError:true})
+          })
   }
-
   handleLogout() {
     localStorage.removeItem('token');
     this.setState({ isLoggedIn: false });
   }
-
 
   render() {
     if (this.state.redirect){
@@ -165,14 +182,35 @@ class EditProfile extends Component {
       const newCourse = {value: course.id,label:course.name}
       return(newCourse)
     })
+    let years = [
+      {
+        label: 'Freshman',
+        value: 'freshman'
+      },
+      {
+        label: 'Sophomore',
+        value: 'sophomore'
+      },
+      {
+        label: 'Junior',
+        value: 'junior'
+      },
+      {
+        label: 'Senior',
+        value: 'senior'
+      },
+      {
+        label: 'Graduate',
+        value: 'graduate'
+      },
+    ]
     return (
 
-      <div className="signin">
-
+      <div className="editprofile">
         <div className="signin-left">
           <img className="signin-background" src={background} alt="Duke University campus"/>
         </div>
-        <div className="signin-right">
+        <div className="editprofile-right ">
           <h2 className="signin-title">Edit Profile</h2>
           <p className="signin-input">Full name</p>
           <input className="signin-input-box"
@@ -184,18 +222,12 @@ class EditProfile extends Component {
             placeholder="e.g. Johnny Appleseed...">
           </input>
           <p className="signin-input">Year</p>
-          <select
-            className="signin-input-box"
-            name = "year"
-            onChange = {this.handleChange}
-            defaultValue={this.state.user.year}
-            >
-              <option value = "freshman">Freshman</option>
-              <option value = "sophomore">Sophomore</option>
-              <option value = "junior">Junior</option>
-              <option value = "senior">Senior</option>
-              <option value = "graduate">Graduate</option>
-          </select>
+          <Select
+            className = "course-dropdown"
+            styles = {colourStyles}
+            options = {years}
+            onChange = {year => this.setState({year})}
+          />
           <p className="signin-input">University</p>
           <input className="signin-input-box"
             type="text"
@@ -205,21 +237,14 @@ class EditProfile extends Component {
             placeholder="e.g. Duke University...">
           </input>
           <p className="signin-input">Bio</p>
-          <input className="bio-input-box"
+          <input className="signin-input-box"
             type="text"
             defaultValue = {this.state.user.bio}
             name = "bio"
             onChange = {this.handleChange}
             placeholder="Tell us about yourself">
           </input>
-          <p className="signin-input">Report Card</p>
-          <input className="bio-input-box"
-            type="text"
-            defaultValue = {this.state.user.report_card}
-            name = "report_card"
-            onChange = {this.handleChange}
-            placeholder="e.g. Econ 174: A-, Econ 256: A, CS 201: A, CS 230: A-, CS 290: A">
-          </input>
+
 
           <p className="signin-input">Availabilities</p>
           <input className="signin-input-box"
@@ -241,32 +266,40 @@ class EditProfile extends Component {
           <p className="signin-input">Courses taken</p>
           <div>
           <Select
+            className = "course-dropdown"
             options = {options}
             onChange = {userCourses => this.setState({userCourses})}
             isMulti="true"
+            styles = {colourStyles}
           />
           </div>
+          <p className="signin-input">Profile photo</p>
+          <div>
+          <label className="custom-file-upload">
+
           <input type="file"
           id="image"
           accept="image/png, image/jpeg"
           onChange={this.handleImageChange}
           />
-
-          <p className="signin-input-checkbox">Tutor?
-
+          Upload Photo
+          </label>
+          </div>
+          <p className="signin-input">Tutor status</p>
+          <label className="signup-tutor-label"> I want to be an active tutor
           <input
-            className= "checkbox"
+            className= "signup-checkbox"
             type = "checkbox"
             name = "is_tutor"
             onChange = {this.handleChange}
             defaultChecked = {this.state.is_tutor}
-          /></p>
+          />
+          </label>
           <div>
-          <SecondaryButton onClick={() => {this.handleImage()}}>Upload Photo</SecondaryButton>
-
-              <SecondaryButton onClick={() => {this.handleUpdate()}}>Update Profile</SecondaryButton>
+            {this.state.hasError ? <p  style={{color:"#d13e50"}}>Error updating profile</p> : null}
+              <PrimaryButton onClick={() => {this.handleUpdate()}}>Update Profile</PrimaryButton>
             <Link to={{ pathname: "/signin/" }}>
-              <PrimaryButton onClick={() => {this.handleLogout()}}>Log Out</PrimaryButton>
+              <SecondaryButton onClick={() => {this.handleLogout()}}>Log Out</SecondaryButton>
             </Link >
           </div>
         </div>

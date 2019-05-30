@@ -463,8 +463,18 @@ h4 {
 /* Sign In/ Sign Up Flows */
 
 .signin {
-  height: 100vh;
   position: relative;
+  height: 95vh;
+  transform: translateY(-2%);
+  ms-transform: translateY(-2%);
+  overflow: hidden;
+}
+
+.editprofile {
+  position: absolute;
+  height: 95vh;
+  transform: translateY(-2%);
+  ms-transform: translateY(-2%);
 }
 
 .signin-left {
@@ -472,16 +482,29 @@ h4 {
   height: 100%;
   float: left;
   overflow: hidden;
-  display: inline-block;
 }
 
-.signin-right {
+.signin-background {
+  /* margin-left: -750px; */
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
+}
+
+.editprofile-right {
+
   display: inline-block;
   margin-left: 60px;
   position: absolute;
-  top: 50%;
-  -ms-transform: translateY(-30%);
-  transform: translateY(-30%);
+  overflow: hidden;
+}
+
+.signin-right {
+  margin-top: 15%;
+  display: inline-block;
+  margin-left: 60px;
+  position: absolute;
+  overflow: hidden;
 }
 
 .signin-input-box {
@@ -496,40 +519,35 @@ h4 {
   padding-left: 12px;
 }
 
-
-
-.signin-background {
-  /* margin-left: -750px; */
-  object-fit: cover;
-  height: 100%;
-  width: 100%;
-}
-
-
 .signin-input {
   font-family: Avenir-Heavy;
   letter-spacing: 0px;
   font-size: 12px;
   margin-bottom: 8px;
-  margin-top: 20px;
+  margin-top: 8px;
 }
 
 
 .signin-title {
   font-family: Avenir-Black;
   font-size: 28px;
-  padding-bottom: 20px;
+  padding-bottom: 0px;
+  padding-top: 10px;
+}
+
+.signup-checkbox {
+  margin-right: 80px;
+  margin-left: 10px;
+  border: 1px solid #ECECEC;
 }
 
 .signup-tutor-label {
   font-family: Avenir-Medium;
   font-size: 14px;
-  margin-bottom: 8px;
-  margin-top: 20px;
 }
 
 .bio-input-box {
-  height: 100px;
+  height: 60px;
   width: 440px;
   border: 1px solid #ECECEC;
   border-radius: 4px;
@@ -537,7 +555,7 @@ h4 {
   font-family: Avenir-Medium;
   font-size: 14px;
   letter-spacing: 0;
-  padding-bottom: 4.7em;
+  padding-bottom: 0;
   padding-left: 12px;
 
 }
@@ -570,23 +588,48 @@ h4 {
   letter-spacing: 0px;
   font-size: 12px;
   margin-bottom: 0px;
-  margin-top: 20px;
+  margin-top: 0px;
 }
+.custom-file-upload{
+  height: 44px;
+  width: 160px;
+  border: 2px solid #ECECEC;
+  border-radius: 4px;
+  border-radius: 4px;
+  margin-bottom: 0px;
+  font-family: Avenir-Heavy;
+  font-size: 12px;
+  color: black;
+  letter-spacing: 0;
+  text-align: center;
+  padding: 11px;
+  background-color: #F8F8F8;
 
+
+}
 .course-dropdown{
-  background-color: red;
-  font-size: 100px;
-  }
-.checkbox {
-  margin-left: 10px;
-  border: 20px solid #ECECEC;
+  font-family: Avenir-Medium;
+  font-size: 14px;
+}
+.custom-file-upload:hover {
+  border: 0px;
+  font-size: 12px;
+  padding: 13px;
+  background-color: #DEEBFF;
+}
+input[type="file"] {
+    display: none;
 }
 @media screen and (max-width: 900px) {
   .signin-left {
+
     width: 0%;
     height: 0%;
     visibility: hidden;
     display: inline-block;
+  }
+  .editprofile-right {
+    margin-left: 3%;
   }
   .signin-right{
     margin-left: 3%;
@@ -604,6 +647,7 @@ h4 {
   }
   .appointment-card-profpic{
     transform: translateX(-30%);
+    -ms-transform: translateX(-30%);
   }
 
 }
