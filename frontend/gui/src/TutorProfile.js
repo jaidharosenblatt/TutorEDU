@@ -2,22 +2,17 @@ import React, { Component } from 'react';
 import './styles.css';
 import styled from 'styled-components';
 import axios from "axios";
-import { Link } from "react-router-dom";
+import Select from "react-select";
 
-const StyledDropdown = styled.select`
-  height: 40px;
-  width: 250px;
-  border: 1px solid #ECECEC;
-  border-radius: 4px;
-  font-family: Avenir-Heavy;
-  font-size: 12px;
-  color: black;
-  letter-spacing: 0;
-  text-align: center;
-  justifyContent: center;
-  alignItems: center;
-`;
-
+const colourStyles = {
+  control: styles => ({ ...styles,
+    backgroundColor: '#F8F8F8',
+    border: '1px solid #ECECEC'
+  }),
+  placeholder: styles => ({...styles,
+    color:'black',
+  }),
+};
 const Button = styled.button`
   height: 40px;
   width: 250px;
@@ -69,6 +64,7 @@ class TutorProfile extends Component {
       selectedCourse: -1,
       hasError: false,
       photo: {},
+      redirect : false,
     };
     this.scheduleAppointment.bind(this);
   }
@@ -78,7 +74,7 @@ class TutorProfile extends Component {
     // const { match: { params } } = this.props;
 
     // console.log(this.props.params.userID)
-    console.log(this.props.match.params.userID)
+    // console.log(this.props.match.params.userID)
 
     this.getTutor(this.props.match.params.userID)
     if (this.state.isLoggedIn) {
@@ -111,12 +107,12 @@ class TutorProfile extends Component {
       )
       .then(
         ([resA,resB])=>{
-          console.log(resA)
+          // console.log(resA)
           this.setState({
             tutor: resA.data,
             photo: resB.data
           })
-          this.getCourses(this.state.tutor.courses)
+          this.getCourses(resA.data.courses)
         }
       )
       .catch((err)=>{
@@ -130,7 +126,7 @@ class TutorProfile extends Component {
         .get("http://127.0.0.1:8000/api/courses/" + course)
         .then(res => {
           this.setState(state => {
-            console.log(res.data)
+            // console.log(res.data)
             const courses = state.courses.concat(res.data);
             return {
               courses,
@@ -146,11 +142,12 @@ class TutorProfile extends Component {
       this.setState({hasError:true})
       return(undefined)
     }
+    console.log(this.state.selectedCourse)
     var appointment = {
       id: Math.floor(Math.random() * 100000),
       tutor: this.state.tutor.id,
       student: this.state.user.id,
-      course: parseInt(this.state.selectedCourse, 10) !== -1 ? parseInt(this.state.selectedCourse, 10) : this.state.courses[0].id,
+      course: this.state.selectedCourse.value,
       additional_comments: document.getElementById('description').value,
       availabilities: document.getElementById('availabilities').value,
       is_active: true,
@@ -160,7 +157,7 @@ class TutorProfile extends Component {
     }
 
     console.log(appointment);
-
+    this.setState({redirect:true})
     axios.post('http://127.0.0.1:8000/api/appointments/', appointment)
       .then(function (response) {
         console.log(response);
@@ -171,12 +168,14 @@ class TutorProfile extends Component {
       });
   }
 
-  handleChange = (e) => {
-    this.setState({ selectedCourse: e.target.value });
-  }
-
   render() {
-
+    if (this.state.redirect){
+      window.location.assign("/appointments");
+    }
+    const options = this.state.courses.map(course => {
+      const newCourse = {value: course.id,label:course.name}
+      return(newCourse)
+    })
     const courses = this.state.courses
     var tutorCourses = "None"
 
@@ -228,11 +227,12 @@ class TutorProfile extends Component {
           <p className="tutor-appointment-main">Schedule an appointment</p>
           <p className="schedule-input">Select a course</p>
           {this.state.courses.length > 0 &&
-            <StyledDropdown onChange={this.handleChange}>
-              {this.state.courses.map((course,k) => (
-                <option className="course-select" key={k} value={course.id}>{course.name}</option>
-              ))}
-            </StyledDropdown>
+            <Select
+              className = "course-dropdown"
+              styles = {colourStyles}
+              options = {options}
+              onChange = {selectedCourse => this.setState({selectedCourse})}
+            />
           }
           <p></p>
           <p className="schedule-input">Enter your availabilities</p>
@@ -244,9 +244,7 @@ class TutorProfile extends Component {
           <p></p>
           {this.state.isLoggedIn ? (
             <div>
-              <Link to={{ pathname: "/appointments/" }}>
                 <Button className="submit-request" onClick={() => {this.scheduleAppointment()}}>Submit Request</Button>
-              </Link>
               <p></p>
               <p className="availability-details">We will get back to you within 24 hours.</p>
               {this.state.hasError ?
