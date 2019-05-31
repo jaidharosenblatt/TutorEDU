@@ -226,13 +226,13 @@ class TutorProfile extends Component {
         <div className="tutor-appointment">
           <p className="tutor-appointment-main">Schedule an appointment</p>
           <p className="schedule-input">Select a course</p>
-          {this.state.courses.length > 0 &&
+          {options.length > 0?
             <Select
               className = "course-dropdown"
               styles = {colourStyles}
               options = {options}
               onChange = {selectedCourse => this.setState({selectedCourse})}
-            />
+            />: <p> No courses available </p>
           }
           <p></p>
           <p className="schedule-input">Enter your availabilities</p>
