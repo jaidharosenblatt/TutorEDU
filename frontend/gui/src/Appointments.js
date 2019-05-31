@@ -10,58 +10,73 @@ class Appointments extends Component {
     this.state = {
       pendingAppointments: [],
       scheduledAppointments: [],
+      allAppointments: [],
       user: null,
     };
   }
 
   componentDidMount() {
-    this.getCurrentUser()
-  }
-
-  getCurrentUser() {
     var config = {
       headers: {"Authorization": `Token ${localStorage.getItem('token')}`}
     };
-    
-
     axios
       .get('http://127.0.0.1:8000/api/current-user/', config)
       .then(res => {
-        console.log(res);
+        const studentAppointments = res.data.student_appointments
+        const tutorAppointments = res.data.tutor_appointments
+        const allAppointments = studentAppointments.concat(tutorAppointments)
+        var pendingAppointments = []
+        var scheduledAppointments = []
+        console.log(allAppointments)
+        for (var i=0; i< allAppointments.length; i++) {
+          const appointment = allAppointments[i]
+          if (appointment.status === "Waiting for tutor response" || appointment.status === "Waiting for response") {
+            scheduledAppointments.push(appointment)
+          } else {
+            pendingAppointments.push(appointment)
+          }
+        }
+        this.getPendingAppointments(pendingAppointments)
+        this.getScheduledAppointments(scheduledAppointments)
         this.setState({
           user: res.data,
         })
-        this.getAppointments()
       })
-  }
-
-  getAppointments() {
-    // axios
-    //   .get("/appointments")
-    //   .then(res => {
-    //     console.log(res);
-    //     this.setState({
-    //       appointments: res.data,
-    //     })
-    //   })
-    //   .catch(err => console.log(err));
-    var pendingAppointments = []
-    var scheduledAppointments = []
-    const unfilteredAppointments = this.state.user.tutor_appointments.concat(this.state.user.student_appointments)
-
-    for (let appointment of unfilteredAppointments) {
-      if (appointment.status === "Waiting for tutor response" || appointment.status === "Waiting for response") {
-        pendingAppointments.push(appointment)
-      } else {
-        scheduledAppointments.push(appointment)
-      }
+      .catch(err =>{
+        console.log(err)
+      })
+   }
+  getPendingAppointments(appointments) {
+    for(let appointment of appointments){
+      axios
+        .get("http://127.0.0.1:8000/api/appointments/"+appointment)
+        .then(res => {
+          this.setState(state => {
+            // console.log(res.data)
+            const appointments = state.pendingAppointments.push(res.data);
+            return {
+              appointments,
+            };
+          });
+        })
+        .catch(err => console.log(err));
     }
-
-    this.setState({
-      pendingAppointments: pendingAppointments,
-      scheduledAppointments: scheduledAppointments,
-    })
-
+  }
+  getScheduledAppointments(appointments) {
+    for(let appointment of appointments){
+      axios
+        .get("http://127.0.0.1:8000/api/appointments/"+appointment)
+        .then(res => {
+          this.setState(state => {
+            // console.log(res.data)
+            const appointments = state.scheduledAppointments.push(res.data);
+            return {
+              appointments,
+            };
+          });
+        })
+        .catch(err => console.log(err));
+    }
   }
 
   render() {

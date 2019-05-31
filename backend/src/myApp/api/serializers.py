@@ -26,7 +26,7 @@ class UserSerializer(serializers.ModelSerializer):
         queryset= Course.objects.all(), many=True,required=False)
     class Meta:
         model = CustomUser
-        fields = ('id','email', 'username','name', 'courses','profile_image','year', 'university','bio', 'client_rating',
+        fields = ('id','email', 'tutor_appointments', 'student_appointments','username','name', 'courses','profile_image','year', 'university','bio', 'client_rating',
         'is_tutor','is_active', 'tutor_rating','hourly_rate','availabilities','tutor_appointments','student_appointments','courses','report_card')
         read_only_fields = ('id',)
 
@@ -36,7 +36,7 @@ class RegisterSerializer(serializers.ModelSerializer):
     class Meta:
         model = CustomUser
         fields = ('id','email', 'username','name', 'courses','year',
-        'password', 'university','bio', 'client_rating',
+        'password', 'university','bio', 'client_rating', 'tutor_appointments', 'student_appointments',
         'is_tutor','is_active', 'tutor_rating','hourly_rate','availabilities','courses','report_card')
         write_only_fields = ('password',)
         read_only_fields = ('id',)

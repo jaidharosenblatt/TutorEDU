@@ -33,7 +33,7 @@ class NavBar extends Component {
       )
       .then(
         ([resA,resB])=>{
-          console.log(resA)
+          // console.log(resA)
           this.setState({
             user: resA.data,
             photo: resB.data
