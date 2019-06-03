@@ -63,35 +63,56 @@ class AppointmentCard extends Component {
     super(props);
     this.state = {
       tutor: null,
+      student: null,
+      photo: null,
       appointment: this.props.appointment,
       courseName: "",
     };
 
   }
-
   componentDidMount() {
     this.getCourseNameFromId(this.props.appointment.course)
     this.getTutorFromId(this.state.appointment.tutor)
+    this.getStudentFromId(this.state.appointment.student)
   }
-
   getCourseNameFromId(courseID) {
     axios
       .get("http://127.0.0.1:8000/api/courses/" + courseID)
       .then(res => this.setState({ courseName: res.data.name }))
       .catch(err => console.log(err));
   }
-
-  getTutorFromId(tutorId) {
+  getTutorFromId(tutorID) {
     axios
-      .get("http://127.0.0.1:8000/api/users/" + tutorId)
-      .then(res => {
-        this.setState({ tutor: res.data })
+      .get('http://127.0.0.1:8000/api/users/'+ tutorID)
+      .then(resA =>
+        // console.log(resA.data.profile_image[0])
+        Promise.all([
+          resA,
+          axios.get('http://127.0.0.1:8000/api/images/'+resA.data.profile_image[0])
+        ])
+      )
+      .then(
+        ([resA,resB])=>{
+          // console.log(resA)
+          this.setState({
+            tutor: resA.data,
+            photo: resB.data
+          })
+        }
+      )
+      .catch((err)=>{
+        console.log(err.message)
       })
-      .catch(err => console.log(err));
   }
-
+  getStudentFromId(studentID) {
+    axios
+      .get('http://127.0.0.1:8000/api/users/'+ studentID)
+      .then(res => this.setState({student:res.data}))
+      .catch((err)=>{
+        console.log(err.message)
+      })
+  }
   handleAction(actionType) {
-
     var updatedFields;
 
     if (actionType === "save") {
@@ -117,7 +138,7 @@ class AppointmentCard extends Component {
     console.log(updatedFields)
 
     axios
-      .patch("http://127.0.0.1:8000/api/appointments/" + this.state.appointment.id + "/", updatedFields)
+      .patch("http://127.0.0.1:8000/api/appointments/" + this.state.appointment.id, updatedFields)
       .then(res => {
         console.log(res)
         this.setState({ appointment: res.data })
@@ -126,7 +147,6 @@ class AppointmentCard extends Component {
   }
 
   render() {
-
     // Conditionally render appointment status
     const appointmentStatus = this.state.appointment.status
     var statusComponent;
@@ -144,19 +164,32 @@ class AppointmentCard extends Component {
 
     // Check if current user is tutor or client for this appointment and render as such
     const tutorID = this.state.appointment.tutor
+    // const studentEmail = this.getTutorFromId(this.state.appointment.student)
+    // const tutorEmail = this.getTutorFromId(this.state.appointment.tutor)
+
     const currentUserID = this.props.currentUserID
+    var displayContact = false
+    // var student = this.getTutorFromId(this.state.appointment.student)
+    if (this.state.tutor!== null && this.state.appointment.status === "Confirmed"){
+      displayContact = true
+    }
+    const courseName = this.state.courseName.length === 0 ? "No course specified" : this.state.courseName
+    var userEmail = this.state.tutor === null ? null : this.state.tutor.email
+    var userType = "tutor"
     var primaryButtonText = "Save changes"
     var secondaryButtonText = "Cancel Request"
     var primaryAction = "save"
     var secondaryAction = "cancel"
-    var detailString = "TUTOR • " + this.state.courseName + " • $" + (this.state.tutor != null ? this.state.tutor.hourly_rate : "") + "/HOUR"
+    var detailString = "TUTOR • " + courseName + " • $" + (this.state.tutor != null ? this.state.tutor.hourly_rate : "") + "/HOUR"
 
     if (tutorID === currentUserID) {
+      userEmail = this.state.student === null ? null : this.state.student.email
+      userType = "student"
       primaryButtonText = "Approve Request"
       secondaryButtonText = "Reject Request"
       primaryAction = "confirm"
       secondaryAction = "decline"
-      detailString = "CLIENT • " + this.state.courseName
+      detailString = "CLIENT • " + courseName
     }
 
     return (
@@ -165,7 +198,7 @@ class AppointmentCard extends Component {
           <div className="appointment-card-left">
             <div className="appointment-card-text">
               <div className="appointment-card-left">
-                <img className="appointment-card-profpic" src={ this.state.tutor != null ? this.state.tutor.profile_image : null } alt="Tutor Profile Pic"/>
+                <img className="appointment-card-profpic" src={ this.state.tutor != null ? this.state.photo.image : null } alt="Tutor Profile Pic"/>
               </div>
               <div className="appointment-card-left">
                 { statusComponent }
@@ -179,6 +212,7 @@ class AppointmentCard extends Component {
                 </div>
               }
               <div className="appointment-card-info">
+              {displayContact ? <p> Please reach out to your {userType}: {userEmail} </p> : null}
                 <div className="appointment-card-info-left">
                   <p className="schedule-input">Additional Information</p>
                   <textarea className="textarea-input-box" id="description" type="text" defaultValue={this.state.appointment.additional_comments} placeholder="Midterm test prep on integrals..."></textarea>

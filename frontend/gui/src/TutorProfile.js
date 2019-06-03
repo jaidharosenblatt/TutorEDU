@@ -48,14 +48,14 @@ class TutorProfile extends Component {
       user: null,
       tutor: {
         id: -1,
-        name: "Alex Gerrese",
+        name: "Loading",
         profpicURL: "https://randomuser.me/api/portraits/men/4.jpg",
-        bio: "This is fake data for this bio. This is fake data for this bio. This is fake data for this bio.",
-        availabilities: "4-9pm on Wednesdays and Fridays",
-        courses: "Econ 174, Econ 256, CS 201, CS 230, CS 290",
-        university: "Duke University",
-        rating: "4.7/5",
-        reportCard: "Econ 174: A-, Econ 256: A, CS 201: A, CS 230: A-, CS 290: A",
+        bio: "",
+        availabilities: "",
+        courses: "",
+        university: "",
+        rating: "",
+        reportCard: "",
         year: 2020,
         hourly_rate: 40
       },
@@ -242,7 +242,7 @@ class TutorProfile extends Component {
           <p className="schedule-input">Briefly describe the kind of help you need</p>
           <textarea className="textarea-input-box" id="description" type="text" placeholder="Midterm test prep on integrals..."></textarea>
           <p></p>
-          {this.state.isLoggedIn ? (
+          {this.state.isLoggedIn && this.state.tutor !== null && this.state.user !== null && this.state.tutor.id !== this.state.user.id ? (
             <div>
                 <Button className="submit-request" onClick={() => {this.scheduleAppointment()}}>Submit Request</Button>
               <p></p>
@@ -254,7 +254,10 @@ class TutorProfile extends Component {
               }
             </div>
           ) : (
-            <p style={{ textAlign: "center" }} className="availability-details"><br/>Please sign in to schedule an appointment.</p>
+            this.state.tutor !== null && this.state.user !== null && this.state.tutor.id !== this.state.user.id ?
+              <p style={{ textAlign: "center" }} className="availability-details"><br/>Please sign in to schedule an appointment.</p> :
+              <p style={{ textAlign: "center" }} className="availability-details"><br/> You can't book an appointment with youself</p>
+
           )}
 
         </div>
