@@ -8,17 +8,19 @@ import Select from "react-select";
 const PrimaryButton = styled.button`
   height: 44px;
   width: 160px;
-  background-color: #1C3A9F;
+  border: 2px solid #D9E2FF;
+  background-color: #F8F9FA;
   border-radius: 4px;
-  font-family: Avenir-Heavy;
-  font-size: 12px;
-  color: white;
+  border: 1px solid #ECECEC;
+  font-family: Avenir-Book;
+  font-size: 14px;
+  color: black;
   letter-spacing: 0;
   text-align: center;
   justifyContent: center;
   alignItems: center;
-  margin-right: 12px;
   margin-top: 10px;
+
 
   :hover {
     color: white;
@@ -26,14 +28,20 @@ const PrimaryButton = styled.button`
     background-color: #1C3A9F;
   }
 `;
-
 const colourStyles = {
   control: styles => ({ ...styles,
-    backgroundColor: '#F8F8F8',
-    border: '1px solid #ECECEC'
+    backgroundColor: '#F8F9FA',
+    border: '1px solid #ECECEC',
+    fontSize: '14',
+    fontFamily: 'Avenir-Book',
   }),
   placeholder: styles => ({...styles,
     color:'black',
+  }),
+  option: styles => ({...styles,
+    fontSize: '14',
+    fontFamily: 'Avenir-Book',
+    textAlign: 'left',
   }),
 };
 
@@ -42,6 +50,7 @@ class Collection extends Component {
     super(props);
     this.state = {
       users: [],
+      filteredUsers: [],
       courses: [],
       courseFilter: [],
     };
@@ -49,7 +58,20 @@ class Collection extends Component {
   }
 
   handleRemove() {
-    this.setState({users: this.state.users.filter(user => user.id === 1)})
+    const courses = this.state.courseFilter
+    if (courses.length === 0){
+      this.setState({filteredUsers: this.state.users
+      })
+      return
+    }
+    var courseIDs = new Array(courses.length)
+    for(var i = 0; i < courses.length; i++){
+      courseIDs[i] = (courses[i].value)
+    }
+    console.log(courseIDs)
+    this.setState({filteredUsers: this.state.users.filter(user =>
+      courseIDs.some(r=> user.courses.indexOf(r) >= 0)
+    )})
   }
 
   componentDidMount() {
@@ -60,7 +82,7 @@ class Collection extends Component {
   getUsers(){
     axios
       .get(" http://127.0.0.1:8000/api/users/")
-      .then(res => this.setState({ users: res.data.filter(user => user.is_tutor && user.is_active) }))
+      .then(res => this.setState({ users: res.data.filter(user => user.is_tutor && user.is_active), filteredUsers: res.data.filter(user => user.is_tutor && user.is_active) }))
       .catch(err => console.log(err));
   }
 
@@ -84,15 +106,16 @@ class Collection extends Component {
         <h2 className="upcoming-appointments-text">Browse Tutors</h2>
           <div className = "Filter">
           <Select
-            className = "course-dropdown"
+            className = "course-dropdown-filter"
             options = {options}
             onChange = {courseFilter => this.setState({courseFilter})}
             isMulti="true"
             styles = {colourStyles}
+            placeholder = "Filter by course..."
           />
           <PrimaryButton onClick={() => {this.handleRemove()}}>Filter</PrimaryButton>
           </div>
-            {this.state.users.map((user,k) => (
+            {this.state.filteredUsers.map((user,k) => (
               <TutorCard  key={k}
                           user={user}/>
             ))}
