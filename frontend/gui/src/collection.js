@@ -6,7 +6,7 @@ import Select from "react-select";
 
 
 const PrimaryButton = styled.button`
-  height: 44px;
+  height: 40px;
   width: 160px;
   border: 2px solid #D9E2FF;
   background-color: #F8F9FA;
@@ -50,6 +50,7 @@ class Collection extends Component {
     super(props);
     this.state = {
       users: [],
+      photo: null,
       filteredUsers: [],
       courses: [],
       courseFilter: [],
@@ -68,10 +69,10 @@ class Collection extends Component {
     for(var i = 0; i < courses.length; i++){
       courseIDs[i] = (courses[i].value)
     }
-    console.log(courseIDs)
     this.setState({filteredUsers: this.state.users.filter(user =>
       courseIDs.some(r=> user.courses.indexOf(r) >= 0)
     )})
+    this.forceUpdate()
   }
 
   componentDidMount() {
@@ -82,7 +83,12 @@ class Collection extends Component {
   getUsers(){
     axios
       .get(" http://127.0.0.1:8000/api/users/")
-      .then(res => this.setState({ users: res.data.filter(user => user.is_tutor && user.is_active), filteredUsers: res.data.filter(user => user.is_tutor && user.is_active) }))
+      .then(res => {
+        const myUsers =  res.data.filter(user => user.is_tutor && user.is_active)
+        this.setState({
+          users: myUsers,
+          filteredUsers: myUsers})
+      })
       .catch(err => console.log(err));
   }
 
@@ -93,13 +99,29 @@ class Collection extends Component {
       .catch(err => console.log(err));
   }
 
+  // getPhoto(photoID){
+  //   axios
+  //     .get('http://127.0.0.1:8000/api/images/'+photoID)
+  //     .then(res => {
+  //       // console.log(res.data.image)
+  //       return res.data.image
+  //       // this.setState({photo : res.data.image })
+  //     })
+  //     .catch(err => console.log(err));
+  // }
 
   render() {
     const options = this.state.courses.map(course => {
       const newCourse = {value: course.id,label:course.name}
       return(newCourse)
     })
-    console.log(this.state)
+    // var newUsers = this.state.filteredUsers
+    // for (var i = 0; i < newUsers.length; i++){
+    //   var user = newUsers[i]
+    //   user['photo'] = 'this.getPhoto(user.profile_image[0])'
+    //   newUsers[i] = user
+    // }
+    // console.log(newUsers)
     return  (
       <div className="app">
         <div className="collection">
@@ -113,13 +135,16 @@ class Collection extends Component {
             styles = {colourStyles}
             placeholder = "Filter by course..."
           />
-          <PrimaryButton onClick={() => {this.handleRemove()}}>Filter</PrimaryButton>
+          <PrimaryButton onClick={() => {
+            this.handleRemove()
+          }}>Filter</PrimaryButton>
           </div>
             {this.state.filteredUsers.map((user,k) => (
               <TutorCard  key={k}
-                          user={user}/>
+                          user={user}
+                          />
             ))}
-            <p className="tutor-results">{this.state.users.length} tutors found.</p>
+            <p className="tutor-results">{this.state.filteredUsers.length} tutors found.</p>
 
           </div>
         </div>
