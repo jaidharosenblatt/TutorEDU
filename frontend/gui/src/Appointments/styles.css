@@ -1,0 +1,261 @@
+
+.appointment-card-container {
+  text-align: center;
+}
+
+.appointment-card-card {
+  display: inline-block;
+  overflow: hidden;
+  width: 100%;
+  border-radius: 8px;
+  box-shadow: 1px 1px 4px rgba(0,0,0,0.10);
+  margin-top: 12px;
+  margin-bottom: 12px;
+  font-family: Avenir-Book;
+  font-size: 14px;
+  padding: 24px;
+  background-color: white;
+}
+
+.appointment-card-profpic {
+  height: 80px;
+  width: 80px;
+  border: 3px solid #ECECEC;
+  border-radius: 40px;
+  vertical-align: top;
+  margin-left: 24px;
+  margin-right: 36px;
+  object-fit: cover;
+  float: left;
+  display: inline-block;
+}
+
+.appointment-card-text {
+  display: inline-block;
+}
+
+.appointment-card-name {
+  margin-top: -10px;
+  font-family: Avenir-Heavy;
+  font-size: 20px;
+  text-align: left;
+}
+
+.appointment-card-details {
+  margin-top: 10px;
+  font-family: Avenir-Medium;
+  font-size: 14px;
+  text-align: left;
+  color: #9B9B9B;
+}
+
+.appointment-card-left {
+  display: inline-block;
+  float: left;
+}
+
+.appointment-card-right {
+  float: right;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.appointment-card-info {
+  text-align: left;
+  margin-top: 24px;
+  display: inline-block;
+  margin-left: 28px;
+}
+
+.appointment-card-info-left {
+  display: inline-block;
+  vertical-align: top;
+  margin-right: 16px;
+}
+
+.appointment-card-info-right {
+  display: inline-block;
+}
+
+.appointment-status {
+  font-family: "Avenir-Heavy";
+  font-size: 12px;
+  text-align: left;
+}
+
+.appointments-container {
+  text-align: center;
+  align-items: center;
+}
+
+.upcoming-appointments {
+  display: inline-block;
+  width: 60%;
+  max-width: 1000px;
+  text-align: left;
+}
+
+.upcoming-appointments-text {
+  font-family: "Avenir-Heavy";
+  font-size: 24px;
+  padding-top: 24px;
+}
+
+.past-appointments {
+  display: inline-block;
+  width: 60%;
+  max-width: 1000px;
+  text-align: left;
+  font-family: "Avenir-Heavy";
+  font-size: 24px;
+  padding-bottom: 20px;
+}
+
+.past-appointments-text {
+  font-family: "Avenir-Heavy";
+  font-size: 24px;
+  padding-top: 24px;
+}
+
+.tutor-schoolYearAndRate {
+  font-size: 13px;
+}
+
+.availability-input {
+  width: 250px;
+}
+
+.description-input {
+  width: 250px;
+}
+
+.tutor-profpicture {
+  display: block;
+  border: 3px solid #ECECEC;
+  border-radius: 100px;
+  width: 110px;
+  height: 110px;
+  object-fit: cover;
+  margin-top: 32px;
+}
+
+.tutor-named {
+  font-family: "Avenir-Black";
+  font-size: 24px;
+  text-align: left;
+}
+
+.tutor {
+  text-align: center;
+  margin-left: 5%;
+}
+
+.tutor-TutorProfile {
+  display: inline-block;
+  margin-left: 20px;
+  vertical-align: top;
+}
+.tutor-appointment {
+  display: inline-block;
+  align: center;
+  margin-left: 0%;
+}
+
+.tutor-info {
+  max-width: 26em;
+  /* margin-left: 280px; */
+  margin-top: -120px;
+  margin-right: 40px;
+  margin-left: 132px;
+  display: flex;
+  text-wrap: wrap;
+  text-align: center;
+  flex-direction: column;
+}
+
+.tutor-description {
+  letter-spacing: 0px;
+  font-size: 14px;
+}
+
+.tutor-stats {
+  margin-top: 40px;
+  margin-right: 24px;
+}
+
+.rating-details {
+  color: #757575;
+  font-family: Avenir;
+  letter-spacing: 0px;
+  font-size: 14px;
+}
+
+.class-details {
+  color: #757575;
+  font-family: Avenir;
+  letter-spacing: 0px;
+  font-size: 14px;
+}
+
+.availability-details {
+  color: #757575;
+  font-family: Avenir;
+  letter-spacing: 0px;
+  font-size: 14px;
+}
+
+.RCdetails {
+  color: #757575;
+  font-family: Avenir;
+  letter-spacing: 0px;
+  font-size: 14px;
+  max-width: 32em;
+  padding-bottom: 60px;
+}
+
+.tutor-appointment-main {
+  font-family: Avenir-Black;
+  letter-spacing: 0px;
+  font-size: 24px;
+  padding-top: 12px;
+}
+
+.schedule-input {
+  font-family: Avenir-Heavy;
+  letter-spacing: 0px;
+  font-size: 12px;
+  margin-bottom: 8px;
+  text-align: left;
+}
+
+.text-input-box {
+  height: 36px;
+  width: 250px;
+  border: 1px solid #ECECEC;
+  border-radius: 4px;
+  font-family: Avenir-Medium;
+  font-size: 12px;
+  letter-spacing: 0;
+  padding-left: 12px;
+}
+
+.textarea-input-box {
+  height: 80px;
+  width: 250px;
+  border: 1px solid #ECECEC;
+  border-radius: 4px;
+  font-family: Avenir-Medium;
+  font-size: 12px;
+  padding: 12px;
+  resize: none;
+}
+
+::placeholder {
+  color: #C9C9C9;
+  font-family: Avenir-Book;
+  font-size: 14px;
+}
+
+.navbar-appointments {
+  padding-right: 16px;
+}

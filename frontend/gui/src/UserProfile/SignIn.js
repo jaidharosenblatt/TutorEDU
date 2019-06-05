@@ -3,7 +3,7 @@ import './styles.css';
 import styled from 'styled-components';
 import axios from "axios";
 import { Link, withRouter } from "react-router-dom";
-import background from './images/duke.png'
+import background from './duke.png'
 
 const PrimaryButton = styled.button`
   height: 44px;

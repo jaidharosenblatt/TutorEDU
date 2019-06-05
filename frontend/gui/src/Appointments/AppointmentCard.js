@@ -64,7 +64,8 @@ class AppointmentCard extends Component {
     this.state = {
       tutor: null,
       student: null,
-      photo: null,
+      tutorPhoto: null,
+      studentPhoto: null,
       appointment: this.props.appointment,
       courseName: "",
     };
@@ -96,7 +97,7 @@ class AppointmentCard extends Component {
           // console.log(resA)
           this.setState({
             tutor: resA.data,
-            photo: resB.data
+            tutorPhoto: resB.data
           })
         }
       )
@@ -107,7 +108,22 @@ class AppointmentCard extends Component {
   getStudentFromId(studentID) {
     axios
       .get('http://127.0.0.1:8000/api/users/'+ studentID)
-      .then(res => this.setState({student:res.data}))
+      .then(resA =>
+        // console.log(resA.data.profile_image[0])
+        Promise.all([
+          resA,
+          axios.get('http://127.0.0.1:8000/api/images/'+resA.data.profile_image[0])
+        ])
+      )
+      .then(
+        ([resA,resB])=>{
+          // console.log(resA)
+          this.setState({
+            student: resA.data,
+            studentPhoto: resB.data
+          })
+        }
+      )
       .catch((err)=>{
         console.log(err.message)
       })
@@ -166,7 +182,6 @@ class AppointmentCard extends Component {
     const tutorID = this.state.appointment.tutor
     // const studentEmail = this.getTutorFromId(this.state.appointment.student)
     // const tutorEmail = this.getTutorFromId(this.state.appointment.tutor)
-
     const currentUserID = this.props.currentUserID
     var displayContact = false
     // var student = this.getTutorFromId(this.state.appointment.student)
@@ -174,6 +189,7 @@ class AppointmentCard extends Component {
       displayContact = true
     }
     const courseName = this.state.courseName.length === 0 ? "No course specified" : this.state.courseName
+    var image =  this.state.tutor != null ? this.state.tutorPhoto.image : null
     var userEmail = this.state.tutor === null ? null : this.state.tutor.email
     var userType = "tutor"
     var primaryButtonText = "Save changes"
@@ -183,6 +199,7 @@ class AppointmentCard extends Component {
     var detailString = "TUTOR • " + courseName + " • $" + (this.state.tutor != null ? this.state.tutor.hourly_rate : "") + "/HOUR"
     var name = this.state.tutor != null ? this.state.tutor.name : "Loading..."
     if (tutorID === currentUserID) {
+      image = this.state.student != null ? this.state.studentPhoto.image : null
       userEmail = this.state.student === null ? null : this.state.student.email
       userType = "student"
       primaryButtonText = "Approve Request"
@@ -199,7 +216,7 @@ class AppointmentCard extends Component {
           <div className="appointment-card-left">
             <div className="appointment-card-text">
               <div className="appointment-card-left">
-                <img className="appointment-card-profpic" src={ this.state.tutor != null ? this.state.photo.image : null } alt="Tutor Profile Pic"/>
+                <img className="appointment-card-profpic" src={image} alt="Tutor Profile Pic"/>
               </div>
               <div className="appointment-card-left">
                 { statusComponent }

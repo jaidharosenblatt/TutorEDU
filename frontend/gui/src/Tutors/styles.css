@@ -1,0 +1,120 @@
+.tutor-card {
+  display: inline-block;
+  vertical-align: top;
+  overflow: hidden;
+  width: 300px;
+  border-radius: 8px;
+  box-shadow: 1px 4px 12px rgba(0,0,0,0.05);
+  margin: 10px;
+  transition: all .1s ease-in-out;
+  font-family: Avenir-Book;
+  font-size: 14px;
+  text-align: center;
+  padding: 24px;
+  background-color: white;
+}
+
+.tutor-profpic {
+  height: 100px;
+  width: 100px;
+  border-radius: 100px;
+  border: 5px solid #eee;
+  text-align: center;
+  object-fit: cover;
+}
+
+.tutor-name {
+  height: 24px;
+  margin-top: 10px;
+  font-family: Avenir-Heavy;
+  font-size: 20px;
+  color: #000000;
+  letter-spacing: 0;
+  text-align: center;
+}
+
+.tutor-availabilities {
+  height: 12px;
+  font-family: Avenir-Heavy;
+  font-size: 10px;
+  color: #000000;
+  letter-spacing: 2px;
+  text-align: center;
+}
+
+/* Tutor Detail */
+.tutor-rating {
+  font-family: Avenir-Heavy;
+  font-size: 12px;
+  color: #000000;
+  letter-spacing: 2px;
+  text-align: left;
+}
+
+.tutor-classes {
+  font-family: Avenir-Heavy;
+  font-size: 12px;
+  color: #000000;
+  letter-spacing: 2px;
+  text-align: left;
+
+}
+
+.tutor-availability {
+  font-family: Avenir-Heavy;
+  font-size: 12px;
+  color: #000000;
+  letter-spacing: 2px;
+  text-align: left;
+
+}
+
+.tutor-reportCard {
+  font-family: Avenir-Heavy;
+  font-size: 12px;
+  color: #000000;
+  letter-spacing: 2px;
+  text-align: left;
+
+}
+
+.tutor-schoolYearAndRate {
+  font-family: Avenir-Heavy;
+  font-size: 14px;
+  color: #435EB0;
+  letter-spacing: 2px;
+  text-align: left;
+}
+
+.tutor-appointment {
+  display: inline-block;
+  overflow: hidden;
+  /* height: 480px; */
+  width: 300px;
+  border-radius: 8px;
+  box-shadow: 1px 1px 4px rgba(0,0,0,0.10);
+  margin: 20px;
+  transition: all .1s ease-in-out;
+  font-family: Avenir-Book;
+  font-size: 14px;
+  text-align: left;
+  padding: 24px;
+  background-color: white;
+}
+
+.tutor-appointment-main {
+  font-family: Avenir-Heavy;
+  font-size: 20px;
+  color: #000000;
+  letter-spacing: 2px;
+  text-align: left;
+}
+
+.tutor-description {
+  font-family: Avenir;
+  font-size: 14px;
+  color: #757575;
+  letter-spacing: 2px;
+  text-align: left;
+
+}

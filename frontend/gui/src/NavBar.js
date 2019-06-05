@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Navbar } from 'react-bootstrap';
 import axios from "axios";
-
+import './styles.css';
 class NavBar extends Component {
   constructor(props) {
     super(props);
@@ -57,6 +57,8 @@ class NavBar extends Component {
                 <div>
                   <Navbar.Text className="navbar-appointments">
                     <a href="/appointments">Appointments</a>
+                  </Navbar.Text>
+                  <Navbar.Text className="navbar-appointments">
                   </Navbar.Text>
                   <a href="/edit-profile"><img className="navbar-profpic" src={ this.state.user != null ? this.state.photo.image : null } alt=""/>
                   </a>

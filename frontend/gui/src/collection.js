@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import TutorCard from './TutorCard';
+import TutorCard from './Tutors/TutorCard';
 import axios from "axios";
 import styled from 'styled-components';
 import Select from "react-select";
@@ -20,7 +20,6 @@ const PrimaryButton = styled.button`
   justifyContent: center;
   alignItems: center;
   margin-top: 10px;
-
 
   :hover {
     color: white;

@@ -3,11 +3,11 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import NavBar from './NavBar';
 import Collection from './collection';
-import TutorProfile from './TutorProfile';
-import Appointments from './Appointments';
-import SignIn from './SignIn';
-import SignUp from './SignUp';
-import EditProfile from "./EditProfile"
+import TutorProfile from './Tutors/TutorProfile';
+import Appointments from './Appointments/Appointments';
+import SignIn from './UserProfile/SignIn';
+import SignUp from './UserProfile/SignUp';
+import EditProfile from "./UserProfile/EditProfile"
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import * as serviceWorker from './serviceWorker';
 import 'bootstrap/dist/css/bootstrap.min.css';
