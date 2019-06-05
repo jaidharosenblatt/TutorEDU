@@ -140,6 +140,17 @@ class EditProfile extends Component {
     const coursesIDs = this.state.userCourses.map(course => {
       return(course.value)
     })
+
+    var myCourses = coursesIDs
+    if (coursesIDs.length === 1 && coursesIDs.label === "None"){
+      myCourses = null
+    }
+    if (coursesIDs.length === 0){
+      myCourses = this.state.user.courses
+    }
+    else{
+      myCourses = coursesIDs
+    }
     console.log(this.state.year.value)
 
     const myID =  this.state.user.id
@@ -151,7 +162,7 @@ class EditProfile extends Component {
         availabilities: this.state.availabilities,
         is_tutor: this.state.is_tutor,
         hourly_rate: this.state.hourly_rate,
-        courses: coursesIDs,
+        courses: myCourses,
         profile_image: this.state.image
     }
     console.log(updatedUser)

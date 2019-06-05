@@ -95,33 +95,15 @@ class Collection extends Component {
   getCourses(){
     axios
       .get(" http://127.0.0.1:8000/api/courses/")
-      .then(res => this.setState({ courses: res.data}))
+      .then(res => this.setState({ courses: res.data.filter(course => course.id !== 5)}))
       .catch(err => console.log(err));
   }
-
-  // getPhoto(photoID){
-  //   axios
-  //     .get('http://127.0.0.1:8000/api/images/'+photoID)
-  //     .then(res => {
-  //       // console.log(res.data.image)
-  //       return res.data.image
-  //       // this.setState({photo : res.data.image })
-  //     })
-  //     .catch(err => console.log(err));
-  // }
 
   render() {
     const options = this.state.courses.map(course => {
       const newCourse = {value: course.id,label:course.name}
       return(newCourse)
     })
-    // var newUsers = this.state.filteredUsers
-    // for (var i = 0; i < newUsers.length; i++){
-    //   var user = newUsers[i]
-    //   user['photo'] = 'this.getPhoto(user.profile_image[0])'
-    //   newUsers[i] = user
-    // }
-    // console.log(newUsers)
     return  (
       <div className="app">
         <div className="collection">

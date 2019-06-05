@@ -181,7 +181,7 @@ class AppointmentCard extends Component {
     var primaryAction = "save"
     var secondaryAction = "cancel"
     var detailString = "TUTOR • " + courseName + " • $" + (this.state.tutor != null ? this.state.tutor.hourly_rate : "") + "/HOUR"
-
+    var name = this.state.tutor != null ? this.state.tutor.name : "Loading..."
     if (tutorID === currentUserID) {
       userEmail = this.state.student === null ? null : this.state.student.email
       userType = "student"
@@ -189,7 +189,8 @@ class AppointmentCard extends Component {
       secondaryButtonText = "Reject Request"
       primaryAction = "confirm"
       secondaryAction = "decline"
-      detailString = "CLIENT • " + courseName
+      detailString = "CLIENT • " + courseName + " • $" + (this.state.tutor != null ? this.state.tutor.hourly_rate : "") + "/HOUR"
+      name = this.state.student === null ? null : this.state.student.name
     }
 
     return (
@@ -202,7 +203,7 @@ class AppointmentCard extends Component {
               </div>
               <div className="appointment-card-left">
                 { statusComponent }
-                <h3 className="appointment-card-name">{ this.state.tutor != null ? this.state.tutor.name : "Loading..." }</h3>
+                <h3 className="appointment-card-name">{name}</h3>
                 <p className="appointment-card-details">{ detailString }</p>
               </div>
               { !isScheduled &&

@@ -79,28 +79,39 @@ class SignUp extends Component {
       password: document.getElementById('password').value,
       is_tutor: false,
     }
-    console.log(newUser);
-    axios
-      .post(" http://127.0.0.1:8000/api/register/",newUser)
-      .then(resA =>
-        Promise.all([
-          resA,
-          axios.post('http://127.0.0.1:8000/api/images/')
-        ])
-      )
-      .then(
-        ([resA,resB])=>{
-          console.log(resA)
-          localStorage.removeItem('token');
-          localStorage.setItem('token', resA.data.token);
 
-          let { history } = this.props;
-          history.push({
-           pathname: '/',
-          });
-        }
-      )
-      .catch((err)=>{
+    const constUser = {
+      name: "Test user",
+      email: "newmail@gmail.com",
+      username: "hehahdha",
+      password: "729surfer",
+      is_tutor: false,
+    }
+
+    console.log(constUser);
+    axios.post("http://127.0.0.1:8000/api/register/",constUser)
+      .then(res => {
+        console.log(res)
+      })
+      // .then(resA =>
+      //   Promise.all([
+      //     resA,
+      //     axios.post('http://127.0.0.1:8000/api/images/')
+      //   ])
+      // )
+      // .then(
+      //   ([resA,resB])=>{
+      //     console.log(resA)
+      //     localStorage.removeItem('token');
+      //     localStorage.setItem('token', resA.data.token);
+      //
+      //     let { history } = this.props;
+      //     history.push({
+      //      pathname: '/',
+      //     });
+      //   }
+      // )
+      .catch(err=>{
         console.log(err.message)
         this.setState({hasError:true})
       })
@@ -125,27 +136,13 @@ class SignUp extends Component {
           <div>
             <label className="signup-tutor-label">
             </label>
-
           </div>
           {this.state.hasError ? <p  style={{color:"#d13e50"}}>Error creating profile</p> : null}
-          <div>
+          <div className="signup-button">
             <Link to={{ pathname: "/signin/" }}>
               <SecondaryButton>Sign In</SecondaryButton>
             </Link>
-            {this.state.isTutor ? (
-              <Link to={{
-                pathname: '/signup-tutor',
-                state: {
-                  name: document.getElementById('name') === null ? "" : document.getElementById('name').value,
-                  email: document.getElementById('email') === null ? "" : document.getElementById('email').value,
-                  username: document.getElementById('username') === null ? "" : document.getElementById('username').value,
-                  password: document.getElementById('password') === null ? "" : document.getElementById('password').value,
-                }
-              }}><PrimaryButton>Continue</PrimaryButton>
-              </Link>
-            ) : (
               <PrimaryButton onClick={() => {this.handleSignup()}}>Create Account</PrimaryButton>
-            )}
           </div>
         </div>
       </div>

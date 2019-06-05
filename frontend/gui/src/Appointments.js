@@ -25,19 +25,7 @@ class Appointments extends Component {
         const studentAppointments = res.data.student_appointments
         const tutorAppointments = res.data.tutor_appointments
         const allAppointments = studentAppointments.concat(tutorAppointments)
-        var pendingAppointments = []
-        var scheduledAppointments = []
-        console.log(allAppointments)
-        for (var i=0; i< allAppointments.length; i++) {
-          const appointment = allAppointments[i]
-          if (appointment.status === "Waiting for tutor response" || appointment.status === "Waiting for response") {
-            scheduledAppointments.push(appointment)
-          } else {
-            pendingAppointments.push(appointment)
-          }
-        }
-        this.getPendingAppointments(pendingAppointments)
-        this.getScheduledAppointments(scheduledAppointments)
+        this.getAppointments(allAppointments)
         this.setState({
           user: res.data,
         })
@@ -46,30 +34,16 @@ class Appointments extends Component {
         console.log(err)
       })
    }
-  getPendingAppointments(appointments) {
+
+
+  getAppointments(appointments) {
     for(let appointment of appointments){
       axios
         .get("http://127.0.0.1:8000/api/appointments/"+appointment)
         .then(res => {
           this.setState(state => {
             // console.log(res.data)
-            const appointments = state.pendingAppointments.push(res.data);
-            return {
-              appointments,
-            };
-          });
-        })
-        .catch(err => console.log(err));
-    }
-  }
-  getScheduledAppointments(appointments) {
-    for(let appointment of appointments){
-      axios
-        .get("http://127.0.0.1:8000/api/appointments/"+appointment)
-        .then(res => {
-          this.setState(state => {
-            // console.log(res.data)
-            const appointments = state.scheduledAppointments.push(res.data);
+            const appointments = state.allAppointments.push(res.data);
             return {
               appointments,
             };
@@ -80,12 +54,26 @@ class Appointments extends Component {
   }
 
   render() {
+  
+    var pendingAppointments = []
+    var scheduledAppointments = []
+    const allAppointments = this.state.allAppointments
+    console.log(allAppointments)
+    for (var i=0; i< allAppointments.length; i++) {
+      const appointment = allAppointments[i]
+      if (appointment.status === "Waiting for tutor response" || appointment.status === "Waiting for response") {
+        pendingAppointments.push(appointment)
+      }
+      else {
+        scheduledAppointments.push(appointment)
+      }
+    }
     return (
       <div className="appointments-container">
         <div className="upcoming-appointments">
           <h2 className="upcoming-appointments-text">Pending Appointments</h2>
-          {this.state.pendingAppointments.length > 0 ? (
-            this.state.pendingAppointments.map((appointment,k) => (
+          {pendingAppointments.length > 0 ? (
+            pendingAppointments.map((appointment,k) => (
               <AppointmentCard  key={k}
                                 appointment={appointment}
                                 currentUserID={this.state.user.id}/>
@@ -96,8 +84,8 @@ class Appointments extends Component {
         </div>
         <div className="past-appointments">
           <h2 className="past-appointments-text">Scheduled Appointments</h2>
-            {this.state.scheduledAppointments.length > 0 ? (
-              this.state.scheduledAppointments.map((appointment,k) => (
+            {scheduledAppointments.length > 0 ? (
+              scheduledAppointments.map((appointment,k) => (
                 <AppointmentCard  key={k}
                                   appointment={appointment}
                                   currentUserID={this.state.user.id}/>

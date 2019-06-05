@@ -480,6 +480,9 @@ h4 {
   overflow: hidden;
 }
 
+.signup-button{
+  margin-top: -40px;
+}
 .editprofile {
   position: absolute;
   height: 95vh;
