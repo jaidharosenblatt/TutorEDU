@@ -56,6 +56,7 @@ class SignUp extends Component {
       isTutor: false,
       isLoggedIn: false,
       hasError: false,
+      redirect: false,
     };
 
     this.handleCheckboxChange = this.handleCheckboxChange.bind(this);
@@ -80,37 +81,34 @@ class SignUp extends Component {
       is_tutor: false,
     }
 
-    const constUser = {
-      name: "Test user",
-      email: "newmail@gmail.com",
-      username: "hehahdha",
-      password: "729surfer",
-      is_tutor: false,
-    }
+    // const constUser = {
+    //   name: "Test user",
+    //   email: "newmail@gmail.com",
+    //   username: "hehahdha",
+    //   password: "729surfer",
+    //   is_tutor: false,
+    // }
 
-    console.log(constUser);
-    axios.post("http://127.0.0.1:8000/api/register/",constUser)
-      .then(res => {
-        console.log(res)
-      })
-      // .then(resA =>
-      //   Promise.all([
-      //     resA,
-      //     axios.post('http://127.0.0.1:8000/api/images/')
-      //   ])
-      // )
-      // .then(
-      //   ([resA,resB])=>{
-      //     console.log(resA)
-      //     localStorage.removeItem('token');
-      //     localStorage.setItem('token', resA.data.token);
-      //
-      //     let { history } = this.props;
-      //     history.push({
-      //      pathname: '/',
-      //     });
-      //   }
-      // )
+    console.log(newUser);
+    axios.post("http://127.0.0.1:8000/api/register/",newUser)
+      .then(resA =>
+        Promise.all([
+          resA,
+          axios.post('http://127.0.0.1:8000/api/images/')
+        ])
+      )
+      .then(
+        ([resA,resB])=>{
+          console.log(resA.data.token)
+          localStorage.removeItem('token');
+          localStorage.setItem('token', resA.data.token);
+          this.setState({redirect:true})
+          // let { history } = this.props;
+          // history.push({
+          //  pathname: '/',
+          // });
+        }
+      )
       .catch(err=>{
         console.log(err.message)
         this.setState({hasError:true})
@@ -118,6 +116,10 @@ class SignUp extends Component {
   }
 
   render() {
+    if (this.state.redirect){
+      window.location.assign("/");
+
+    }
     return (
       <div className="signin">
         <div className="signin-left">
