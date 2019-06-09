@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/2.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.2/ref/settings/
 """
-
+import django_heroku
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -133,6 +133,7 @@ USE_TZ = True
 AUTH_USER_MODEL = 'myApp.CustomUser'
 CORS_ORIGIN_ALLOW_ALL = True
 
+PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
@@ -156,3 +157,4 @@ REST_FRAMEWORK = {
         'knox.auth.TokenAuthentication',
     ),
 }
+django_heroku.settings(locals())
