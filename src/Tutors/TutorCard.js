@@ -34,7 +34,7 @@ class TutorCard extends Component {
   componentDidMount() {
     this.getPhoto(this.props.user.profile_image[0])
     axios
-      .get(" http://127.0.0.1:8000/api/courses/")
+      .get(" /api/courses/")
       .then(res => {
         this.setState({courses:res.data})
       })
@@ -45,7 +45,7 @@ class TutorCard extends Component {
 
   getPhoto(photoID){
     axios
-      .get('http://127.0.0.1:8000/api/images/'+photoID)
+      .get('/api/images/'+photoID)
       .then(res => {
         // console.log(res.data.image)
         this.setState({photo : res.data })

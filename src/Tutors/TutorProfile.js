@@ -88,7 +88,7 @@ class TutorProfile extends Component {
     };
 
     axios
-      .get('http://127.0.0.1:8000/api/current-user/', config)
+      .get('/api/current-user/', config)
       .then(res => {
         this.setState({
           user: res.data,
@@ -98,11 +98,11 @@ class TutorProfile extends Component {
 
   getTutor(userID) {
     axios
-      .get(" http://127.0.0.1:8000/api/users/" + userID)
+      .get(" /api/users/" + userID)
       .then(resA =>
         Promise.all([
           resA,
-          axios.get('http://127.0.0.1:8000/api/images/'+resA.data.profile_image[0])
+          axios.get('/api/images/'+resA.data.profile_image[0])
         ])
       )
       .then(
@@ -123,7 +123,7 @@ class TutorProfile extends Component {
   getCourses(courses) {
     for(let course of courses) {
       axios
-        .get("http://127.0.0.1:8000/api/courses/" + course)
+        .get("/api/courses/" + course)
         .then(res => {
           this.setState(state => {
             // console.log(res.data)
@@ -158,7 +158,7 @@ class TutorProfile extends Component {
 
     console.log(appointment);
     this.setState({redirect:true})
-    axios.post('http://127.0.0.1:8000/api/appointments/', appointment)
+    axios.post('/api/appointments/', appointment)
       .then(function (response) {
         console.log(response);
       })

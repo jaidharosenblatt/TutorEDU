@@ -24,11 +24,11 @@ class NavBar extends Component {
     };
 
     axios
-      .get('http://127.0.0.1:8000/api/current-user/', config)
+      .get('/api/current-user/', config)
       .then(resA =>
         Promise.all([
           resA,
-          axios.get('http://127.0.0.1:8000/api/images/'+resA.data.profile_image[0])
+          axios.get('/api/images/'+resA.data.profile_image[0])
         ])
       )
       .then(

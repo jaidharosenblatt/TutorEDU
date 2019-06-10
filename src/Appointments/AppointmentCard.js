@@ -78,18 +78,18 @@ class AppointmentCard extends Component {
   }
   getCourseNameFromId(courseID) {
     axios
-      .get("http://127.0.0.1:8000/api/courses/" + courseID)
+      .get("/api/courses/" + courseID)
       .then(res => this.setState({ courseName: res.data.name }))
       .catch(err => console.log(err));
   }
   getTutorFromId(tutorID) {
     axios
-      .get('http://127.0.0.1:8000/api/users/'+ tutorID)
+      .get('/api/users/'+ tutorID)
       .then(resA =>
         // console.log(resA.data.profile_image[0])
         Promise.all([
           resA,
-          axios.get('http://127.0.0.1:8000/api/images/'+resA.data.profile_image[0])
+          axios.get('/api/images/'+resA.data.profile_image[0])
         ])
       )
       .then(
@@ -107,12 +107,12 @@ class AppointmentCard extends Component {
   }
   getStudentFromId(studentID) {
     axios
-      .get('http://127.0.0.1:8000/api/users/'+ studentID)
+      .get('/api/users/'+ studentID)
       .then(resA =>
         // console.log(resA.data.profile_image[0])
         Promise.all([
           resA,
-          axios.get('http://127.0.0.1:8000/api/images/'+resA.data.profile_image[0])
+          axios.get('/api/images/'+resA.data.profile_image[0])
         ])
       )
       .then(
@@ -154,7 +154,7 @@ class AppointmentCard extends Component {
     console.log(updatedFields)
 
     axios
-      .patch("http://127.0.0.1:8000/api/appointments/" + this.state.appointment.id, updatedFields)
+      .patch("/api/appointments/" + this.state.appointment.id, updatedFields)
       .then(res => {
         console.log(res)
         this.setState({ appointment: res.data })

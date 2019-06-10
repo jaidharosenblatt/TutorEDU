@@ -76,7 +76,7 @@ class SignIn extends Component {
     };
 
     axios
-      .get('http://127.0.0.1:8000/api/current-user/', config)
+      .get('/api/current-user/', config)
       .then(res => {
         console.log(res);
         this.setState({
@@ -92,7 +92,7 @@ class SignIn extends Component {
       password: document.getElementById('password').value
     }
 
-    axios.post('http://127.0.0.1:8000/api/login/', credentials)
+    axios.post('/api/login/', credentials)
       .then((response) => {
         console.log(response);
         if (response.data.token !== undefined) {

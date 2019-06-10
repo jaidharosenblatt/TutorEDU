@@ -20,7 +20,7 @@ class Appointments extends Component {
       headers: {"Authorization": `Token ${localStorage.getItem('token')}`}
     };
     axios
-      .get('http://127.0.0.1:8000/api/current-user/', config)
+      .get('/api/current-user/', config)
       .then(res => {
         const studentAppointments = res.data.student_appointments
         const tutorAppointments = res.data.tutor_appointments
@@ -39,7 +39,7 @@ class Appointments extends Component {
   getAppointments(appointments) {
     for(let appointment of appointments){
       axios
-        .get("http://127.0.0.1:8000/api/appointments/"+appointment)
+        .get("/api/appointments/"+appointment)
         .then(res => {
           this.setState(state => {
             // console.log(res.data)

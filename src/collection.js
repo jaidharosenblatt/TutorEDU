@@ -81,7 +81,7 @@ class Collection extends Component {
 
   getUsers(){
     axios
-      .get(" http://127.0.0.1:8000/api/users/")
+      .get("/api/users/")
       .then(res => {
         const myUsers =  res.data.filter(user => user.is_tutor && user.is_active)
         this.setState({
@@ -93,7 +93,7 @@ class Collection extends Component {
 
   getCourses(){
     axios
-      .get(" http://127.0.0.1:8000/api/courses/")
+      .get("/api/courses/")
       .then(res => this.setState({ courses: res.data.filter(course => course.id !== 5)}))
       .catch(err => console.log(err));
   }
