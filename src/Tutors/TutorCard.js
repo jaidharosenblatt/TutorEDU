@@ -27,7 +27,8 @@ class TutorCard extends Component {
     super()
     this.state = {
       courses: [],
-      photo: {},
+      photo: "",
+      photoUser: -1,
     }
   }
 
@@ -39,8 +40,6 @@ class TutorCard extends Component {
         this.setState({courses:res.data})
       })
       .catch(err => console.log(err));
-
-
   }
 
   getPhoto(photoID){
@@ -50,13 +49,13 @@ class TutorCard extends Component {
         // console.log(res.data.image)
         const photo = "http://localhost:8000/api" +
           res.data.image.substring(21,res.data.image.length)
-        this.setState({photo : photo })
+        this.setState({photo : photo, photoUser:res.data.user})
       })
       .catch(err => console.log(err));
   }
 
   render() {
-    if (this.state.photo.user !== this.props.user.id){
+    if (this.state.photoUser !== this.props.user.id){
       this.getPhoto(this.props.user.profile_image[0])
     }
     const courses = this.state.courses
