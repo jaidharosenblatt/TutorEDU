@@ -33,8 +33,8 @@ class NavBar extends Component {
       )
       .then(
         ([resA,resB])=>{
-          const photo = "http://localhost:8000/api" +
-            resB.data.image.substring(21,resB.data.image.length)
+          const photo = "https://tutoredu.herokuapp.com/api/" +
+            resB.data.image.substring(31,resB.data.image.length)
           console.log(photo)
 
           this.setState({

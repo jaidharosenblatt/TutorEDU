@@ -47,8 +47,8 @@ class TutorCard extends Component {
       .get('/images/'+photoID)
       .then(res => {
         // console.log(res.data.image)
-        const photo = "http://localhost:8000/api" +
-          res.data.image.substring(21,res.data.image.length)
+        const photo = "https://tutoredu.herokuapp.com/api/" +
+          res.data.image.substring(31,res.data.image.length)
         this.setState({photo : photo, photoUser:res.data.user})
       })
       .catch(err => console.log(err));
