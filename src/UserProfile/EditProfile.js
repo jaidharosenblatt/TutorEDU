@@ -79,7 +79,7 @@ class EditProfile extends Component {
       headers: {"Authorization": `Token ${localStorage.getItem('token')}`}
     };
     axios
-      .get('/api/current-user/', config)
+      .get('/current-user/', config)
       .then(res => {
         this.setState({
           user: res.data,
@@ -87,7 +87,7 @@ class EditProfile extends Component {
       })
 
     axios
-      .get(" /api/courses/")
+      .get("/courses/")
 
       .then(res => {
         const courseData = res.data
@@ -123,7 +123,7 @@ class EditProfile extends Component {
 
     console.log(formData)
     axios
-      .put('/api/images/'+imageID, formData,config)
+      .put('/images/'+imageID, formData,config)
       .then(res => {
         console.log(res)
         this.setState({ appointment: res.data })
@@ -167,7 +167,7 @@ class EditProfile extends Component {
     }
     console.log(updatedUser)
     axios
-        .patch("/api/users/" + myID,updatedUser)
+        .patch("/users/" + myID,updatedUser)
         .then(
           res=>{console.log(res)
             if (res.status === 200){

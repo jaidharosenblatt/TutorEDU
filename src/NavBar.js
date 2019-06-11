@@ -24,19 +24,22 @@ class NavBar extends Component {
     };
 
     axios
-      .get('/api/current-user/', config)
+      .get('/current-user/', config)
       .then(resA =>
         Promise.all([
           resA,
-          axios.get('/api/images/'+resA.data.profile_image[0])
+          axios.get('/images/'+resA.data.profile_image[0])
         ])
       )
       .then(
         ([resA,resB])=>{
-          // console.log(resA)
+          const photo = "http://localhost:8000/api" +
+            resB.data.image.substring(21,resB.data.image.length)
+          console.log(photo)
+
           this.setState({
             user: resA.data,
-            photo: resB.data
+            photo: photo
           })
         }
       )
@@ -60,7 +63,7 @@ class NavBar extends Component {
                   </Navbar.Text>
                   <Navbar.Text className="navbar-appointments">
                   </Navbar.Text>
-                  <a href="/edit-profile"><img className="navbar-profpic" src={ this.state.user != null ? this.state.photo.image : null } alt=""/>
+                  <a href="/edit-profile"><img className="navbar-profpic" src={ this.state.user != null ? this.state.photo : null } alt=""/>
                   </a>
                 </div>
               ) : (

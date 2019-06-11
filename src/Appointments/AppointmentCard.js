@@ -78,26 +78,28 @@ class AppointmentCard extends Component {
   }
   getCourseNameFromId(courseID) {
     axios
-      .get("/api/courses/" + courseID)
+      .get("/courses/" + courseID)
       .then(res => this.setState({ courseName: res.data.name }))
       .catch(err => console.log(err));
   }
   getTutorFromId(tutorID) {
     axios
-      .get('/api/users/'+ tutorID)
+      .get('/users/'+ tutorID)
       .then(resA =>
         // console.log(resA.data.profile_image[0])
         Promise.all([
           resA,
-          axios.get('/api/images/'+resA.data.profile_image[0])
+          axios.get('/images/'+resA.data.profile_image[0])
         ])
       )
       .then(
         ([resA,resB])=>{
           // console.log(resA)
+          const photo = "http://localhost:8000/api" +
+            resB.data.image.substring(21,resB.data.image.length)
           this.setState({
             tutor: resA.data,
-            tutorPhoto: resB.data
+            tutorPhoto: photo
           })
         }
       )
@@ -107,20 +109,22 @@ class AppointmentCard extends Component {
   }
   getStudentFromId(studentID) {
     axios
-      .get('/api/users/'+ studentID)
+      .get('/users/'+ studentID)
       .then(resA =>
         // console.log(resA.data.profile_image[0])
         Promise.all([
           resA,
-          axios.get('/api/images/'+resA.data.profile_image[0])
+          axios.get('/images/'+resA.data.profile_image[0])
         ])
       )
       .then(
         ([resA,resB])=>{
           // console.log(resA)
+          const photo = "http://localhost:8000/api" +
+            resB.data.image.substring(21,resB.data.image.length)
           this.setState({
             student: resA.data,
-            studentPhoto: resB.data
+            studentPhoto: photo
           })
         }
       )
@@ -154,7 +158,7 @@ class AppointmentCard extends Component {
     console.log(updatedFields)
 
     axios
-      .patch("/api/appointments/" + this.state.appointment.id, updatedFields)
+      .patch("/appointments/" + this.state.appointment.id, updatedFields)
       .then(res => {
         console.log(res)
         this.setState({ appointment: res.data })
@@ -189,7 +193,7 @@ class AppointmentCard extends Component {
       displayContact = true
     }
     const courseName = this.state.courseName.length === 0 ? "No course specified" : this.state.courseName
-    var image =  this.state.tutor != null ? this.state.tutorPhoto.image : null
+    var image =  this.state.tutor != null ? this.state.tutorPhoto : null
     var userEmail = this.state.tutor === null ? null : this.state.tutor.email
     var userType = "tutor"
     var primaryButtonText = "Save changes"
@@ -199,7 +203,7 @@ class AppointmentCard extends Component {
     var detailString = "TUTOR • " + courseName + " • $" + (this.state.tutor != null ? this.state.tutor.hourly_rate : "") + "/HOUR"
     var name = this.state.tutor != null ? this.state.tutor.name : "Loading..."
     if (tutorID === currentUserID) {
-      image = this.state.student != null ? this.state.studentPhoto.image : null
+      image = this.state.student != null ? this.state.studentPhoto : null
       userEmail = this.state.student === null ? null : this.state.student.email
       userType = "student"
       primaryButtonText = "Approve Request"

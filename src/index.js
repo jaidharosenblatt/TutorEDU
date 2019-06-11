@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import NavBar from './NavBar';
-import Collection from './collection';
+import App from './App';
 import TutorProfile from './Tutors/TutorProfile';
 import Appointments from './Appointments/Appointments';
 import SignIn from './UserProfile/SignIn';
@@ -15,6 +15,7 @@ import axios from "axios";
 
 axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
 axios.defaults.xsrfCookieName = "csrftoken";
+axios.defaults.baseURL = 'http://localhost:8000/api';
 
 const routing = (
   <div>
@@ -23,7 +24,7 @@ const routing = (
     </div>
     <Router>
       <div>
-        <Route exact path="/" component={Collection} />
+        <Route exact path="/" component={App} />
         <Route path="/tutors/:userID" component={TutorProfile} />
         <Route path="/appointments" component={Appointments} />
         <Route path="/signin" component={SignIn} />

@@ -34,7 +34,7 @@ class TutorCard extends Component {
   componentDidMount() {
     this.getPhoto(this.props.user.profile_image[0])
     axios
-      .get(" /api/courses/")
+      .get("/courses/")
       .then(res => {
         this.setState({courses:res.data})
       })
@@ -45,10 +45,12 @@ class TutorCard extends Component {
 
   getPhoto(photoID){
     axios
-      .get('/api/images/'+photoID)
+      .get('/images/'+photoID)
       .then(res => {
         // console.log(res.data.image)
-        this.setState({photo : res.data })
+        const photo = "http://localhost:8000/api" +
+          res.data.image.substring(21,res.data.image.length)
+        this.setState({photo : photo })
       })
       .catch(err => console.log(err));
   }
@@ -85,7 +87,7 @@ class TutorCard extends Component {
 
         <div className="tutor-card">
         <p> {this.props.photo}</p>
-          <img  src={ this.state.photo.image}
+          <img  src={ this.state.photo}
                 alt={ "TUTOR" }
                 className="tutor-profpic" />
           <h3 className="tutor-name">{this.props.user.name}</h3>

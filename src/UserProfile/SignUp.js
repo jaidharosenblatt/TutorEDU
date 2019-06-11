@@ -90,11 +90,11 @@ class SignUp extends Component {
     // }
 
     console.log(newUser);
-    axios.post("/api/register/",newUser)
+    axios.post("/register/",newUser)
       .then(resA =>
         Promise.all([
           resA,
-          axios.post('/api/images/')
+          axios.post('/images/')
         ])
       )
       .then(

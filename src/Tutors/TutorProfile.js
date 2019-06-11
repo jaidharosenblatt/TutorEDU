@@ -49,7 +49,7 @@ class TutorProfile extends Component {
       tutor: {
         id: -1,
         name: "Loading",
-        profpicURL: "https://randomuser.me/api/portraits/men/4.jpg",
+        profpicURL: "https://randomuser.me//portraits/men/4.jpg",
         bio: "",
         availabilities: "",
         courses: "",
@@ -88,7 +88,7 @@ class TutorProfile extends Component {
     };
 
     axios
-      .get('/api/current-user/', config)
+      .get('/current-user/', config)
       .then(res => {
         this.setState({
           user: res.data,
@@ -98,19 +98,21 @@ class TutorProfile extends Component {
 
   getTutor(userID) {
     axios
-      .get(" /api/users/" + userID)
+      .get("/users/" + userID)
       .then(resA =>
         Promise.all([
           resA,
-          axios.get('/api/images/'+resA.data.profile_image[0])
+          axios.get('/images/'+resA.data.profile_image[0])
         ])
       )
       .then(
         ([resA,resB])=>{
           // console.log(resA)
+          const photo = "http://localhost:8000/api" +
+            resB.data.image.substring(21,resB.data.image.length)
           this.setState({
             tutor: resA.data,
-            photo: resB.data
+            photo: photo
           })
           this.getCourses(resA.data.courses)
         }
@@ -123,7 +125,7 @@ class TutorProfile extends Component {
   getCourses(courses) {
     for(let course of courses) {
       axios
-        .get("/api/courses/" + course)
+        .get("/courses/" + course)
         .then(res => {
           this.setState(state => {
             // console.log(res.data)
@@ -158,7 +160,7 @@ class TutorProfile extends Component {
 
     console.log(appointment);
     this.setState({redirect:true})
-    axios.post('/api/appointments/', appointment)
+    axios.post('/appointments/', appointment)
       .then(function (response) {
         console.log(response);
       })
@@ -194,7 +196,7 @@ class TutorProfile extends Component {
         <div className="tutor-TutorProfile">
           <div className="tutor-topHeader">
             <div className="tutor-picture">
-            <img  src={ this.state.photo.image}
+            <img  src={ this.state.photo}
                   alt={ this.state.tutor.name }
                   className="tutor-profpicture"/>
             </div>

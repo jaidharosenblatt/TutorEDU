@@ -4,6 +4,9 @@ from .views import (ProfilePictureDetailView, ProfilePictureView,
 CurrentUserView, LoginUserView, RegisterUserView, UserListView,
  UserDetailView, AppointmentListView, AppointmentDetailView, CourseListView, CourseDetailView)
 # from rest_framework.authtoken.views import obtain_auth_token
+from django.conf import settings
+from django.conf.urls.static import static
+
 
 urlpatterns = [
     path('users/', UserListView.as_view()),
@@ -17,4 +20,4 @@ urlpatterns = [
     path('login/',LoginUserView.as_view()),
     path('images/', ProfilePictureView.as_view()),
     path('images/<pk>', ProfilePictureDetailView.as_view()),
-]
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
