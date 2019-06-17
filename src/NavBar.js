@@ -33,6 +33,7 @@ class NavBar extends Component {
       )
       .then(
         ([resA,resB])=>{
+          console.log(resB.data.image)
           const photo = "https://tutoredu.herokuapp.com/api/" +
             resB.data.image.substring(31,resB.data.image.length)
           console.log(photo)
@@ -45,6 +46,7 @@ class NavBar extends Component {
       )
       .catch((err)=>{
         console.log(err.message)
+        this.setState({isLoggedIn:false})
       })
   }
 

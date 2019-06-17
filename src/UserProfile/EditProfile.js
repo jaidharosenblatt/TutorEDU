@@ -191,6 +191,8 @@ class EditProfile extends Component {
     if (this.state.redirect){
       window.location.assign("/");
     }
+    // const defaultCourses = this.state.user.courses
+    // console.log(defaultCourses.includes(1))
     const options = this.state.courses.map(course => {
       const newCourse = {value: course.id,label:course.name}
       return(newCourse)
@@ -282,6 +284,8 @@ class EditProfile extends Component {
           <Select
             className = "course-dropdown"
             options = {options}
+            defaultValue= {{value: 1,label:'cs'}}
+            placeholder = "Add a new course..."
             onChange = {userCourses => this.setState({userCourses})}
             isMulti="true"
             styles = {colourStyles}

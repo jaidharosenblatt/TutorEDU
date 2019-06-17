@@ -261,9 +261,9 @@ class TutorProfile extends Component {
               }
             </div>
           ) : (
-            this.state.tutor !== null && this.state.user !== null && this.state.tutor.id !== this.state.user.id ?
-              <p style={{ textAlign: "center" }} className="availability-details"><br/>Please sign in to schedule an appointment.</p> :
-              <p style={{ textAlign: "center" }} className="availability-details"><br/> You can't book an appointment with youself</p>
+            this.state.tutor !== null && this.state.user !== null && this.state.tutor.id === this.state.user.id ?
+              <p style={{ textAlign: "center" }} className="availability-details"><br/>You can't book an appointment with youself!</p> :
+              <p style={{ textAlign: "center" }} className="availability-details"><br/>Please sign in to schedule an appointment.</p>
 
           )}
 

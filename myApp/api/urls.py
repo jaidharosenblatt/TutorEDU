@@ -20,4 +20,4 @@ urlpatterns = [
     path('login/',LoginUserView.as_view()),
     path('images/', ProfilePictureView.as_view()),
     path('images/<pk>', ProfilePictureDetailView.as_view()),
-]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]

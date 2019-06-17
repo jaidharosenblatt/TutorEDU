@@ -1,3 +1,6 @@
+.tutor{
+  margin-top: 5vh;
+}
 .tutor-card {
   display: inline-block;
   vertical-align: top;
@@ -7,8 +10,7 @@
   box-shadow: 1px 4px 12px rgba(0,0,0,0.05);
   margin: 10px;
   transition: all .1s ease-in-out;
-
-font-weight:400;
+  font-weight:400;
   font-size: 14px;
   text-align: center;
   padding: 24px;
@@ -48,7 +50,6 @@ font-weight:700;
 /* Tutor Detail */
 .tutor-rating {
 
-font-weight:700;
   font-size: 12px;
   color: #000000;
   letter-spacing: 2px;
@@ -57,7 +58,6 @@ font-weight:700;
 
 .tutor-classes {
 
-font-weight:700;
   font-size: 12px;
   color: #000000;
   letter-spacing: 2px;
@@ -67,7 +67,6 @@ font-weight:700;
 
 .tutor-availability {
 
-font-weight:700;
   font-size: 12px;
   color: #000000;
   letter-spacing: 2px;
@@ -121,7 +120,6 @@ font-weight:700;
 }
 
 .tutor-description {
-     ;
   font-size: 14px;
   color: #757575;
   letter-spacing: 2px;

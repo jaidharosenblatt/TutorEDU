@@ -28,6 +28,7 @@ class TutorCard extends Component {
   constructor(){
     super()
     this.state = {
+      loading:true,
       courses: [],
       photo: "",
       photoUser: -1,
@@ -36,6 +37,7 @@ class TutorCard extends Component {
 
   componentDidMount() {
     this.getPhoto(this.props.user.profile_image[0])
+    this.setState({loading:false})
     axios
       .get("/courses/")
       .then(res => {
@@ -87,10 +89,11 @@ class TutorCard extends Component {
     return (
 
         <div className="tutor-card">
-        <p> {this.props.photo}</p>
-          <img  src={ this.state.photo}
-                alt={ "TUTOR" }
-                className="tutor-profpic" />
+          <Link to={{ pathname: "/tutors/" + this.props.user.id }}>
+            <img  src={ this.state.photo}
+                  alt={ "TUTOR" }
+                  className="tutor-profpic" />
+          </Link>
           <h3 className="tutor-name">{this.props.user.name}</h3>
           <p className="paragraph">{this.props.user.bio}</p>
           <h4 className="tutor-availabilities">COURSES</h4>
