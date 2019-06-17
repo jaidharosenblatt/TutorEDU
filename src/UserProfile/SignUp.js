@@ -4,13 +4,16 @@ import styled from 'styled-components';
 import axios from "axios";
 import { Link, withRouter } from "react-router-dom";
 import background from './duke.png'
+import NavBar from "./NavBar"
+
 
 const PrimaryButton = styled.button`
   height: 44px;
   width: 160px;
   background-color: #1C3A9F;
   border-radius: 4px;
-  font-family: Avenir-Heavy;
+
+font-weight:700;
   font-size: 12px;
   color: white;
   letter-spacing: 0;
@@ -31,7 +34,9 @@ const SecondaryButton = styled.button`
   width: 160px;
   border: 2px solid #D9E2FF;
   border-radius: 4px;
-  font-family: Avenir-Heavy;
+  background-color: white;
+
+font-weight:700;
   font-size: 12px;
   color: #1C3A9F;
   letter-spacing: 0;
@@ -122,6 +127,8 @@ class SignUp extends Component {
     }
     return (
       <div className="signin">
+      <NavBar />
+
         <div className="signin-left">
           <img className="signin-background" src={background} alt="Duke University campus"/>
         </div>
@@ -136,7 +143,6 @@ class SignUp extends Component {
           <p className="signin-input">Password</p>
           <input className="signin-input-box" id="password" type="password" placeholder="(8 characters minimum)"></input>
           {this.state.hasError ? <p  style={{color:"#d13e50"}}>Error creating profile</p> : null}
-
 
           <div className="signup-button">
             <Link to={{ pathname: "/signin/" }}>

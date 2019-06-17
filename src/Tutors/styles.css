@@ -7,7 +7,8 @@
   box-shadow: 1px 4px 12px rgba(0,0,0,0.05);
   margin: 10px;
   transition: all .1s ease-in-out;
-  font-family: Avenir-Book;
+
+font-weight:400;
   font-size: 14px;
   text-align: center;
   padding: 24px;
@@ -26,7 +27,8 @@
 .tutor-name {
   height: 24px;
   margin-top: 10px;
-  font-family: Avenir-Heavy;
+
+font-weight:700;
   font-size: 20px;
   color: #000000;
   letter-spacing: 0;
@@ -35,7 +37,8 @@
 
 .tutor-availabilities {
   height: 12px;
-  font-family: Avenir-Heavy;
+
+font-weight:700;
   font-size: 10px;
   color: #000000;
   letter-spacing: 2px;
@@ -44,7 +47,8 @@
 
 /* Tutor Detail */
 .tutor-rating {
-  font-family: Avenir-Heavy;
+
+font-weight:700;
   font-size: 12px;
   color: #000000;
   letter-spacing: 2px;
@@ -52,7 +56,8 @@
 }
 
 .tutor-classes {
-  font-family: Avenir-Heavy;
+
+font-weight:700;
   font-size: 12px;
   color: #000000;
   letter-spacing: 2px;
@@ -61,7 +66,8 @@
 }
 
 .tutor-availability {
-  font-family: Avenir-Heavy;
+
+font-weight:700;
   font-size: 12px;
   color: #000000;
   letter-spacing: 2px;
@@ -70,7 +76,8 @@
 }
 
 .tutor-reportCard {
-  font-family: Avenir-Heavy;
+
+font-weight:700;
   font-size: 12px;
   color: #000000;
   letter-spacing: 2px;
@@ -79,7 +86,8 @@
 }
 
 .tutor-schoolYearAndRate {
-  font-family: Avenir-Heavy;
+
+font-weight:700;
   font-size: 14px;
   color: #435EB0;
   letter-spacing: 2px;
@@ -95,7 +103,8 @@
   box-shadow: 1px 1px 4px rgba(0,0,0,0.10);
   margin: 20px;
   transition: all .1s ease-in-out;
-  font-family: Avenir-Book;
+
+font-weight:400;
   font-size: 14px;
   text-align: left;
   padding: 24px;
@@ -103,7 +112,8 @@
 }
 
 .tutor-appointment-main {
-  font-family: Avenir-Heavy;
+
+font-weight:700;
   font-size: 20px;
   color: #000000;
   letter-spacing: 2px;
@@ -111,7 +121,7 @@
 }
 
 .tutor-description {
-  font-family: Avenir;
+     ;
   font-size: 14px;
   color: #757575;
   letter-spacing: 2px;

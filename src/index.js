@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import NavBar from './NavBar';
+// import NavBar from './NavBar';
 import App from './App';
 import TutorProfile from './Tutors/TutorProfile';
 import Appointments from './Appointments/Appointments';
@@ -21,9 +21,6 @@ axios.defaults.baseURL = 'https://tutoredu.herokuapp.com/api';
 
 const routing = (
   <div>
-    <div className="navbar">
-      <NavBar/>
-    </div>
     <Router>
       <div>
         <Route exact path="/" component={App} />

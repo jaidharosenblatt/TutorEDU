@@ -4,13 +4,16 @@ import styled from 'styled-components';
 import axios from "axios";
 import { Link, withRouter } from "react-router-dom";
 import background from './duke.png'
+import NavBar from "./NavBar"
 
 const PrimaryButton = styled.button`
   height: 44px;
   width: 160px;
   background-color: #1C3A9F;
   border-radius: 4px;
-  font-family: Avenir-Heavy;
+
+
+font-weight:700;
   font-size: 12px;
   color: white;
   letter-spacing: 0;
@@ -32,7 +35,9 @@ const SecondaryButton = styled.button`
   width: 160px;
   border: 2px solid #D9E2FF;
   border-radius: 4px;
-  font-family: Avenir-Heavy;
+  background-color: white;
+
+font-weight:700;
   font-size: 12px;
   color: #1C3A9F;
   letter-spacing: 0;
@@ -118,47 +123,30 @@ class SignIn extends Component {
   }
 
   render() {
-
     if (this.state.redirect){
       window.location.assign("/");
-      // return (
-      //   <Redirect push to="/" />
-      // )
-
     }
-    const signInView =
-      <div className="signin-right">
-        <h2 className="signin-title">Sign in</h2>
-        <p className="signin-input">Username</p>
-        <input className="signin-input-box" id="username" type="text" placeholder="">
-        </input>
-        <p className="signin-input">Password</p>
-        <input className="signin-input-box" id="password" type="password" placeholder="">
-        </input>
-        {this.state.hasError ? <p style={{color:"#d13e50"}}>You have entered an invalid username or password</p> : null}
-        <div>
-          <PrimaryButton onClick={() => {this.handleLogin()}}>Sign In</PrimaryButton>
-          <Link to={{ pathname: "/signup/" }}>
-            <SecondaryButton>Sign Up</SecondaryButton>
-          </Link>
-        </div>
-      </div>
-
-    const signOutView =
-      <div className="signin-right">
-        <h2 className="signin-title">Hi { this.state.user !== null ? this.state.user.name : "there"}!</h2>
-        <p>Are you sure you want to log out?</p>
-        <div>
-          <PrimaryButton onClick={() => {this.handleLogout()}}>Logout</PrimaryButton>
-        </div>
-      </div>
-
     return (
       <div className="signin">
+      <NavBar />
         <div className="signin-left">
           <img className="signin-background" src={background} alt="Duke University campus"/>
         </div>
-        {this.state.isLoggedIn ? signOutView : signInView}
+        <div className="signin-right"><h2 className="signin-title">Sign in</h2>
+          <p className="signin-input">Username</p>
+          <input className="signin-input-box" id="username" type="text" placeholder="">
+          </input>
+          <p className="signin-input">Password</p>
+          <input className="signin-input-box" id="password" type="password" placeholder="">
+          </input>
+          {this.state.hasError ? <p style={{color:"#d13e50"}}>You have entered an invalid username or password</p> : null}
+          <div>
+            <PrimaryButton onClick={() => {this.handleLogin()}}>Sign In</PrimaryButton>
+            <Link to={{ pathname: "/signup/" }}>
+              <SecondaryButton>Sign Up</SecondaryButton>
+            </Link>
+          </div>
+        </div>
       </div>
     )
   }

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './styles.css';
 import AppointmentCard from './AppointmentCard';
 import axios from "axios";
+import NavBar from '../NavBar';
 
 class Appointments extends Component {
 
@@ -69,6 +70,8 @@ class Appointments extends Component {
       }
     }
     return (
+      <div className="appointments">
+      <NavBar />
       <div className="appointments-container">
         <div className="upcoming-appointments">
           <h2 className="upcoming-appointments-text">Pending Appointments</h2>
@@ -95,6 +98,7 @@ class Appointments extends Component {
             )}
         </div>
       </div>
+    </div>
     )
   }
 }

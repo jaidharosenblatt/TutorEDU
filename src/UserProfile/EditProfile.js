@@ -5,14 +5,15 @@ import axios from "axios";
 import { Link, withRouter } from "react-router-dom";
 import background from './duke.png'
 import Select from "react-select";
-
+import NavBar from "./NavBar"
 
 const PrimaryButton = styled.button`
   height: 44px;
   width: 160px;
   background-color: #1C3A9F;
   border-radius: 4px;
-  font-family: Avenir-Heavy;
+
+font-weight:700;
   font-size: 12px;
   color: white;
   letter-spacing: 0;
@@ -33,7 +34,8 @@ const SecondaryButton = styled.button`
   width: 160px;
   border: 2px solid #D9E2FF;
   border-radius: 4px;
-  font-family: Avenir-Heavy;
+
+font-weight:700;
   font-size: 12px;
   color: #1C3A9F;
   letter-spacing: 0;
@@ -55,7 +57,7 @@ const colourStyles = {
     border: '1px solid #ECECEC'
   }),
   placeholder: styles => ({...styles,
-    color:'black',
+    color:'#D2D2D2',
   }),
 };
 class EditProfile extends Component {
@@ -218,6 +220,7 @@ class EditProfile extends Component {
     return (
 
       <div className="editprofile">
+        <NavBar />
         <div className="signin-left">
           <img className="signin-background" src={background} alt="Duke University campus"/>
         </div>

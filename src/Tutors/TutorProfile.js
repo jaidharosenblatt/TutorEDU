@@ -3,6 +3,7 @@ import './styles.css';
 import styled from 'styled-components';
 import axios from "axios";
 import Select from "react-select";
+import NavBar from '../NavBar';
 
 const colourStyles = {
   control: styles => ({ ...styles,
@@ -18,7 +19,9 @@ const Button = styled.button`
   width: 250px;
   border: 2px solid #D9E2FF;
   border-radius: 4px;
-  font-family: Avenir-Heavy;
+  background-color: white;
+
+font-weight:700;
   font-size: 12px;
   color: #1C3A9F;
   letter-spacing: 0;
@@ -192,6 +195,8 @@ class TutorProfile extends Component {
 
     }
     return (
+      <div>
+      <NavBar />
       <div className="tutor">
         <div className="tutor-TutorProfile">
           <div className="tutor-topHeader">
@@ -250,7 +255,7 @@ class TutorProfile extends Component {
               <p></p>
               <p className="availability-details">We will get back to you within 24 hours.</p>
               {this.state.hasError ?
-                <p style={{fontFamily: "Avenir-Heavy", color: "#d13e50", textAlign: "center" }} className="availability-details">Error scheduling appointment</p>
+                <p style={{color: "#d13e50", textAlign: "center" }} className="availability-details">Error scheduling appointment</p>
                 :
                 null
               }
@@ -264,6 +269,7 @@ class TutorProfile extends Component {
 
         </div>
       </div>
+    </div>
     )
   }
 }

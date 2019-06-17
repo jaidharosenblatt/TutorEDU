@@ -12,14 +12,14 @@ body {
 }
 
 h1 {
-  font-family: "Avenir";
   font-size: 28px;
   text-align: center;
 }
 
 
 h3 {
-  font-family: Avenir-Heavy;
+
+font-weight:700;
   font-size: 16px;
   color: #000000;
   letter-spacing: 0;
@@ -27,7 +27,8 @@ h3 {
 }
 
 h4 {
-  font-family: Avenir-Heavy;
+
+font-weight:700;
   font-size: 10px;
   color: #000000;
   letter-spacing: 2px;
@@ -46,9 +47,6 @@ h4 {
 
 /* NAVBAR COMPONENT */
 
-.navbar {
-  font-family: Avenir-Heavy;
-}
 
 .navbar-profpic {
   height: 40px;
@@ -69,6 +67,7 @@ h4 {
 
 .app {
   text-align: center;
+  margin-top: 5vh;
 }
 .Filter{
   width: 100%;
@@ -89,7 +88,7 @@ h4 {
 
 .tutor-results {
   color: #898989;
-  font-family: Avenir;
+     ;
   font-size: 14px;
   text-align: center;
   padding: 20px;

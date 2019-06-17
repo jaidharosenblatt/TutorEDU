@@ -11,7 +11,8 @@
   box-shadow: 1px 1px 4px rgba(0,0,0,0.10);
   margin-top: 12px;
   margin-bottom: 12px;
-  font-family: Avenir-Book;
+
+font-weight:400;
   font-size: 14px;
   padding: 24px;
   background-color: white;
@@ -36,14 +37,16 @@
 
 .appointment-card-name {
   margin-top: -10px;
-  font-family: Avenir-Heavy;
+
+font-weight:700;
   font-size: 20px;
   text-align: left;
 }
 
 .appointment-card-details {
   margin-top: 10px;
-  font-family: Avenir-Medium;
+
+font-weight:300;
   font-size: 14px;
   text-align: left;
   color: #9B9B9B;
@@ -78,11 +81,15 @@
 }
 
 .appointment-status {
-  font-family: "Avenir-Heavy";
+    ;
+  font-weight:700;
   font-size: 12px;
   text-align: left;
 }
 
+.appointments{
+  margin-top: 5vh;
+}
 .appointments-container {
   text-align: center;
   align-items: center;
@@ -96,7 +103,7 @@
 }
 
 .upcoming-appointments-text {
-  font-family: "Avenir-Heavy";
+  font-weight:700;
   font-size: 24px;
   padding-top: 24px;
 }
@@ -106,13 +113,15 @@
   width: 60%;
   max-width: 1000px;
   text-align: left;
-  font-family: "Avenir-Heavy";
+    ;
+font-weight:700;
   font-size: 24px;
   padding-bottom: 20px;
 }
 
 .past-appointments-text {
-  font-family: "Avenir-Heavy";
+    ;
+font-weight:700;
   font-size: 24px;
   padding-top: 24px;
 }
@@ -140,7 +149,7 @@
 }
 
 .tutor-named {
-  font-family: "Avenir-Black";
+
   font-size: 24px;
   text-align: left;
 }
@@ -185,28 +194,28 @@
 
 .rating-details {
   color: #757575;
-  font-family: Avenir;
+     ;
   letter-spacing: 0px;
   font-size: 14px;
 }
 
 .class-details {
   color: #757575;
-  font-family: Avenir;
+     ;
   letter-spacing: 0px;
   font-size: 14px;
 }
 
 .availability-details {
   color: #757575;
-  font-family: Avenir;
+     ;
   letter-spacing: 0px;
   font-size: 14px;
 }
 
 .RCdetails {
   color: #757575;
-  font-family: Avenir;
+     ;
   letter-spacing: 0px;
   font-size: 14px;
   max-width: 32em;
@@ -214,14 +223,15 @@
 }
 
 .tutor-appointment-main {
-  font-family: Avenir-Black;
+
   letter-spacing: 0px;
   font-size: 24px;
   padding-top: 12px;
 }
 
 .schedule-input {
-  font-family: Avenir-Heavy;
+
+font-weight:700;
   letter-spacing: 0px;
   font-size: 12px;
   margin-bottom: 8px;
@@ -233,7 +243,8 @@
   width: 250px;
   border: 1px solid #ECECEC;
   border-radius: 4px;
-  font-family: Avenir-Medium;
+
+font-weight:300;
   font-size: 12px;
   letter-spacing: 0;
   padding-left: 12px;
@@ -244,7 +255,8 @@
   width: 250px;
   border: 1px solid #ECECEC;
   border-radius: 4px;
-  font-family: Avenir-Medium;
+
+font-weight:300;
   font-size: 12px;
   padding: 12px;
   resize: none;
@@ -252,7 +264,8 @@
 
 ::placeholder {
   color: #C9C9C9;
-  font-family: Avenir-Book;
+
+font-weight:400;
   font-size: 14px;
 }
 

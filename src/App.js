@@ -3,6 +3,7 @@ import TutorCard from './Tutors/TutorCard';
 import axios from "axios";
 import styled from 'styled-components';
 import Select from "react-select";
+import NavBar from './NavBar';
 
 
 const PrimaryButton = styled.button`
@@ -12,7 +13,8 @@ const PrimaryButton = styled.button`
   background-color: #F8F9FA;
   border-radius: 4px;
   border: 1px solid #ECECEC;
-  font-family: Avenir-Book;
+
+font-weight:400;
   font-size: 14px;
   color: black;
   letter-spacing: 0;
@@ -32,15 +34,16 @@ const colourStyles = {
     backgroundColor: '#F8F9FA',
     border: '1px solid #ECECEC',
     fontSize: '14',
-    fontFamily: 'Avenir-Book',
+    fontFamily: 'Open Sans, sans-serif',
+    fontweight:'600'
   }),
   placeholder: styles => ({...styles,
     color:'black',
   }),
   option: styles => ({...styles,
     fontSize: '14',
-    fontFamily: 'Avenir-Book',
-    textAlign: 'left',
+    fontFamily: 'Open Sans, sans-serif',
+    fontweight:'600'
   }),
 };
 
@@ -104,6 +107,8 @@ class Collection extends Component {
       return(newCourse)
     })
     return  (
+      <div>
+      <NavBar />
       <div className="app">
         <div className="collection">
         <h2 className="upcoming-appointments-text">Browse Tutors</h2>
@@ -129,6 +134,7 @@ class Collection extends Component {
 
           </div>
         </div>
+      </div>
       )
     }
   }
