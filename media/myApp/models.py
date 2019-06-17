@@ -12,17 +12,17 @@ class Course(models.Model):
         return self.name
 
 class CustomUser(AbstractUser):
-    name = models.CharField(blank=True, max_length=40)
-    email = models.EmailField(unique=True)
-    year = models.CharField(blank=True, max_length=40)
-    university = models.CharField(blank=True, max_length=40)
-    bio = models.CharField(blank=True, max_length=2000)
-    report_card = models.CharField( blank=True, max_length=2000)
+    name = models.CharField(default='blank', blank=True, max_length=40)
+    email = models.EmailField(default='blank', unique=True)
+    year = models.CharField(default='blank', blank=True, max_length=40)
+    university = models.CharField(default='blank', blank=True, max_length=40)
+    bio = models.CharField(default='blank', blank=True, max_length=2000)
+    report_card = models.CharField(default='blank', blank=True, max_length=2000)
     is_tutor = models.BooleanField(default=False)
     client_rating = models.IntegerField(default='5', blank=True,null=True)
     tutor_rating = models.IntegerField(default='5', blank=True,null=True)
     hourly_rate = models.FloatField(null=True, blank=True, default=None)
-    availabilities = models.CharField(blank=True, max_length=2000)
+    availabilities = models.CharField(default='blank', blank=True, max_length=2000)
     courses = models.ManyToManyField(Course, related_name='user_courses',blank=True)
 
 class Photo(models.Model):
