@@ -192,7 +192,19 @@ class EditProfile extends Component {
       window.location.assign("/");
     }
     // const defaultCourses = this.state.user.courses
-    // console.log(defaultCourses.includes(1))
+    // console.log(defaultCourses)
+    // if (defaultCourses!==undefined){
+    //   console.log(defaultCourses.includes(4))
+    // }
+    var defaultCourses = []
+    if (this.state.user.courses!==undefined){
+      defaultCourses = this.state.user.courses.map(course => {
+        const newCourse = {value: course.id,label:course.name}
+      })
+    }
+
+    console.log(defaultCourses)
+
     const options = this.state.courses.map(course => {
       const newCourse = {value: course.id,label:course.name}
       return(newCourse)

@@ -17,6 +17,7 @@ axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
 axios.defaults.xsrfCookieName = "csrftoken";
 // axios.defaults.baseURL = 'http://localhost:8000/api';
 axios.defaults.baseURL = 'https://tutoredu.herokuapp.com/api';
+// axios.defaults.headers.common['Authorization'] = AUTH_TOKEN;
 
 
 const routing = (
