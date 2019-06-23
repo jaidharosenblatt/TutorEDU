@@ -41,6 +41,7 @@ body {
 .signin{
   height: 100vh;
   overflow: hidden;
+  margin-top: 40px;
 }
 
 .signup-button{
@@ -49,6 +50,7 @@ body {
 .editprofile {
   height: 100vh;
   overflow: hidden;
+  margin-top: 40px;
 }
 
 .signin-left {

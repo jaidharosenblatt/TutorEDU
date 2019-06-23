@@ -90,7 +90,6 @@ class EditProfile extends Component {
 
     axios
       .get("/courses/")
-
       .then(res => {
         const courseData = res.data
         this.setState({courses:courseData})
@@ -136,7 +135,6 @@ class EditProfile extends Component {
     if (this.state.profilePic !== null){
       this.handleImage()
     }
-
 
     console.log(this.state.userCourses)
     const coursesIDs = this.state.userCourses.map(course => {
@@ -196,15 +194,17 @@ class EditProfile extends Component {
     // if (defaultCourses!==undefined){
     //   console.log(defaultCourses.includes(4))
     // }
-    var defaultCourses = []
-    if (this.state.user.courses!==undefined){
-      defaultCourses = this.state.user.courses.map(course => {
-        const newCourse = {value: course.id,label:course.name}
-      })
-    }
-
-    console.log(defaultCourses)
-
+    // var defaultCourses = []
+    // if (this.state.user.courses!==undefined){
+    //   defaultCourses = this.state.user.courses.map(courseID => {
+    //     const course = this.state.courses.find(elem=>{
+    //       return elem.id == courseID
+    //     })
+    //     return {value: course.id,label:course.name}
+    //   })
+    // }
+    // console.log(defaultCourses)
+    // console.log(this.state.courses)
     const options = this.state.courses.map(course => {
       const newCourse = {value: course.id,label:course.name}
       return(newCourse)
@@ -296,7 +296,6 @@ class EditProfile extends Component {
           <Select
             className = "course-dropdown"
             options = {options}
-            defaultValue= {{value: 1,label:'cs'}}
             placeholder = "Add a new course..."
             onChange = {userCourses => this.setState({userCourses})}
             isMulti="true"
@@ -314,6 +313,7 @@ class EditProfile extends Component {
           />
           Upload Photo
           </label>
+          {this.state.profilePic===null? null : <p className="signup-tutor-label">  Photo uploaded</p> }
           </div>
           <p className="signin-input">Tutor status</p>
           <label className="signup-tutor-label"> I want to be an active tutor
