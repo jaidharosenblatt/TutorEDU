@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     'corsheaders',
     'myApp',
     'knox',
-    'rest_framework.authtoken'
+    'rest_framework.authtoken',
+    'storages',
 ]
 
 CORS_ORIGIN_WHITELIST = (
@@ -134,7 +135,12 @@ AUTH_USER_MODEL = 'myApp.CustomUser'
 CORS_ORIGIN_ALLOW_ALL = True
 
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
-STATIC_URL = '/static/'
+
+
+
+STATIC_HOST = 'https://d3r3o1ojn7sdss.cloudfront.net' if not DEBUG else ''
+STATIC_URL = STATIC_HOST + '/static/'
+# STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
