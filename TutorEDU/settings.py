@@ -44,7 +44,7 @@ INSTALLED_APPS = [
     'myApp',
     'knox',
     'rest_framework.authtoken',
-    'storages',
+    # 'storages',
 ]
 
 CORS_ORIGIN_WHITELIST = (
@@ -138,9 +138,8 @@ PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 
 
 
-STATIC_HOST = 'https://d3r3o1ojn7sdss.cloudfront.net' if not DEBUG else ''
-STATIC_URL = STATIC_HOST + '/static/'
-# STATIC_URL = '/static/'
+# STATIC_URL = STATIC_HOST + '/static/'
+STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
