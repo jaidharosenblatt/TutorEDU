@@ -34,13 +34,13 @@ class NavBar extends Component {
       .then(
         ([resA,resB])=>{
           console.log(resB.data.image)
-          const photo = "https://tutoredu.herokuapp.com/api/" +
-            resB.data.image.substring(31,resB.data.image.length)
-          console.log(photo)
+          // const photo = "https://tutoredu.herokuapp.com/api/" +
+          //   resB.data.image.substring(31,resB.data.image.length)
+          // console.log(photo)
 
           this.setState({
             user: resA.data,
-            photo: photo
+            photo: resB.data.image
           })
         }
       )
@@ -65,7 +65,7 @@ class NavBar extends Component {
                   </Navbar.Text>
                   <Navbar.Text className="navbar-appointments">
                   </Navbar.Text>
-                  <a href="/edit-profile"><img className="navbar-profpic" src={ this.state.user != null ? this.state.photo : null } alt=""/>
+                  <a href="/edit-profile"><img className="navbar-profpic" src={ this.state.user != null ? this.state.photo : null } alt="Profile"/>
                   </a>
                 </div>
               ) : (

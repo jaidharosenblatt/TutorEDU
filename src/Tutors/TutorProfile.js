@@ -110,12 +110,12 @@ class TutorProfile extends Component {
       )
       .then(
         ([resA,resB])=>{
-          // console.log(resA)
-          const photo = "https://tutoredu.herokuapp.com/api/" +
-            resB.data.image.substring(31,resB.data.image.length)
+          console.log(resB.data.image)
+          // const photo = "https://tutoredu.herokuapp.com/api/" +
+          //   resB.data.image.substring(31,resB.data.image.length)
           this.setState({
             tutor: resA.data,
-            photo: photo
+            photo: resB.data.image
           })
           this.getCourses(resA.data.courses)
         }

@@ -99,11 +99,11 @@ class AppointmentCard extends Component {
       .then(
         ([resA,resB])=>{
           // console.log(resA)
-          const photo = "https://tutoredu.herokuapp.com/api/" +
-            resB.data.image.substring(31,resB.data.image.length)
+          // const photo = "https://tutoredu.herokuapp.com/api/" +
+          //   resB.data.image.substring(31,resB.data.image.length)
           this.setState({
             tutor: resA.data,
-            tutorPhoto: photo
+            tutorPhoto: resB.data.image
           })
         }
       )
