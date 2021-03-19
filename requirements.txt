@@ -4,7 +4,7 @@ cryptography==2.6.1
 Django==2.2.1
 django-cors-headers==3.0.0
 django-rest-knox==4.0.1
-djangorestframework==3.9.4
+djangorestframework==3.11.2
 djangorestframework-jwt==1.11.0
 Pillow==6.0.0
 pycparser==2.19
